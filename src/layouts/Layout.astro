@@ -20,8 +20,6 @@ const { title = "JL Home Sale" } = Astro.props;
       rel="stylesheet"
     />
 
- 
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -124,28 +122,48 @@ const { title = "JL Home Sale" } = Astro.props;
     }
   </style>
 
-<script>
-  //tabs
-  const tabWrapper = document.querySelector(".tab-wrapper");
-  const tabList = tabWrapper.querySelector("ul");
-  const tabButtons = tabList.querySelectorAll("a");
-  const tabPanels = tabWrapper.querySelectorAll(
-    ".tab-content-wrapper>article"
-  );
+  <script>
+    //tabs
+    const tabWrapper = document.querySelector(".tab-wrapper");
+    const tabList = tabWrapper.querySelector("ul");
+    const tabButtons = tabList.querySelectorAll("a");
+    const tabPanels = tabWrapper.querySelectorAll(
+      ".tab-content-wrapper>article"
+    );
 
-  tabButtons.forEach((tab,index)=>{
-    if (index === 0){
-      return
-    }
-    else{
-      // tabPanels[index].setAttribute("hidden","");
-    }
-  })
+    tabButtons.forEach((tab, index) => {
+      if (index === 0) {
+        return;
+      } else {
+        tabPanels[index].setAttribute("hidden",true);
+      }
+    });
 
-  tabWrapper.addEventListener("click", (e)=>{
-    const clickedTab = e.target.closest("a");
-    console.log(clickedTab)
-    e.preventDefault();
-  })
-</script>
+    tabWrapper.addEventListener("click", (e) => {
+     //@ts-ignore 
+     const clickedTab = e.target.closest("a"); 
+      if (!clickedTab) return;
+      e.preventDefault();
+
+      const activePanelId = clickedTab.getAttribute("href");
+      //@ts-ignore
+      const activePanel = document.querySelector
+      (activePanelId);
+      
+      
+
+      tabButtons.forEach((button)=>{
+        button.parentElement.classList.remove("active");
+        
+      })
+      
+      clickedTab.parentElement.classList.add("active")
+
+      tabPanels.forEach((panel)=>{
+        panel.setAttribute("hidden","true");
+        
+      });
+      activePanel.removeAttribute("hidden");
+    });
+  </script>
 </html>
