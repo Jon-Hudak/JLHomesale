@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets"
+import logo from "../assets/images/logo.png"
+
+const year = new Date().getFullYear();
+
+console.log(year)
+
+---
+<footer class="bg-background mt-40  text-base ">
+    <div class="sm:max-w-[25ch] mx-8 sm:ml-16">
+        <div class="img-wrapper pt-12">
+            <Image src={logo} alt="JL Homesale Logo"></Image>
+        </div>
+        <p class="mt-12">We take the stress out of selling your home. We make the process fast, cost effective and easy.</p>
+        <p class="mt-16">Call Us At: <a class="hover:underline" href="tel:8666986169">(866) 698-6169</a></p>
+        <a class=" mt-16 block" href="/privacy">Privacy Policy</a>
+        <a class=" mt-4 block" href="/terms">Terms and Conditions</a>
+    </div>
+    <div class="mt-12 py-4 text-center px-4 bg-white/5 ">
+        <p>Copyright © {year} JL Home Sale. All Rights Reserved</p>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+

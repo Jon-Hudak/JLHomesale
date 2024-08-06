@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import Form from "../components/Form.astro";
+
+import sellImg from "../assets/images/sell.png";
+import houseImg from "../assets/images/house.svg";
+import sketchImg from "../assets/images/sketch.svg";
+import paymentImg from "../assets/images/payment.svg";
+
+const { breadcrumb = "Sell Your Home" } = Astro.props;
+---
+
+<Layout>
+  <section class="heading-bg-img text-white">
+    <div class="cont pb-12">
+      <h1 class="h1 pt-12">Sell Your Home</h1>
+      <p class="font-medium text-3xl mt-4 pb-8">Sell Your House Today</p>
+      <p>Home > {breadcrumb}</p>
+
+      <Form />
+    </div>
+  </section>
+  <section class="mt-40">
+    <div class="tab-wrapper flex gap-8 cont">
+      <Image src={sellImg} alt="" />
+      <ul
+        aria-labelledby="tab-title"
+        class="tabs grid gap-4"
+      >
+        <li class="tab-header bg-background active">
+          <a href="#step-1" id="tab-1" class="p-8 block text-center"
+            ><Image class="mx-auto" src={houseImg} alt="" /><p>Step 1</p></a
+          >
+        </li>
+        <li class="tab-header bg-background">
+          <a href="#step-2" id="tab-2" class="p-8 block text-center min-w-64"
+            ><Image  class="mx-auto" src={sketchImg} alt="" /><p>Step 2</p></a
+          >
+        </li>
+        <li class="tab-header bg-background">
+          <a href="#step-3" id="tab-3" class="p-8 block text-center"
+            ><Image class="mx-auto" src={paymentImg} alt="" /><p>Step 3</p></a
+          >
+        </li>
+      </ul>
+      <div class="tab-content-wrapper">
+          <article id="step-1" class="text-black ">
+            <p class="eyebrow">Step 1
+                </p>
+            <h2 class="mt-2 text-3xl font-bold accent-underline ">Selling your home is quick and easy with JL Home Sale</h2>
+            <p class="mt-4">
+                Give us a call at (866) 384-0233 or fill out our online form. We will get a FREE, no obligation appointment set to meet with you around the purchase of your home.</p>
+            <a class="btn btn-primary mt-8" href="/cash">Get a Cash Offer</a>
+          </article>
+          <article id="step-2" class="text-black">
+              <p class="eyebrow">Step 2
+            </p>
+            <h2 class="mt-2 text-3xl font-bold accent-underline">Selling your home is quick and easy with JL Home Sale</h2>
+            <p class="mt-4">
+                We work with you to view your home in a timely manner. We can be flexible to your schedule and our home assessment takes no more than 30 minutes.</p>
+                <a class="btn btn-primary mt-8" href="/cash">Get a Cash Offer</a>
+            </article>
+            <article id="step-3" class="text-black">
+                <p class="eyebrow">Step 3
+                </p>
+                <h2 class="mt-2 text-3xl font-bold  accent-underline">Selling your home is quick and easy with JL Home Sale</h2>
+                <p class="mt-4">
+                    We charge no commissions, we pay your closing costs, and we buy the home in any condition. After the assessment is complete, we simply make you an offer on the spot.</p>
+                    <a class="btn btn-primary mt-8" href="/cash">Get a Cash Offer</a>
+                </article>
+            </div>
+    </div>
+  </section>
+</Layout>
+<style>
+  .heading-bg-img {
+    background-image: url("../assets/images/hero-bg.jpg");
+  }
+  .tab-header img {
+    filter: invert(95%) sepia(93%) saturate(33%) hue-rotate(71deg)
+      brightness(106%) contrast(99%);
+  }
+  .tab-header.active img,
+  .tab-header:hover img {
+    filter: invert(81%) sepia(13%) saturate(1633%) hue-rotate(81deg)
+      brightness(89%) contrast(86%);}
+</style>

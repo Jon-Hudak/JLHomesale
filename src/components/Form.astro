@@ -1,0 +1,109 @@
+---
+const { page } = Astro.props;
+---
+
+<div class="after:rounded-xl ">
+  <div class="info-column w-fit">
+    <form
+      id={`${page} form`}
+      name={`${page} form`}
+      class="z-10 py-4 px-4 bg-white text-black max-w-[800px]"
+      method="POST"
+      action="https://hooks.zapier.com/hooks/catch/"
+    >
+      <input type="hidden" name="form-name" value={`${page} form`} />
+
+      <div class="inputWrapper">
+        <input required id="street" name="street" type="text" placeholder="" />
+        <label class="formLabel relative" for="street">Street:</label>
+      </div>
+      <div class="form-row grid grid-cols-[2fr_1fr_1fr]">
+        <div class="inputWrapper">
+          <input required id="city" name="city" type="text" placeholder="" />
+          <label class="formLabel relative" for="city">City:</label>
+        </div>
+        <div class="inputWrapper">
+          <input required id="state" name="state" type="text" placeholder="" />
+          <label class="formLabel relative" for="state">State:</label>
+        </div>
+        <div class="inputWrapper">
+          <input required id="zip" name="zip" type="number" placeholder="" />
+          <label class="formLabel relative" for="zip">Zip:</label>
+        </div>
+      </div>
+      <div class="inputWrapper">
+        <input required id="phone" name="phone" type="tel" placeholder="" />
+        <label class="formLabel relative" for="phone"> Phone: </label>
+      </div>
+      <div class="inputWrapper">
+        <input required id="email" name="email" type="email" placeholder="" />
+        <label class="formLabel relative" for="email"> Email: </label>
+      </div>
+      
+      <div class="inputWrapper">
+        <input required id="phone" name="phone" type="tel" placeholder="" />
+        <label class="formLabel relative" for="phone"> Phone: </label>
+      </div>
+      <div class="inputWrapper flex gap-4 align-content-start pt-4">
+        <input
+          required
+          id="chk"
+          name="chk"
+          type="checkbox"
+          placeholder=""
+          class="max-w-fit ml-2 mb-auto "
+        />
+        <label class="relative checkbox-label text-base mt-1" for="chk">
+            By checking this box you give consent to receive communication from JL Home Sale LLC via email, phone, sms. We do not share your details with any third parties.  By providing your information, you acknowledge and agree to our <a class="underline hover:text-accent" href="/privacy/">Privacy Policy </a> and <a class="underline hover:text-accent" href="/terms/">Terms and Conditions</a>  Please note that consent to receive messages is not a condition of purchase. Message frequency varies. Standard message and data rates may apply.  You can opt-out at any time by replying with the keyword “STOP”.  For additional assistance or information contact us at <a class="underline hover:text-accent" href="tel:8666986169">(866)698-6169</a> or send text with keyword “HELP"
+        </label>
+      </div>
+
+      <button id="form-submit" type="submit" class=" mt-8 btn btn-primary">
+        Get Your Cash Offer
+      </button>
+    </form>
+    <style>
+      
+      .inputWrapper {
+        color: black;
+        position: relative;
+        font-size: 1rem;
+        margin: 3px;
+      }
+
+      .inputWrapper label:not(.checkbox-label) {
+        position: absolute;
+        top: 20%;
+        left: 1rem;
+
+        transition: 200ms;
+      }
+      
+      .inputWrapper textarea ~ :where(label) {
+        top: 1.5rem;
+      }
+      .inputWrapper:is(:hover, :active, :focus-within)
+        label:not(.checkbox-label),
+      .inputWrapper > :not(:placeholder-shown) ~ label:not(.checkbox-label) {
+        scale: 80%;
+        transform-origin: top;
+        top: 0rem;
+        left: 0%;
+        opacity: 70%;
+      }
+      input,
+      textarea {
+        @apply text-base border border-neutral-400 rounded-md  w-full;
+      }
+      input {
+        min-height:2rem;       
+         padding: 1rem 1rem 0.5rem 1rem;
+        box-sizing: border-box;
+      }
+      textarea {
+        padding: 2rem 1rem;
+        box-sizing: border-box;
+      }
+    </style>
+  </div>
+</div>
