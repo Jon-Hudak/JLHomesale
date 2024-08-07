@@ -15,8 +15,8 @@ const { breadcrumb = "Sell Your Home" } = Astro.props;
   <section class="heading-bg-img text-white">
     <div class="cont pb-12">
       <h1 class="h1 pt-12">Sell Your Home</h1>
-      <p class="font-medium text-3xl mt-4 pb-8">Sell Your House Today</p>
-      <p>Home > {breadcrumb}</p>
+      <p class="font-medium text-3xl mt-4">Sell Your House Today</p>
+      <p class="mt-4 mb-8 font-bold">Home <img class="inline" src="/images/arrow.png"></img> {breadcrumb}</p>
 
       <Form />
     </div>
@@ -72,11 +72,11 @@ const { breadcrumb = "Sell Your Home" } = Astro.props;
             </div>
     </div>
   </section>
+
+  
 </Layout>
 <style>
-  .heading-bg-img {
-    background-image: url("../assets/images/hero-bg.jpg");
-  }
+
   .tab-header img {
     filter: invert(95%) sepia(93%) saturate(33%) hue-rotate(71deg)
       brightness(106%) contrast(99%);
