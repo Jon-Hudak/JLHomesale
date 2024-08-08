@@ -94,17 +94,30 @@ body {
   }
 }
 
-.checkmark-deco li {
+.li-deco li {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem;
+  margin-inline:auto;
 }
-.checkmark-deco li::before {
-  content: url("/images/arrow.png");
+.li-deco.no-grid li{
+  
+  width:max-content;
+  text-align: center;
 }
 
+.li-deco li::before {
+  content: url("/images/arrow.png");
+}
+.li-deco.check li::before{
+  content: url("/images/check.svg");
+  width:16px;
+}
 .heading-bg-img {
   background-image: url("../assets/images/hero-bg.jpg");
+}
+.cash-bg-img{
+  background-image: url("../assets/images/cash-bg.png");
 }
 .tab-header img {
   filter: invert(95%) sepia(93%) saturate(33%) hue-rotate(71deg)

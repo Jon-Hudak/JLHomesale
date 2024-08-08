@@ -1,9 +1,118 @@
 ---
-import Layout from "../layouts/Layout.astro"
----
+import { Image } from "astro:assets";
+import HouseSVG from "../assets/images/house2.astro";
+import GroupSVG from "../assets/images/group.astro";
+import AlertSVG from "../assets/images/alert.astro";
+import gabbleImg from "../assets/images/We Do All the Work.png";
+import repairImg from "../assets/images/No Repairs.png";
+import feesImg from "../assets/images/No Fees.png";
+import fastImg from "../assets/images/Close Fast.png";
+import step1Img from "../assets/images/step1.svg";
+import step3Img from "../assets/images/step3.svg";
+import step4Img from "../assets/images/step4.svg";
 
-<Layout>
-    <section></section>
-    <section></section>
-    <section></section>
-</Layout>
+const {page} = Astro.props;
+---
+<section>
+    <h2 class="font-medium text-4xl mt-12 text-center text-black uppercase">Sell Your Home in 3 Simple Steps</h2>
+    <div class="mt-12 grid lg:grid-cols-3 cont">
+      <article class="bg-background p-8">
+        <Image class="invert mx-auto" src={step1Img} alt="" />
+        <h3 class="mt-8 font-bold text-2xl text-balance text-center" >Fill Out the <a class="underline" href={`#${page}-form`}>Form</a> or Call us at <a class="underline" href="tel:8666986169">(866) 698-6169</a></h3>
+        <p class="mt-4">
+          We'll review your goals, current situation, and go over all possible
+          solutions with you.
+        </p>
+      </article>
+      <article class="bg-backgroundLight p-8">
+        <Image class="invert mx-auto" src={step3Img} alt="" />
+        <h3 class="mt-8 font-bold text-2xl text-balance text-center" >Get A Fair All Cash Offer</h3>
+        <p class="mt-4">
+          We will provide you with your fast and fair no obligation cash offer for your house.
+        </p>
+      </article>
+      <article class="bg-background p-8">
+        <Image class="invert mx-auto" src={step4Img} alt="" />
+        <h3 class="mt-8 font-bold text-2xl text-balance text-center" >Get Paid Via Title Company</h3>
+        <p class="mt-4">If you receive our offer, we will pay you
+    cash so you can leave your stress and worry behind!</p>
+      </article>
+    </div>
+     <div class="grid mt-12 mb-12"><a class="btn btn-primary mx-auto" href="/cash">Get Your Cash Offer Today</a></div>
+  </section>
+<section class="text-center text-black bg-neutral-50 py-16">
+  <div class="grid md:grid-cols-3 cont">
+    <h2 class="sr-only">What Condition</h2>
+    <article class="">
+      <span class="w-8 mx-auto fill-background inline-block">
+        <HouseSVG />
+      </span>
+      <h3 class="mt-2 text-2xl font-medium">Any Condition</h3>
+      <ul class="mt-6 li-deco check no-grid">
+        <li>Major Repairs Needed</li>
+        <li>Vacant</li>
+        <li>Unfinished Interiors</li>
+        <li>Fire Damage</li>
+        <li>Foundation Damage</li>
+      </ul>
+    </article>
+
+    <article>
+      <span class="w-8 mx-auto fill-background inline-block">
+        <GroupSVG /></span
+      >
+      <h3 class="mt-2 text-2xl font-medium">Any Situation</h3>
+      <ul class="mt-6 li-deco check no-grid">
+        <li>Foreclosures</li>
+        <li>Divorce</li>
+        <li>Financial Struggles</li>
+        <li>Downsizing/ Upgrading</li>
+        <li>Inherited Home</li>
+      </ul>
+    </article>
+
+    <article>
+      <span class="w-8 mx-auto fill-background inline-block">
+        <AlertSVG /></span
+      >
+      <h3 class="mt-2 text-2xl font-medium">Any Problem</h3>
+
+      <ul class="mt-6 li-deco check no-grid">
+        <li>Code Violations</li>
+        <li>Bad Tenants</li>
+        <li>Behind on Payments</li>
+        <li>Bankruptcy</li>
+        <li>Title Issues</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="cont text-black text-center mt-16">
+  <h2 class="text-3xl font-medium text-center">Why Work With JL Home Sale</h2>
+  <div class="grid lg:grid-cols-4 mt-8">
+    <article>
+      <Image class="w-12 mx-auto" src={gabbleImg} alt="" />
+      <h3 class="mt-2 text-2xl font-medium">We Do All the Work</h3>
+      <p class="text-balance mt-2">From paperwork to legal complexities, we’ll take care of it all.</p>
+    </article>
+    <article>
+      <Image class="w-12 mx-auto" src={repairImg} alt="" />
+      <h3 class="mt-2 text-2xl font-medium">No Repairs Needed</h3>
+      <p class="text-balance mt-2">We’ll gladly buy your home <span class="text-nowrap">“as-is,”</span> in any condition.</p>
+    </article>
+
+    <article>
+      <Image class="w-12 mx-auto" src={feesImg} alt="" />
+      <h3 class="mt-2 text-2xl font-medium">No Fees</h3>
+      <p class="text-balance mt-2">You won't pay fees or commissions of any kind.</p>
+    </article>
+
+    <article>
+      <Image class="w-12 mx-auto" src={fastImg} alt=""/>
+        <h3 class="mt-2 text-2xl font-medium">Close Fast</h3>
+        <p class="text-balance mt-2">Close on your schedule and get cash in as little as a week.</p>
+      
+    </article>
+  </div>
+</section>

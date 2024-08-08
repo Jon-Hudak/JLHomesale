@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import investImg from "../assets/images/jlhome.png";
+import Layout from "../layouts/Layout.astro";
+
+const breadcrumb = "Investment Partners";
+---
+
+<Layout>
+  <section class="heading-bg-img text-white py-16">
+    <div class="cont pb-12">
+      <h1 class="h1 pt-12">Investment Partners</h1>
+
+      <p class="mt-4 mb-8 font-bold">
+        Home <img class="inline" src="/images/arrow.png" />
+        {breadcrumb}
+      </p>
+    </div>
+  </section>
+
+  <section class="cont text-black grid lg:grid-cols-2 mt-16">
+    <div class="info ">
+      <p class="eyebrow">Partner With Us</p>
+      <h2 class="h2 mt-4 accent-underline">Investment Partners</h2>
+      <p class="mt-8">
+        When you work with JL Home Sale you are working with an experienced
+        partner that operates with a “win - win” mentality. We meet our sellers
+        needs and in doing so assist our partners in achieving their goals.
+      </p>
+
+      <p class="mt-8">
+        We are in the people business. Our mission is to alleviate the cost
+        pressure and stress that comes with selling a home. In doing so we are
+        able to connect our partners with opportunities to help as well as
+        achieve their own investment goals.
+      </p>
+
+      <p class="mt-8">
+        We take a long term approach to investing. Our buying criteria ensures
+        we are bringing the appropriate assets to our partners that meet their
+        needs.
+      </p>
+    </div>
+    <div class="img  p-8">
+      <Image class="" src={investImg} alt="" />
+    </div>
+  </section>
+  <section>
+    
+  </section>
+</Layout>

@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Form from "../components/Form.astro"
+import Why from "../components/Why.astro";
+import { Breadcrumb } from "react-bootstrap"
+
+const breadcrumb="Get Your Cash Offer";
+const page="cash"
+---
+
+<Layout>
+    <section class="cash-bg-img text-white">
+        <div class="cont pb-12">
+          <h1 class="h1 pt-12">Sell Your Home</h1>
+          <p class="font-medium text-3xl mt-4">Sell Your House Today</p>
+          <p class="mt-4 mb-8 font-bold">Home <img class="inline" src="/images/arrow.png"></img> {breadcrumb}</p>
+    
+          <div class="py-16">
+              <Form page={page}/>
+          </div>
+        </div>
+      </section>
+      <Why/>
+</Layout>

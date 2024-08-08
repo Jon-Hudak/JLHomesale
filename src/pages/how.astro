@@ -5,54 +5,26 @@ import Why from "../components/Why.astro"
 
 import { Image } from "astro:assets";
 
-import step1Img from "../assets/images/step1.svg";
-import step3Img from "../assets/images/step3.svg";
-import step4Img from "../assets/images/step4.svg";
+
 
 const page = "how";
 ---
 
 
-  <section class="heading-bg-img text-white">
-    <div class="cont pb-12">
-      <h1 class="h1 pt-12">Sell Your Home</h1>
-      <p class="font-medium text-3xl mt-4">Sell Your House Today</p>
-      <p class="mt-4 mb-8 font-bold">
-        No Fees, No Commissions, No Repairs Needed
-      </p>
-
-      <Form />
-    </div>
-  </section>
-  <section>
-    <h2 class="font-medium text-4xl mt-12 text-center text-black uppercase">Sell Your Home in 3 Simple Steps</h2>
-    <div class="mt-12 grid lg:grid-cols-3 cont">
-      <article class="bg-background p-8">
-        <Image class="invert mx-auto" src={step1Img} alt="" />
-        <h3 class="mt-8 font-bold text-2xl text-balance text-center" >Fill Out the <a class="underline" href={`#${page}-form`}>Form</a> or Call us at <a class="underline" href="tel:8666986169">(866) 698-6169</a></h3>
-        <p class="mt-4">
-          We'll review your goals, current situation, and go over all possible
-          solutions with you.
+  <Layout title="How It Works | JL Home Sale">
+    <section class="heading-bg-img text-white">
+      <div class="cont pb-12">
+        <h1 class="h1 pt-12">Sell Your Home</h1>
+        <p class="font-medium text-3xl mt-4">Sell Your House Today</p>
+        <p class="mt-4 mb-8 font-bold">
+          No Fees, No Commissions, No Repairs Needed
         </p>
-      </article>
-      <article class="bg-backgroundLight p-8">
-        <Image class="invert mx-auto" src={step3Img} alt="" />
-        <h3 class="mt-8 font-bold text-2xl text-balance text-center" >Get A Fair All Cash Offer</h3>
-        <p class="mt-4">
-          We will provide you with your fast and fair no obligation cash offer for your house.
-        </p>
-      </article>
-      <article class="bg-background p-8">
-        <Image class="invert mx-auto" src={step4Img} alt="" />
-        <h3 class="mt-8 font-bold text-2xl text-balance text-center" >Get Paid Via Title Company</h3>
-        <p class="mt-4">If you receive our offer, we will pay you
-    cash so you can leave your stress and worry behind!</p>
-      </article>
-    </div>
-
-     <div class="grid mt-12"><a class="btn btn-primary mx-auto" href="/cash">Get Your Cash Offer Today</a></div>
-  </section>
-  <Why></Why>
+        <Form page={page} />
+      </div>
+    </section>
+    
+    <Why page={page}></Why>
+  </Layout>
 
 
 <style></style>
