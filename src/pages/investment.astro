@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import investImg from "../assets/images/jlhome.png";
 import Layout from "../layouts/Layout.astro";
+import Form2 from "../components/Form2.astro";
 
 const breadcrumb = "Investment Partners";
 ---
@@ -45,7 +46,7 @@ const breadcrumb = "Investment Partners";
       <Image class="" src={investImg} alt="" />
     </div>
   </section>
-  <section>
-    
+  <section class="cont">
+    <Form2></Form2>
   </section>
 </Layout>
