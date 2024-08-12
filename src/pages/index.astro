@@ -60,9 +60,9 @@ const features = [
         <h1 class="font-semibold text-5xl mt-4 max-w-[24ch]">
           Selling Your Home Has Never Been Easier.
         </h1>
-        <div class="mt-10">
-          <a class="uppercase btn btn-outline" href="/cash">Get A Cash Offer</a>
-          <a class="uppercase btn btn-primary" href="/sell"> Learn More</a>
+        <div class="mt-10 gap-4">
+          <a class="uppercase btn btn-outline w-full sm:w-auto" href="/cash">Get A Cash Offer</a>
+          <a class="uppercase btn btn-primary w-full sm:w-auto mt-4 sm:mt-0" href="/sell"> Learn More</a>
         </div>
       </div>
     </section>
@@ -123,7 +123,7 @@ const features = [
               >
             </div>
             <div class="tab-img">
-              <Image class="h-full w-full object-cover" src={tab1Img} alt="" />
+              <Image class="h-full w-full object-cover hidden sm:block" src={tab1Img} alt="" />
             </div>
           </div>
         </article>
@@ -184,9 +184,9 @@ const features = [
       </div>
     </section>
 
-    <section class="cont grid grid-cols-2 gap-12 text-black mt-40" id="reasons">
+    <section class="cont grid md:grid-cols-2 gap-12 text-black mt-40" id="reasons">
       <div class="">
-        <Image class="img-fluid" src={keysImg} alt="" />
+        <Image class="img-fluid w-full" src={keysImg} alt="" />
       </div>
       <div class="info-wrapper text-base">
         <p class="eyebrow">Make the Best Decision</p>
@@ -218,7 +218,7 @@ const features = [
     </section>
 
     <section class="bg-dark py-40 mt-16">
-      <div class="cont grid lg:grid-cols-2 gap-8">
+      <div class="cont grid md:grid-cols-2 gap-8">
         <div class="info">
           <p class="eyebrow">Why Work With Us</p>
           <h2 class="h2 accent-underline mt-2">About JL Home Sale</h2>
@@ -240,7 +240,7 @@ const features = [
     </section>
 
     <section class="py-20 relative -top-36 -mb-36">
-      <div class="cont grid lg:grid-cols-2 text-black gap-4">
+      <div class="cont grid sm:grid-cols-2 text-black gap-4">
         <article
           class="bg-white shadow-[0px_2px_4px_grey;] rounded-sm px-8 p-12"
         >

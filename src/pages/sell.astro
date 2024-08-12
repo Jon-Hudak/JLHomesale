@@ -23,22 +23,22 @@ const { breadcrumb = "Sell Your Home" } = Astro.props;
   </section>
   <section class="mt-40">
     <div class="tab-wrapper flex gap-8 cont">
-      <Image src={sellImg} alt="" />
+      <Image class="hidden lg:block" src={sellImg} alt="" />
       <ul
         aria-labelledby="tab-title"
-        class="tabs grid gap-4"
+        class="tabs grid gap-4 flex-shrink"
       >
-        <li class="tab-header bg-background active">
+        <li class="tab-header bg-background text-nowrap active">
           <a href="#step-1" id="tab-1" class="p-8 block text-center"
             ><Image class="mx-auto" src={houseImg} alt="" /><p>Step 1</p></a
           >
         </li>
-        <li class="tab-header bg-background">
-          <a href="#step-2" id="tab-2" class="p-8 block text-center min-w-64"
+        <li class="tab-header bg-background text-nowrap">
+          <a href="#step-2" id="tab-2" class="p-8 block text-center"
             ><Image  class="mx-auto" src={sketchImg} alt="" /><p>Step 2</p></a
           >
         </li>
-        <li class="tab-header bg-background">
+        <li class="tab-header bg-background text-nowrap">
           <a href="#step-3" id="tab-3" class="p-8 block text-center"
             ><Image class="mx-auto" src={paymentImg} alt="" /><p>Step 3</p></a
           >
@@ -76,6 +76,11 @@ const { breadcrumb = "Sell Your Home" } = Astro.props;
   
 </Layout>
 <style>
+
+  .tab-header{
+    width:clamp(4rem,30vw,16rem)
+    
+  }
 
   .tab-header img {
     filter: invert(95%) sepia(93%) saturate(33%) hue-rotate(71deg)

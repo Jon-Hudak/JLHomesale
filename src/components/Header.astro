@@ -9,7 +9,7 @@ console.log(currentPath);
 
 <header
   id="navigation"
-  class={`bg-background  grid relative ${navEnabled ? "" : "no-nav"}`}
+  class={`bg-background lg:h-[104px] grid relative ${navEnabled ? "" : "no-nav"}`}
 >
   <div class="cont w-full nav-container px-2 lg:px-4">
     <a href="/" class="logo flex" aria-label="back  to home">
@@ -24,7 +24,7 @@ console.log(currentPath);
     <nav class="nav" role="navigation">
       <!--Mobile Nav Toggle-->
       <button class="toggle" aria-label="mobile menu toggle ">
-        <div class="box" aria-hidden="true">
+        <div class="box pointer-events-none" aria-hidden="true">
           <span class="line line1" aria-hidden="true"></span>
           <span class="line line2" aria-hidden="true"></span>
           <span class="line line3" aria-hidden="true"></span>
@@ -37,37 +37,28 @@ console.log(currentPath);
             <div
               class={` nav-links flex flex-col lg:flex-row gap-3 lg:gap-6 ${navEnabled ? "" : "hidden"}`}
             >
+              <li class={`li nav-item  ${currentPath === "/" ? "active" : ""}`}>
+                <a href="/">Home</a>
+              </li>
               <li
-                class={`li nav-item active ${currentPath === "/" ? "active" : ""}`}
+                class={`li nav-item  ${currentPath === "/sell" ? "active" : ""}`}
               >
-                <a
-                  class={`active ${currentPath === "/" ? "active" : ""}`}
-                  href="/">Home</a
-                >
+                <a href="/sell">Sell Your Home</a>
               </li>
-              <li class="li nav-item">
-                <a
-                  class={`${currentPath === "/sell" ? "active" : ""}`}
-                  href="/sell">Sell Your Home</a
-                >
+              <li
+                class={`li nav-item  ${currentPath === "/how" ? "active" : ""}`}
+              >
+                <a href="/how">How It Works</a>
               </li>
-              <li class="li nav-item">
-                <a
-                  class={`${currentPath === "/how" ? "active" : ""}`}
-                  href="/how">How It Works</a
-                >
+              <li
+                class={`li nav-item  ${currentPath === "/investment" ? "active" : ""}`}
+              >
+                <a href="/investment">Investment Partners</a>
               </li>
-              <li class="li nav-item">
-                <a
-                  class={`${currentPath === "/investment" ? "active" : ""}`}
-                  href="/investment/">Investment Partners</a
-                >
-              </li>
-              <li class="li nav-item">
-                <a
-                  class={`nav-link ${currentPath === "" ? "active" : ""}`}
-                  href="/cash/">Get A Cash Offer</a
-                >
+              <li
+                class={`li nav-item  ${currentPath === "/cash" ? "active" : ""}`}
+              >
+                <a href="/cash">Get A Cash Offer</a>
               </li>
             </div>
           </ul>
@@ -78,7 +69,7 @@ console.log(currentPath);
 </header>
 
 <style>
-  #navigation .nav-item{
+  #navigation .nav-item {
     text-transform: uppercase;
     font-size: 1rem;
   }
@@ -145,6 +136,11 @@ console.log(currentPath);
     #navigation.active .li {
       opacity: 1;
       transform: translateY(0);
+    }
+    #navigation .li a {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
     }
     #navigation .nav-container {
       width: 100%;
@@ -483,51 +479,79 @@ console.log(currentPath);
   }
 </style>
 <script>
-  // add classes for mobile navigation toggling
-  var body = document.querySelector("body");
-  const navbarMenu = document.querySelector("#navigation");
-  const hamburgerMenu = document.querySelector("#navigation .toggle");
+  document.addEventListener("astro:page-load", () => {
+   
+  
 
-  hamburgerMenu!.addEventListener("click", function () {
-    hamburgerMenu!.classList.toggle("active");
-    navbarMenu!.classList.toggle("active");
-    body!.classList.toggle("open");
-    // run the function to check the aria-expanded value
-    ariaExpanded();
+    // add classes for mobile navigation toggling
+    var body = document.querySelector("body");
+    const navbarMenu = document.querySelector("#navigation");
+    const hamburgerMenu = document.querySelector("#navigation .toggle");
+
+    hamburgerMenu!.addEventListener("click", function () {
+      hamburgerMenu!.classList.toggle("active");
+      navbarMenu!.classList.toggle("active");
+      body!.classList.toggle("open");
+      // run the function to check the aria-expanded value
+      ariaExpanded();
+    });
+
+    // checks the value of aria expanded on the ul and changes it accordingly whether it is expanded or not
+    function ariaExpanded() {
+      const UL = document.querySelector("#expanded");
+      const Expanded = UL!.getAttribute("aria-expanded");
+
+      if (Expanded === "false") {
+        UL!.setAttribute("aria-expanded", "true");
+      } else {
+        UL!.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // mobile nav toggle code
+    const dropDowns = Array.from(
+      document.querySelectorAll("#navigation .dropdown")
+    );
+    for (const item of dropDowns) {
+      const onClick = () => {
+        item.classList.toggle("active");
+      };
+      item.addEventListener("click", onClick);
+    }
+
+    //mobile nav scroll listener
+
+    document.addEventListener("scroll", handleScroll);
+
+    function handleScroll() {
+      if (window.scrollY > 10) {
+        navbarMenu?.classList.add("scrolled");
+      } else {
+        navbarMenu?.classList.remove("scrolled");
+      }
+    }
+
+    //mobile nav close on tap outside of menu
+    const navMenu = document.querySelector("#navigation");
+    const ulWrapper = navMenu.querySelector("ul-wrapper");
+
+    document.addEventListener("click", (e) => {
+      //@ts-ignore
+      if (e.target !== hamburgerMenu) {
+        closeHamburger();
+        
+      }
+    });
+    //mobile nav close on esc pressed
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeHamburger();
+      }
+    });
+    function closeHamburger() {
+      hamburgerMenu!.classList.remove("active");
+      navbarMenu!.classList.remove("active");
+      body!.classList.remove("open");
+    }
   });
-
-  // checks the value of aria expanded on the ul and changes it accordingly whether it is expanded or not
-  function ariaExpanded() {
-    const UL = document.querySelector("#expanded");
-    const Expanded = UL!.getAttribute("aria-expanded");
-
-    if (Expanded === "false") {
-      UL!.setAttribute("aria-expanded", "true");
-    } else {
-      UL!.setAttribute("aria-expanded", "false");
-    }
-  }
-
-  // mobile nav toggle code
-  const dropDowns = Array.from(
-    document.querySelectorAll("#navigation .dropdown")
-  );
-  for (const item of dropDowns) {
-    const onClick = () => {
-      item.classList.toggle("active");
-    };
-    item.addEventListener("click", onClick);
-  }
-
-  //mobile nav scroll listener
-
-  document.addEventListener("scroll", handleScroll);
-
-  function handleScroll() {
-    if (window.scrollY > 10) {
-      navbarMenu?.classList.add("scrolled");
-    } else {
-      navbarMenu?.classList.remove("scrolled");
-    }
-  }
 </script>
