@@ -3,6 +3,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 import "../styles/style.css";
+import { ViewTransitions } from "astro:transitions";
 const { title = "JL Home Sale" } = Astro.props;
 ---
 
@@ -32,7 +33,7 @@ const { title = "JL Home Sale" } = Astro.props;
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=AW-11160695389"></script>
-    <script>
+    <script is:inline>
       //@ts-nocheck
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -43,7 +44,7 @@ const { title = "JL Home Sale" } = Astro.props;
     </script>
 
     <!-- Facebook Pixel Code -->
-    <script>
+    <script is:inline>
       //@ts-nocheck
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
@@ -71,8 +72,8 @@ const { title = "JL Home Sale" } = Astro.props;
       fbq("init", "419888609948087");
       fbq("track", "PageView");
     </script>
-    <noscript>
-      <img
+    <noscript data-astro-transition-persist="pixel">
+      <img 
         height="1"
         width="1"
         src="https://www.facebook.com/tr?id=419888609948087&ev=PageView
@@ -80,10 +81,11 @@ const { title = "JL Home Sale" } = Astro.props;
       />
     </noscript>
     <!-- End Facebook Pixel Code -->
+    <ViewTransitions />
   </head>
 
   <body>
-    <noscript
+    <noscript data-astro-transition-persist="gtag"
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-59V7B37K"
         height="0"
@@ -126,11 +128,6 @@ const { title = "JL Home Sale" } = Astro.props;
         Courier New,
         monospace;
     }
-    .cont {
-      max-width: 1200px;
-      margin-inline: auto;
-      padding-inline: 1rem;
-    }
 
     .accent-underline::after {
       content: "";
@@ -144,44 +141,48 @@ const { title = "JL Home Sale" } = Astro.props;
   </style>
 
   <script>
-    //tabs
-    if (document.querySelector(".tab-wrapper")) {
-      const tabWrapper = document.querySelector(".tab-wrapper");
-      const tabList = tabWrapper.querySelector("ul");
-      const tabButtons = tabList.querySelectorAll("a");
-      const tabPanels = tabWrapper.querySelectorAll(
-        ".tab-content-wrapper>article"
-      );
+    document.addEventListener("astro:page-load", () => {
+      // This only runs once.
 
-      tabButtons.forEach((tab, index) => {
-        if (index === 0) {
-          return;
-        } else {
-          tabPanels[index].setAttribute("hidden", true);
-        }
-      });
+      //tabs
+      if (document.querySelector(".tab-wrapper")) {
+        const tabWrapper = document.querySelector(".tab-wrapper");
+        const tabList = tabWrapper.querySelector("ul");
+        const tabButtons = tabList.querySelectorAll("a");
+        const tabPanels = tabWrapper.querySelectorAll(
+          ".tab-content-wrapper>article"
+        );
 
-      tabWrapper.addEventListener("click", (e) => {
-        //@ts-ignore
-        const clickedTab = e.target.closest("a");
-        if (!clickedTab) return;
-        e.preventDefault();
-
-        const activePanelId = clickedTab.getAttribute("href");
-        //@ts-ignore
-        const activePanel = document.querySelector(activePanelId);
-
-        tabButtons.forEach((button) => {
-          button.parentElement.classList.remove("active");
+        tabButtons.forEach((tab, index) => {
+          if (index === 0) {
+            return;
+          } else {
+            tabPanels[index].setAttribute("hidden", true);
+          }
         });
 
-        clickedTab.parentElement.classList.add("active");
+        tabWrapper.addEventListener("click", (e) => {
+          //@ts-ignore
+          const clickedTab = e.target.closest("a");
+          if (!clickedTab) return;
+          e.preventDefault();
 
-        tabPanels.forEach((panel) => {
-          panel.setAttribute("hidden", "true");
+          const activePanelId = clickedTab.getAttribute("href");
+          //@ts-ignore
+          const activePanel = document.querySelector(activePanelId);
+
+          tabButtons.forEach((button) => {
+            button.parentElement.classList.remove("active");
+          });
+
+          clickedTab.parentElement.classList.add("active");
+
+          tabPanels.forEach((panel) => {
+            panel.setAttribute("hidden", "true");
+          });
+          activePanel.removeAttribute("hidden");
         });
-        activePanel.removeAttribute("hidden");
-      });
-    }
+      }
+    });
   </script>
 </html>
