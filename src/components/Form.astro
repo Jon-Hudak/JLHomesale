@@ -53,7 +53,7 @@ const { page } = Astro.props;
           placeholder=""
           class="max-w-fit ml-2 mb-auto "
         />
-        <label class="relative checkbox-label text-base mt-1" for="chk">
+        <label class="relative inline-label text-base mt-1" for="chk">
             By checking this box you give consent to receive communication from JL Home Sale LLC via email, phone, sms. We do not share your details with any third parties.  By providing your information, you acknowledge and agree to our <a class="underline hover:text-accent" href="/privacy/">Privacy Policy </a> and <a class="underline hover:text-accent" href="/terms/">Terms and Conditions</a>  Please note that consent to receive messages is not a condition of purchase. Message frequency varies. Standard message and data rates may apply.  You can opt-out at any time by replying with the keyword “STOP”.  For additional assistance or information contact us at <a class="underline hover:text-accent" href="tel:8666986169">(866)698-6169</a> or send text with keyword “HELP"
         </label>
       </div>
@@ -71,7 +71,7 @@ const { page } = Astro.props;
         margin: 3px;
       }
 
-      .inputWrapper label:not(.checkbox-label) {
+      .inputWrapper label:not(.inline-label) {
         position: absolute;
         top: 20%;
         left: 1rem;
@@ -83,8 +83,8 @@ const { page } = Astro.props;
         top: 1.5rem;
       }
       .inputWrapper:is(:hover, :active, :focus-within)
-        label:not(.checkbox-label),
-      .inputWrapper > :not(:placeholder-shown) ~ label:not(.checkbox-label) {
+        label:not(.inline-label),
+      .inputWrapper > :not(:placeholder-shown) ~ label:not(.inline-label) {
         scale: 80%;
         transform-origin: top;
         top: 0rem;
