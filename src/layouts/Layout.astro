@@ -4,6 +4,9 @@ import Footer from "../components/Footer.astro";
 
 import "../styles/style.css";
 import { ViewTransitions } from "astro:transitions";
+
+const currentPath = Astro.url.pathname;
+
 const { title = "JL Home Sale" } = Astro.props;
 ---
 
@@ -93,7 +96,7 @@ const { title = "JL Home Sale" } = Astro.props;
         style="display:none;visibility:hidden"></iframe></noscript
     >
     <!-- End Google Tag Manager (noscript) -->
-    <Header />
+    <Header currentPath={currentPath} />
     <slot />
     <Footer />
   </body>
@@ -157,7 +160,7 @@ const { title = "JL Home Sale" } = Astro.props;
           if (index === 0) {
             return;
           } else {
-            tabPanels[index].setAttribute("hidden", true);
+            tabPanels[index].setAttribute("hidden", "true");
           }
         });
 

@@ -1,8 +1,7 @@
 ---
 import logo from "../assets/images/logo.png";
 
-const { navEnabled = true } = Astro.props;
-const currentPath = Astro.url.pathname;
+const { navEnabled = true, currentPath=""} = Astro.props;
 
 console.log(currentPath);
 ---
