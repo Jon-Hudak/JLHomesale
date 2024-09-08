@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout>
+    <section class="text-black cont text-center my-40"><h1 class="h1">Thank You!</h1>
+    <p class="font-medium text-xl mt-4">Your form has been submitted. You will be redirected in 5 seconds.</p>
+    <p class="mt-2">Click <a class="underline text-blue-500 hover:text-blue-700 focus:text-blue-700" href="/">here</a> to go the home page manually.</p>
+
+</section>
+</Layout>
+
+<script>
+    setTimeout(()=>{window.location.replace('/')},5000)
+</script>
