@@ -11,8 +11,9 @@ const { page } = Astro.props;
       method="POST"
       netlify-honeypot="bot-field"
       data-netlify="true"
+      action="/"
     >
-      <input type="hidden" name="form-name" value={`${page} form`} />
+      <input type="hidden" name="form-name" value={`${page}-form`} />
       <p class="hidden">
         <label>
           Don’t fill this out if you’re human: <input name="bot-field" />
@@ -45,10 +46,7 @@ const { page } = Astro.props;
         <label class="formLabel relative" for="email"> Email: </label>
       </div>
 
-      <div class="inputWrapper">
-        <input required id="phone" name="phone" type="tel" placeholder="" />
-        <label class="formLabel relative" for="phone"> Phone: </label>
-      </div>
+      
       <div class="inputWrapper flex gap-4 align-content-start pt-4">
         <input
           required
