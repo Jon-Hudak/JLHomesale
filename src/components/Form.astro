@@ -13,9 +13,11 @@ const { page } = Astro.props;
       data-netlify="true"
     >
       <input type="hidden" name="form-name" value={`${page} form`} />
-      <label>
-        Don’t fill this out if you’re human: <input name="bot-field" />
-      </label>
+      <p class="hidden">
+        <label>
+          Don’t fill this out if you’re human: <input name="bot-field" />
+        </label>
+      </p>
       <div class="inputWrapper">
         <input required id="street" name="street" type="text" placeholder="" />
         <label class="formLabel relative" for="street">Street:</label>
