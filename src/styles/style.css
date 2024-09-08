@@ -8,7 +8,7 @@ body {
 }
 .cont {
   /* max-width: 1200px; */
-  max-width:clamp(550px, 80vw, 1200px);
+  max-width: clamp(550px, 80vw, 1200px);
   margin-inline: auto;
   padding-inline: 1rem;
 }
@@ -107,36 +107,42 @@ body {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.5rem;
-  margin-inline:auto;
+  margin-inline: auto;
 }
-.li-deco.no-grid li{
-  
-  width:max-content;
+.li-deco.no-grid li {
+  width: max-content;
   text-align: center;
 }
 
 .li-deco li::before {
   content: url("/images/arrow.png");
 }
-.li-deco.check li::before{
+.li-deco.check li::before {
   content: url("/images/check.svg");
-  width:16px;
+  width: 16px;
 }
 .heading-bg-img {
   background-image: url("../assets/images/hero-bg.jpg");
 }
-.cash-bg-img{
+.cash-bg-img {
   background-image: url("../assets/images/cash-bg.png");
 }
-.tab-header a:focus{  
-  outline:none;
+.tab-header a:focus {
+  outline: none;
   box-shadow: 0 0 0 3px hsla(106, 100%, 50%, 0.8);
 }
 .tab-header img {
   filter: invert(95%) sepia(93%) saturate(33%) hue-rotate(71deg)
     brightness(106%) contrast(99%);
 }
-.tab-header.active img,
-.tab-header:hover img {
-  filter: invert(81%) sepia(13%) saturate(1633%) hue-rotate(81deg)
-    brightness(89%) contrast(86%);}
+
+.tab-header a:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
+[aria-selected="true"] img{
+  filter: invert(81%) sepia(13%) saturate(1633%) hue-rotate(81deg) 
+     brightness(89%) contrast(86%);
+
+}

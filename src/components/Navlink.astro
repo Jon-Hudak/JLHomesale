@@ -3,7 +3,6 @@ const {href, class: className, ...props} = Astro.props;
 
 const {pathname} = Astro.url;
 const isActive = href === pathname || href === pathname.replace(/[/]$/, "");
-console.log(pathname);
 ---
 
 <li class:list={[className, {active: isActive}]}>

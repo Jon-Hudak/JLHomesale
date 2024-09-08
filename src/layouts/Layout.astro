@@ -141,8 +141,9 @@ const { title = "JL Home Sale" } = Astro.props;
     }
   </style>
 
-  <script>
+  <script is:inline>
     document.addEventListener("astro:page-load", () => {
+      console.log("ummm");
       // This only runs once.
 
       //tabs
@@ -154,12 +155,23 @@ const { title = "JL Home Sale" } = Astro.props;
           ".tab-content-wrapper>article"
         );
 
+        tabList.setAttribute("role", "tablist");
+        tabList.querySelectorAll("li").forEach((listitem) => {
+          listitem.setAttribute("role", "presentation");
+        });
+
         tabButtons.forEach((tab, index) => {
+          tab.setAttribute("role", "tab");
           if (index === 0) {
-            return;
+            tab.setAttribute("aria-selected", "true");
           } else {
+            tab.setAttribute("tabindex", "-1");
             tabPanels[index].setAttribute("hidden", "true");
           }
+          tabPanels.forEach((panel) => {
+            panel.setAttribute("role", "tabpanel");
+            panel.setAttribute("tabindex", "0");
+          });
         });
 
         tabWrapper.addEventListener("click", (e) => {
@@ -167,22 +179,67 @@ const { title = "JL Home Sale" } = Astro.props;
           const clickedTab = e.target.closest("a");
           if (!clickedTab) return;
           e.preventDefault();
+          switchTab(clickedTab);
+        });
+        tabWrapper.addEventListener("keydown", (e) => {
+          switch (e.key) {
+            case "ArrowLeft":
+              moveLeft();
+              break;
+            case "ArrowRight":
+              moveRight();
+              break;
+            case "Home":
+              e.preventDefault()
+              switchTab(tabButtons[0]);
+              break;
+            case "End":
+              e.preventDefault();
+              switchTab(tabButtons[tabButtons.length-1]);
+              break;
+          }
+        });
+        function moveLeft() {
+          const currentTab = document.activeElement;
 
-          const activePanelId = clickedTab.getAttribute("href");
+          if (!currentTab.parentElement.previousElementSibling) {
+            switchTab(tabButtons[tabButtons.length - 1]);
+          } else {
+            switchTab(
+              currentTab.parentElement.previousElementSibling.querySelector("a")
+            );
+          }
+        }
+        function moveRight() {
+          const currentTab = document.activeElement;
+
+          if (!currentTab.parentElement.nextElementSibling) {
+            switchTab(tabButtons[0]);
+          } else {
+            switchTab(
+              currentTab.parentElement.nextElementSibling.querySelector("a")
+            );
+          }
+        }
+        function switchTab(newTab) {
+          const activePanelId = newTab.getAttribute("href");
           //@ts-ignore
           const activePanel = document.querySelector(activePanelId);
 
           tabButtons.forEach((button) => {
-            button.parentElement.classList.remove("active");
+            button.setAttribute("aria-selected", false);
+            button.setAttribute("tabindex", "-1");
           });
-
-          clickedTab.parentElement.classList.add("active");
 
           tabPanels.forEach((panel) => {
             panel.setAttribute("hidden", "true");
           });
           activePanel.removeAttribute("hidden");
-        });
+
+          newTab.setAttribute("aria-selected", true);
+          newTab.setAttribute("tabindex", "0");
+          newTab.focus();
+        }
       }
     });
   </script>
