@@ -9,9 +9,14 @@ const { page } = Astro.props;
       name={`${page}-form`}
       class="z-10 py-4 px-4 bg-white text-black max-w-[650px]"
       method="POST"
-      action="https://hooks.zapier.com/hooks/catch/"
+      netlify-honeypot="bot-field"
+      data-netlify="true"
     >
       <input type="hidden" name="form-name" value={`${page} form`} />
+      <label>
+        Don’t fill this out if you’re human: <input name="bot-field" />
+      </label>
+    
 
       <div class="inputWrapper">
         <input required id="fName" name="fName" type="text" placeholder="" />

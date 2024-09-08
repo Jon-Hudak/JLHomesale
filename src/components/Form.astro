@@ -2,17 +2,20 @@
 const { page } = Astro.props;
 ---
 
-<div class="after:rounded-xl ">
+<div class="after:rounded-xl">
   <div class="info-column w-fit">
     <form
       id={`${page}-form`}
       name={`${page}-form`}
       class="z-10 py-4 px-4 bg-white text-black max-w-[800px]"
       method="POST"
-      action="https://hooks.zapier.com/hooks/catch/"
+      netlify-honeypot="bot-field"
+      data-netlify="true"
     >
       <input type="hidden" name="form-name" value={`${page} form`} />
-
+      <label>
+        Don’t fill this out if you’re human: <input name="bot-field" />
+      </label>
       <div class="inputWrapper">
         <input required id="street" name="street" type="text" placeholder="" />
         <label class="formLabel relative" for="street">Street:</label>
@@ -39,7 +42,7 @@ const { page } = Astro.props;
         <input required id="email" name="email" type="email" placeholder="" />
         <label class="formLabel relative" for="email"> Email: </label>
       </div>
-      
+
       <div class="inputWrapper">
         <input required id="phone" name="phone" type="tel" placeholder="" />
         <label class="formLabel relative" for="phone"> Phone: </label>
@@ -51,19 +54,31 @@ const { page } = Astro.props;
           name="chk"
           type="checkbox"
           placeholder=""
-          class="max-w-fit ml-2 mb-auto "
+          class="max-w-fit ml-2 mb-auto"
         />
         <label class="relative inline-label text-base mt-1" for="chk">
-            By checking this box you give consent to receive communication from JL Home Sale LLC via email, phone, sms. We do not share your details with any third parties.  By providing your information, you acknowledge and agree to our <a class="underline hover:text-accent" href="/privacy/">Privacy Policy </a> and <a class="underline hover:text-accent" href="/terms/">Terms and Conditions</a>  Please note that consent to receive messages is not a condition of purchase. Message frequency varies. Standard message and data rates may apply.  You can opt-out at any time by replying with the keyword “STOP”.  For additional assistance or information contact us at <a class="underline hover:text-accent" href="tel:8666986169">(866)698-6169</a> or send text with keyword “HELP"
+          By checking this box you give consent to receive communication from JL
+          Home Sale LLC via email, phone, sms. We do not share your details with
+          any third parties. By providing your information, you acknowledge and
+          agree to our <a class="underline hover:text-accent" href="/privacy/"
+            >Privacy Policy
+          </a> and <a class="underline hover:text-accent" href="/terms/"
+            >Terms and Conditions</a
+          > Please note that consent to receive messages is not a condition of purchase.
+          Message frequency varies. Standard message and data rates may apply. You
+          can opt-out at any time by replying with the keyword “STOP”. For additional
+          assistance or information contact us at <a
+            class="underline hover:text-accent"
+            href="tel:8666986169">(866)698-6169</a
+          > or send text with keyword “HELP"
         </label>
       </div>
 
-      <button id="form-submit" type="submit" class=" mt-8 btn btn-primary">
+      <button id="form-submit" type="submit" class="mt-8 btn btn-primary">
         Get Your Cash Offer
       </button>
     </form>
     <style>
-      
       .inputWrapper {
         color: black;
         position: relative;
@@ -78,12 +93,11 @@ const { page } = Astro.props;
 
         transition: 200ms;
       }
-      
+
       .inputWrapper textarea ~ :where(label) {
         top: 1.5rem;
       }
-      .inputWrapper:is(:hover, :active, :focus-within)
-        label:not(.inline-label),
+      .inputWrapper:is(:hover, :active, :focus-within) label:not(.inline-label),
       .inputWrapper > :not(:placeholder-shown) ~ label:not(.inline-label) {
         scale: 80%;
         transform-origin: top;
@@ -96,8 +110,8 @@ const { page } = Astro.props;
         @apply text-base border border-neutral-400 rounded-md  w-full;
       }
       input {
-        min-height:2rem;       
-         padding: 1rem 1rem 0.5rem 1rem;
+        min-height: 2rem;
+        padding: 1rem 1rem 0.5rem 1rem;
         box-sizing: border-box;
       }
       textarea {
