@@ -1,9 +1,8 @@
 ---
 import logo from "../assets/images/logo.png";
+import Navlink from "./Navlink.astro";
 
-const { navEnabled = true, currentPath=""} = Astro.props;
-
-console.log(currentPath);
+const { navEnabled = true} = Astro.props;
 ---
 
 <header
@@ -36,29 +35,22 @@ console.log(currentPath);
             <div
               class={` nav-links flex flex-col lg:flex-row gap-3 lg:gap-6 ${navEnabled ? "" : "hidden"}`}
             >
-              <li class={`li nav-item  ${currentPath === "/" ? "active" : ""}`}>
-                <a href="/">Home</a>
-              </li>
-              <li
-                class={`li nav-item  ${currentPath === "/sell" ? "active" : ""}`}
-              >
-                <a href="/sell">Sell Your Home</a>
-              </li>
-              <li
-                class={`li nav-item  ${currentPath === "/how" ? "active" : ""}`}
-              >
-                <a href="/how">How It Works</a>
-              </li>
-              <li
-                class={`li nav-item  ${currentPath === "/investment" ? "active" : ""}`}
-              >
-                <a href="/investment">Investment Partners</a>
-              </li>
-              <li
-                class={`li nav-item  ${currentPath === "/cash" ? "active" : ""}`}
-              >
-                <a href="/cash">Get A Cash Offer</a>
-              </li>
+            <Navlink class="li nav-item" href="/">
+              Home
+            </Navlink>
+            <Navlink class="li nav-item" href="/sell">
+              Sell Your Home
+            </Navlink>
+            <Navlink class="li nav-item" href="/how">
+              How It Works
+            </Navlink>
+            <Navlink class="li nav-item" href="/investment">
+              Investment Partners
+            </Navlink>
+            <Navlink class="li nav-item" href="/cash">
+              Get A Cash Offer
+            </Navlink>
+              
             </div>
           </ul>
         </div>
@@ -67,7 +59,7 @@ console.log(currentPath);
   </div>
 </header>
 
-<style>
+<style is:inline>
   #navigation .nav-item {
     text-transform: uppercase;
     font-size: 1rem;

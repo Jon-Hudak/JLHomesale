@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/style.css";
 import { ViewTransitions } from "astro:transitions";
 
-const currentPath = Astro.url.pathname;
+
 
 const { title = "JL Home Sale" } = Astro.props;
 ---
@@ -96,7 +96,7 @@ const { title = "JL Home Sale" } = Astro.props;
         style="display:none;visibility:hidden"></iframe></noscript
     >
     <!-- End Google Tag Manager (noscript) -->
-    <Header currentPath={currentPath} />
+    <Header  />
     <slot />
     <Footer />
   </body>
