@@ -5,6 +5,8 @@ import Layout from "../layouts/Layout.astro";
 import Form2 from "../components/Form2.astro";
 
 const breadcrumb = "Investment Partners";
+
+const page = "investment";
 ---
 
 <Layout>
@@ -47,6 +49,6 @@ const breadcrumb = "Investment Partners";
     </div>
   </section>
   <section class="cont">
-    <Form2></Form2>
+    <Form2 page={page}></Form2>
   </section>
 </Layout>
