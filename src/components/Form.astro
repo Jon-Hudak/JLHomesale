@@ -47,16 +47,16 @@ const { page } = Astro.props;
       </div>
 
       
-      <div class="inputWrapper flex gap-4 align-content-start pt-4">
+      <div class="inputWrapper flex flex-col md:flex-row  gap-4 align-content-start pt-4">
         <input
           required
           id="chk"
           name="chk"
           type="checkbox"
           placeholder=""
-          class="max-w-fit ml-2 mb-auto"
+          class="max-w-fit md:ml-2 mb-auto"
         />
-        <label class="relative inline-label text-base mt-1" for="chk">
+        <label class="relative inline-label text-base md:mt-1" for="chk">
           By checking this box you give consent to receive communication from JL
           Home Sale LLC via email, phone, sms. We do not share your details with
           any third parties. By providing your information, you acknowledge and
