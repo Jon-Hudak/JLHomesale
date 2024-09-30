@@ -6,27 +6,33 @@ const page = "step-2";
 const breadcrumb = "Step 2";
 ---
 
-<Layout>
+<Layout title="Step 2 | JL Home Sale" >
   <!-- Header -->
   <section class="heading-bg-img text-white">
     <div class="cont pb-12">
-      <h1 class="h1 pt-12">Sell Your Home</h1>
-      <p class="font-medium text-3xl mt-4">Sell Your House Today</p>
-      <p class="mt-4 mb-8 font-bold">Home <img class="inline" src="/images/arrow.png"></img> {breadcrumb}</p>
+      <h1 class="h1 pt-12">Get Your Cash Offer</h1>
+      <div class="breadcrumbs">
+        <span class="flex gap-2"
+          >Home <img src="../../public/images/arrow.png" class="object-contain" /> Get Your
+          Cash Offer</span
+        >
+      </div>
+      <!-- <Form page={page} /> -->
+    </div>
 
-      <Step2Form page={page}/>
+    <div class="cont pb-24">
+      <Step2Form />
     </div>
   </section>
+  <section>
   <Why page={page} />
+</section>
 </Layout>
 <script>
   gtag("event", "conversion", {
     send_to: "AW-11160695389/zm3GCLrl3JwYEN3k6skp",
   });
 </script>
-<style>
-.step-2-hero {
-    background: transparent url("../assets/images/hero-bg.jpg") repeat 0 0;
-  }
-
-</style>
+<style>.heading-bg-img {
+    background-image: url("../assets/images/hero-bg.jpg");
+  }</style>

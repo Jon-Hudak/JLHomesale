@@ -139,6 +139,47 @@ const { title = "JL Home Sale" } = Astro.props;
       border-radius: 10px;
       margin-block: 0.75rem 0;
     }
+
+    .inputWrapper {
+        color: black;
+        position: relative;
+        font-size: 1rem;
+        margin: 3px;
+      }
+
+      .inputWrapper label:not(.inline-label) {
+        position: absolute;
+        top: 20%;
+        left: 1rem;
+
+        transition: 200ms;
+      }
+
+      .inputWrapper textarea ~ :where(label) {
+        top: 1.5rem;
+      }
+      .inputWrapper:is(:hover, :active, :focus-within) label:not(.inline-label),
+      .inputWrapper > :not(:placeholder-shown) ~ label:not(.inline-label) {
+        scale: 80%;
+        transform-origin: top;
+        top: 0rem;
+        left: 0%;
+        opacity: 70%;
+      }
+      .inputWrapper input,
+      .inputWrapper textarea {
+        @apply text-base border border-neutral-400 rounded-md  w-full;
+      }
+      .inputWrapper input {
+        min-height: 2rem;
+        padding: 1.5rem 1rem 0.75rem 1rem;
+        box-sizing: border-box;
+      
+      }
+      .inputWrapper textarea {
+        padding: 2rem 1rem;
+        box-sizing: border-box;
+      }
   </style>
 
   <script is:inline>

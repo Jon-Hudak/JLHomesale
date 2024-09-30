@@ -10,187 +10,193 @@ const page = "step-2";
   ,
   action="https://hooks.zapier.com/hooks/catch/9846372/36ilapb/"
 >
-  <input type="hidden" name="form-name" value={`${page}-form`} />
-  <p class="hidden">
-    <label>
-      Don’t fill this out if you’re human: <input name="bot-field" />
-    </label>
-  </p>
-  <div class="inputWrapper">
-    <input
-      required
-      id="first_name"
-      name="first_name"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="first_name">First Name:</label>
+  <div class="form-row grid sm:grid-cols-2">
+    <div class="inputWrapper">
+      <input
+        required
+        id="first_name"
+        name="first_name"
+        type="text"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="first_name">First Name:</label>
+    </div>
+
+    <div class="inputWrapper">
+      <input
+        required
+        id="last_name"
+        name="last_name"
+        type="text"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="last_name">Last Name:</label>
+    </div>
   </div>
 
-  <div class="inputWrapper">
-    <input
-      required
-      id="last_name"
-      name="last_name"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="last_name">Last Name:</label>
-  </div>
-  <div class="inputWrapper">
-    <input required id="email" name="email" type="email" placeholder="" />
-    <label class="formLabel relative" for="email"> Email: </label>
-  </div>
-  <div class="inputWrapper">
-    <input required id="phone" name="phone" type="tel" placeholder="" />
-    <label class="formLabel relative" for="phone"> Phone: </label>
+  <div class="form-row grid sm:grid-cols-2">
+    <div class="inputWrapper">
+      <input required id="email" name="email" type="email" placeholder="" />
+      <label class="formLabel relative" for="email"> Email: </label>
+    </div>
+    <div class="inputWrapper">
+      <input required id="phone" name="phone" type="tel" placeholder="" />
+      <label class="formLabel relative" for="phone"> Phone: </label>
+    </div>
   </div>
   <div class="inputWrapper">
     <input required id="street" name="street" type="text" placeholder="" />
     <label class="formLabel relative" for="street">Street:</label>
   </div>
-  <div class="inputWrapper">
-    <input required id="city" name="city" type="text" placeholder="" />
-    <label class="formLabel relative" for="city">City:</label>
+  <div class="form-row grid sm:grid-cols-6">
+    <div class="inputWrapper col-span-3">
+      <input required id="city" name="city" type="text" placeholder="" />
+      <label class="formLabel relative" for="city">City:</label>
+    </div>
+    <div class="inputWrapper col-span-2">
+      <input required id="state" name="state" type="text" placeholder="" />
+      <label class="formLabel relative" for="state">State:</label>
+    </div>
+    <div class="inputWrapper">
+      <input required id="zip" name="zip" inputmode="numeric" placeholder="" />
+      <label class="formLabel relative" for="zip">Zip:</label>
+    </div>
+  </div>
+  <div class="form-row grid sm:grid-cols-3">
+    <div class="inputWrapper">
+      <input
+        required
+        id="bedrooms"
+        name="bedrooms"
+        inputmode="numeric"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="bedrooms">Bedrooms:</label>
+    </div>
+    <div class="inputWrapper">
+      <input
+        required
+        id="bathrooms"
+        name="bathrooms"
+        inputmode="numeric"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="bathrooms">Bathrooms:</label>
+    </div>
+    <div class="inputWrapper">
+      <input
+        required
+        id="square_footage"
+        name="square_footage"
+        inputmode="numeric"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="square_footage"
+        >Square Footage:</label
+      >
+    </div>
+    <div class="inputWrapper">
+      <input required id="pool" name="pool" type="text" placeholder="" />
+      <label class="formLabel relative" for="pool">Pool:</label>
+    </div>
+    <div class="inputWrapper">
+      <input
+        required
+        id="age_of_hvac"
+        name="age_of_hvac"
+        type="text"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="age_of_hvac">Age of HVAC:</label>
+    </div>
+    <div class="inputWrapper">
+      <input
+        required
+        id="age_of_roof"
+        name="age_of_roof"
+        type="text"
+        placeholder=""
+      />
+      <label class="formLabel relative" for="age_of_roof">Age of Roof:</label>
+    </div>
+  </div>
+  <div class="form-row grid sm:grid-cols-3">
+      <div class="inputWrapper">
+        <input
+          required
+          id="asking_price"
+          name="asking_price"
+          type="text"
+          placeholder=""
+        />
+        <label class="formLabel relative" for="asking_price">Asking Price:</label>
+      </div>
+      <div class="inputWrapper col-span-2">
+        <input
+          required
+          id="reason_for_selling"
+          name="reason_for_selling"
+          type="text"
+          placeholder=""
+        />
+        <label class="formLabel relative" for="reason_for_selling"
+          >Reason for Selling:</label
+        >
+      </div>
+  </div>
+  <div class="form-row grid sm:grid-cols-2">
+      <div class="inputWrapper">
+        <input
+          required
+          id="tenant_duration"
+          name="tenant_duration"
+          type="text"
+          placeholder=""
+        />
+        <label class="formLabel relative" for="tenant_duration"
+          >Tenant Duration:</label
+        >
+      </div>
+      <div class="inputWrapper">
+        <input
+          required
+          id="lease_end"
+          name="lease_end"
+          type="text"
+          placeholder=""
+        />
+        <label class="formLabel relative" for="lease_end">Lease End:</label>
+      </div>
+      <div class="inputWrapper">
+        <input
+          required
+          id="tenant_monthly_rent"
+          name="tenant_monthly_rent"
+          type="text"
+          placeholder=""
+        />
+        <label class="formLabel relative" for="tenant_monthly_rent"
+          >Tenant Monthly Rent:</label
+        >
+      </div>
+      <div class="inputWrapper">
+        <input
+          required
+          id="vacancy_duration"
+          name="vacancy_duration"
+          type="text"
+          placeholder=""
+        />
+        <label class="formLabel relative" for="vacancy_duration"
+          >Vacancy Duration:</label
+        >
+      </div>
   </div>
   <div class="inputWrapper">
-    <input required id="state" name="state" type="text" placeholder="" />
-    <label class="formLabel relative" for="state">State:</label>
-  </div>
-  <div class="inputWrapper">
-    <input required id="zip" name="zip" type="number" placeholder="" />
-    <label class="formLabel relative" for="zip">Zip:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="bedrooms"
-      name="bedrooms"
-      type="number"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="bedrooms">Bedrooms:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="bathrooms"
-      name="bathrooms"
-      type="number"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="bathrooms">Bathrooms:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="square_footage"
-      name="square_footage"
-      type="number"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="square_footage"
-      >Square Footage:</label
-    >
-  </div>
-  <div class="inputWrapper">
-    <input required id="pool" name="pool" type="text" placeholder="" />
-    <label class="formLabel relative" for="pool">Pool:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="age_of_hvac"
-      name="age_of_hvac"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="age_of_hvac">Age of HVAC:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="age_of_roof"
-      name="age_of_roof"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="age_of_roof">Age of Roof:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="asking_price"
-      name="asking_price"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="asking_price">Asking Price:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="reason_for_selling"
-      name="reason_for_selling"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="reason_for_selling"
-      >Reason for Selling:</label
-    >
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="tenant_duration"
-      name="tenant_duration"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="tenant_duration"
-      >Tenant Duration:</label
-    >
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="lease_end"
-      name="lease_end"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="lease_end">Lease End:</label>
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="tenant_monthly_rent"
-      name="tenant_monthly_rent"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="tenant_monthly_rent"
-      >Tenant Monthly Rent:</label
-    >
-  </div>
-  <div class="inputWrapper">
-    <input
-      required
-      id="vacancy_duration"
-      name="vacancy_duration"
-      type="text"
-      placeholder=""
-    />
-    <label class="formLabel relative" for="vacancy_duration"
-      >Vacancy Duration:</label
-    >
-  </div>
-  <div class="inputWrapper">
-    <input
+    <textarea
       required
       id="house_additional_info"
       name="house_additional_info"
-      type="text"
       placeholder=""
     />
     <label class="formLabel relative" for="house_additional_info"
@@ -251,6 +257,9 @@ const page = "step-2";
   textarea {
     padding: 2rem 1rem;
     box-sizing: border-box;
+  }
+  .form-row > * {
+    flex-grow: 1;
   }
 </style>
 

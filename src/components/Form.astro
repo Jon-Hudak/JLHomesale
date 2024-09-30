@@ -11,12 +11,7 @@ const { page } = Astro.props;
       method="POST"
       action="https://hooks.zapier.com/hooks/catch/9846372/36il180/"
     >
-      <input type="hidden" name="form-name" value={`${page}-form`} />
-      <p class="hidden">
-        <label>
-          Don’t fill this out if you’re human: <input name="bot-field" />
-        </label>
-      </p>
+     
       <div class="inputWrapper">
         <input required id="street" name="street" type="text" placeholder="" />
         <label class="formLabel relative" for="street">Street:</label>
@@ -44,8 +39,9 @@ const { page } = Astro.props;
         <label class="formLabel relative" for="email"> Email: </label>
       </div>
 
-      
-      <div class="inputWrapper flex flex-col md:flex-row  gap-4 align-content-start pt-4">
+      <div
+        class="inputWrapper flex flex-col md:flex-row gap-4 align-content-start pt-4"
+      >
         <input
           required
           id="chk"
@@ -77,7 +73,7 @@ const { page } = Astro.props;
       </button>
     </form>
     <style>
-      .inputWrapper {
+      /* .inputWrapper {
         color: black;
         position: relative;
         font-size: 1rem;
@@ -115,56 +111,53 @@ const { page } = Astro.props;
       textarea {
         padding: 2rem 1rem;
         box-sizing: border-box;
-      }
+      } */
     </style>
   </div>
 </div>
 
-
 <script>
-
   async function postFormDataAsJson({ url, formData }) {
-	const plainFormData = Object.fromEntries(formData.entries());
-	const formDataJsonString = JSON.stringify(plainFormData);
+    const plainFormData = Object.fromEntries(formData.entries());
+    const formDataJsonString = JSON.stringify(plainFormData);
 
-	const fetchOptions = {
-		method: "POST",
-    mode: "no-cors",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-		body: formDataJsonString,
-	};
+    const fetchOptions = {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: formDataJsonString,
+    };
 
-	const response = await fetch(url, fetchOptions);
+    const response = await fetch(url, fetchOptions);
 
-	if (!response.ok) {
-		const errorMessage = await response.text();
-		throw new Error(errorMessage);
-	}
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(errorMessage);
+    }
 
-	return response.json();
-}
+    return response.json();
+  }
 
+  async function handleFormSubmit(event) {
+    event.preventDefault();
 
-async function handleFormSubmit(event) {
-	event.preventDefault();
+    const form = event.currentTarget;
+    const url = form.action;
 
-	const form = event.currentTarget;
-	const url = form.action;
+    try {
+      const formData = new FormData(form);
+      const responseData = await postFormDataAsJson({ url, formData });
 
-	try {
-		const formData = new FormData(form);
-		const responseData = await postFormDataAsJson({ url, formData });
-   
-		console.log({ responseData });
-	} catch (error) {
-		console.error(error);
-	}
-  window.location.assign("/step-2");
-}
+      console.log({ responseData });
+    } catch (error) {
+      console.error(error);
+    }
+    window.location.assign("/step-2");
+  }
 
-const form1 = document.querySelector("form");
-form1.addEventListener("submit", handleFormSubmit);
+  const form1 = document.querySelector("form");
+  form1.addEventListener("submit", handleFormSubmit);
 </script>
