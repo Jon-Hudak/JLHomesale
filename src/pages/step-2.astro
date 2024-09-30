@@ -2,46 +2,31 @@
 import Step2Form from "../components/Step2Form.astro";
 import Why from "../components/Why.astro";
 import Layout from "../layouts/Layout.astro";
-const page="step-2"
---- 
+const page = "step-2";
+const breadcrumb = "Step 2";
+---
 
 <Layout>
-<!-- Header -->
-<header id="cash-hero" class="py-5 mb-5">
-  <div class="container">
-    <div class="row h-100 align-items-center">
-      <div class="col-lg-8">
-        <div data-aos="fade-up" class="hero-content">
-          <h1 class="display-4 text-white">Get Your Cash Offer</h1>
-          <div class="breadcrumbs">
-            <span
-            >Home 
-            <!-- <img src="{% static 'pages/images/arrow.png' %}" /> -->
-             Get Your
-              Cash Offer</span
-              >
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 mx-auto">
-        <div class="form-box js-wizard-simple block">
-          <ul class="nav nav-tabs nav-tabs-block nav-fill" role="tablist"></ul>
-          <div class="block-content block-content-full tab-content">
-            <Step2Form/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-<Why page={page}></Why>
+  <!-- Header -->
+  <section class="heading-bg-img text-white">
+    <div class="cont pb-12">
+      <h1 class="h1 pt-12">Sell Your Home</h1>
+      <p class="font-medium text-3xl mt-4">Sell Your House Today</p>
+      <p class="mt-4 mb-8 font-bold">Home <img class="inline" src="/images/arrow.png"></img> {breadcrumb}</p>
 
-
+      <Step2Form page={page}/>
+    </div>
+  </section>
+  <Why page={page} />
 </Layout>
-              <script>
-                  gtag('event', 'conversion', {'send_to': 'AW-11160695389/zm3GCLrl3JwYEN3k6skp'});
-                </script>
+<script>
+  gtag("event", "conversion", {
+    send_to: "AW-11160695389/zm3GCLrl3JwYEN3k6skp",
+  });
+</script>
+<style>
+.step-2-hero {
+    background: transparent url("../assets/images/hero-bg.jpg") repeat 0 0;
+  }
+
+</style>
