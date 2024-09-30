@@ -1,0 +1,144 @@
+---
+import Step2Form from "../components/Step2Form.astro";
+import Layout from "../layouts/Layout.astro";
+
+--- 
+
+<Layout>
+<!-- Header -->
+<header id="cash-hero" class="py-5 mb-5">
+  <div class="container">
+    <div class="row h-100 align-items-center">
+      <div class="col-lg-8">
+        <div data-aos="fade-up" class="hero-content">
+          <h1 class="display-4 text-white">Get Your Cash Offer</h1>
+          <div class="breadcrumbs">
+            <span
+            >Home 
+            <!-- <img src="{% static 'pages/images/arrow.png' %}" /> -->
+             Get Your
+              Cash Offer</span
+              >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <div class="form-box js-wizard-simple block">
+          <ul class="nav nav-tabs nav-tabs-block nav-fill" role="tablist"></ul>
+          <div class="block-content block-content-full tab-content">
+            <Step2Form/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container text-center pb-5">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="mb-4">SELL YOUR HOME IN 3 SIMPLE STEPS</h2>
+      <div class="step-tabs offer-tabs">
+        <div class="tab-headers">
+          <div id="step1" class="tab-header">
+            <!-- <img src="{% static 'pages/images/step1.svg' %}" class="step-icon" alt="house"> -->
+            <h3>Fill Out the Form or Call us at (866) 698-6169</h3>
+            <p>We'll review your goals, current situation, and go over all possible solutions with you.</p>
+          </div>
+          <div id="step3" class="tab-header">
+            <!-- <img src="{% static 'pages/images/step3.svg' %}" class="step-icon" alt="house"> -->
+            <h3>Get A Fair All Cash Offer</h3>
+            <p>We will provide you with your fast and fair no obligation cash offer for your house.</p>
+          </div>
+          <div id="step4" class="tab-header">
+            <!-- <img src="{% static 'pages/images/step4.svg' %}" class="step-icon" alt="house"> -->
+            <h3>Get Paid Via Title Company</h3>
+            <p>If you receive our offer, we will pay you cash so you can leave your stress and worry behind!</p>
+          </div>
+        </div>
+      </div>
+      <a href="/cash/" class="btn btn-primary mt-4">Get Your Cash Offer Today</a>
+    </div>
+  </div>
+</div>
+
+
+<!-- Section 3 -->
+<section class="section-3 py-5 bg-light">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-4">
+        <i class="fas fa-home fa-2x mb-2"></i>
+        <h4>Any Condition</h4>
+         <ul class="list-unstyled mt-4">
+           <li><i class="fas fa-check mr-2"></i>Major Repairs Needed</li>
+           <li><i class="fas fa-check mr-2"></i>Vacant</li>
+           <li><i class="fas fa-check mr-2"></i>Unfinished Interiors</li>
+           <li><i class="fas fa-check mr-2"></i>Fire Damage</li>
+           <li><i class="fas fa-check mr-2"></i>Foundation Damage</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-users fa-2x mb-2"></i>
+        <h4>Any Situation</h4>
+        <ul class="list-unstyled mt-4">
+           <li><i class="fas fa-check mr-2"></i>Foreclosures</li>
+          <li><i class="fas fa-check mr-2"></i>Divorce</li>
+          <li><i class="fas fa-check mr-2"></i>Financial Struggles</li>
+          <li><i class="fas fa-check mr-2"></i>Downsizing/ Upgrading</li>
+          <li><i class="fas fa-check mr-2"></i>Inherited Home</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+        <h4>Any Problem</h4>
+        <ul class="list-unstyled mt-4">
+          <li><i class="fas fa-check mr-2"></i>Code Violations</li>
+          <li><i class="fas fa-check mr-2"></i>Bad Tenants</li>
+          <li><i class="fas fa-check mr-2"></i>Behind on Payments</li>
+          <li><i class="fas fa-check mr-2"></i>Bankruptcy</li>
+          <li><i class="fas fa-check mr-2"></i>Title Issues</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 4 -->
+<section class="section-4 py-5">
+  <div class="container text-center">
+    <h2 class="mb-4">Why Work With JL Home Sale</h2>
+    <div class="row">
+      <div class="col-md-3">
+        <!-- <img src="{% static 'pages/images/We Do All the Work.png' %}" alt="We do all the work" class="offer-image"> -->
+        <h4>We Do All the Work</h4>
+        <p>From paperwork to legal complexities, we’ll take care of it all.</p>
+      </div>
+      <div class="col-md-3">
+        <!-- <img src="{% static 'pages/images/No Repairs.png' %}" alt="No repairs needed" class="offer-image"> -->
+        <h4>No Repairs Needed</h4>
+        <p>We’ll gladly buy your home “as-is,” in any condition.</p>
+      </div>
+      <div class="col-md-3">
+        <!-- <img src="{% static 'pages/images/No Fees.png' %}" alt="No fees" class="offer-image"> -->
+        <h4>No Fees</h4>
+        <p>You won't pay fees or commissions of any kind.</p>
+      </div>
+      <div class="col-md-3">
+        <!-- <img src="{% static 'pages/images/Close Fast.png' %}" alt="Close fast" class="offer-image"> -->
+        <h4>Close Fast</h4>
+        <p>Close on your schedule and get cash in as little as a week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</Layout>
+              <script>
+                  gtag('event', 'conversion', {'send_to': 'AW-11160695389/zm3GCLrl3JwYEN3k6skp'});
+                </script>

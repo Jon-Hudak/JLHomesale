@@ -9,9 +9,7 @@ const { page } = Astro.props;
       name={`${page}-form`}
       class="z-10 py-4 px-4 bg-white text-black max-w-[800px]"
       method="POST"
-      netlify-honeypot="bot-field"
-      data-netlify="true"
-      action="/thank-you"
+      action="https://hooks.zapier.com/hooks/catch/9846372/36il180/"
     >
       <input type="hidden" name="form-name" value={`${page}-form`} />
       <p class="hidden">
@@ -121,3 +119,51 @@ const { page } = Astro.props;
     </style>
   </div>
 </div>
+
+
+<script>
+
+  async function postFormDataAsJson({ url, formData }) {
+	const plainFormData = Object.fromEntries(formData.entries());
+	const formDataJsonString = JSON.stringify(plainFormData);
+
+	const fetchOptions = {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+		},
+		body: formDataJsonString,
+	};
+
+	const response = await fetch(url, fetchOptions);
+
+	if (!response.ok) {
+		const errorMessage = await response.text();
+		throw new Error(errorMessage);
+	}
+
+	return response.json();
+}
+
+
+async function handleFormSubmit(event) {
+	event.preventDefault();
+
+	const form = event.currentTarget;
+	const url = form.action;
+
+	try {
+		const formData = new FormData(form);
+		const responseData = await postFormDataAsJson({ url, formData });
+   
+		console.log({ responseData });
+	} catch (error) {
+		console.error(error);
+	}
+  // window.location.assign("/step-2");
+}
+
+const form1 = document.querySelector("form");
+form1.addEventListener("submit", handleFormSubmit);
+</script>
