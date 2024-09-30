@@ -129,6 +129,7 @@ const { page } = Astro.props;
 
 	const fetchOptions = {
 		method: "POST",
+    mode: "no-cors",
 		headers: {
 			"Content-Type": "application/json",
 			Accept: "application/json",
@@ -161,7 +162,7 @@ async function handleFormSubmit(event) {
 	} catch (error) {
 		console.error(error);
 	}
-  // window.location.assign("/step-2");
+  window.location.assign("/step-2");
 }
 
 const form1 = document.querySelector("form");
