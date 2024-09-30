@@ -123,15 +123,14 @@ const { page } = Astro.props;
 
     const fetchOptions = {
       method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Accept: "application/json",
+      // },
       body: formDataJsonString,
     };
 
-    const response = await fetch(url, fetchOptions);
+    const response = await fetch(url,fetchOptions);
 
     if (!response.ok) {
       const errorMessage = await response.text();

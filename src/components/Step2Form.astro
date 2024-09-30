@@ -270,15 +270,10 @@ const page = "step-2";
 
     const fetchOptions = {
       method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
       body: formDataJsonString,
     };
 
-    const response = await fetch(url, fetchOptions);
+    const response = await fetch(url,fetchOptions);
 
     if (!response.ok) {
       const errorMessage = await response.text();
@@ -302,7 +297,7 @@ const page = "step-2";
     } catch (error) {
       console.error(error);
     }
-    // window.location.assign("/cash");
+    window.location.assign("/cash");
   }
 
   const form1 = document.querySelector("form");
