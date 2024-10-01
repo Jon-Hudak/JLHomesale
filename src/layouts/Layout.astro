@@ -215,7 +215,7 @@ const { title = "JL Home Sale" } = Astro.props;
           });
         });
 
-        tabWrapper.addEventListener("click", (e) => {
+        tabList.addEventListener("click", (e) => {
           //@ts-ignore
           const clickedTab = e.target.closest("a");
           if (!clickedTab) return;
