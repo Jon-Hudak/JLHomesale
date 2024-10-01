@@ -11,6 +11,7 @@ const { page } = Astro.props;
       method="POST"
       action="https://hooks.zapier.com/hooks/catch/9846372/36il180/"
     >
+      
      
       <div class="inputWrapper">
         <input required id="street" name="street" type="text" placeholder="" />
@@ -143,17 +144,34 @@ const { page } = Astro.props;
     const form = event.currentTarget;
     const url = form.action;
 
-    try {
-      const formData = new FormData(form);
-      const responseData = await postFormDataAsJson({ url, formData });
+	try {
+		const formData = new FormData(form);
+		const responseData = await postFormDataAsJson({ url, formData });
+   
+		// console.log({ responseData });
+    storeData(formData)
+	} catch (error) {
+		console.error(error);
+	}
+  window.location.assign("/step-2");
+}
 
-      console.log({ responseData });
-    } catch (error) {
-      console.error(error);
-    }
-    window.location.assign("/step-2");
+const form1 = document.querySelector("form");
+form1.addEventListener("submit", handleFormSubmit);
+
+//extract info from form
+function getFormInfo(data){
+
+}
+//move info to session storage
+function storeData(data){
+  for (var p of data) {
+    let name = p[0];
+    let value = p[1];
+    sessionStorage.setItem(name, value);
+
   }
+  
 
-  const form1 = document.querySelector("form");
-  form1.addEventListener("submit", handleFormSubmit);
+}
 </script>

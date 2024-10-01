@@ -120,7 +120,7 @@ const page = "step-2";
       <label class="formLabel relative" for="age_of_roof">Age of Roof:</label>
     </div>
   </div>
-  <div class="form-row grid sm:grid-cols-3">
+  <div class="form-row grid grid-cols-1 sm:grid-cols-3">
       <div class="inputWrapper">
         <input
           required
@@ -128,6 +128,7 @@ const page = "step-2";
           name="asking_price"
           type="text"
           placeholder=""
+          class="w-full"
         />
         <label class="formLabel relative" for="asking_price">Asking Price:</label>
       </div>
@@ -292,4 +293,17 @@ const page = "step-2";
 
   const form1 = document.querySelector("form");
   form1.addEventListener("submit", handleFormSubmit);
+</script>
+<script>
+  //retrieve session storage from step-1 and assign it to form.
+  const formKeys = ["email", "phone", "street", "city", "state", "zip"];
+  formKeys.forEach((key) => {
+    setSessionData(key);
+  });
+  function setSessionData(key) {
+    if (!sessionStorage.getItem(key) || key === "chk") {
+      return;
+    }
+    document.getElementById(key).value = sessionStorage.getItem(key);
+  }
 </script>
