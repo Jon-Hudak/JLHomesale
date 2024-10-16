@@ -85,7 +85,7 @@ const { title = "JL Home Sale" } = Astro.props;
     <ViewTransitions />
   </head>
 
-  <body>
+  <body class="dark:bg-neutral-800">
     <noscript data-astro-transition-persist="gtag"
       ><iframe
         src="https://www.googletagmanager.com/ns.html?id=GTM-59V7B37K"
@@ -100,6 +100,9 @@ const { title = "JL Home Sale" } = Astro.props;
   </body>
 
   <style is:global>
+    @media (prefers-color-scheme: dark) {
+     
+    }
     :root {
       /* --accent: 136, 58, 234;
       --accent-light: 224, 204, 250;
@@ -180,6 +183,7 @@ const { title = "JL Home Sale" } = Astro.props;
         padding: 2rem 1rem;
         box-sizing: border-box;
       }
+      
   </style>
 
   <script is:inline>

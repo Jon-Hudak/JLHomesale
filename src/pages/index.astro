@@ -109,7 +109,7 @@ const features = [
         </ul>
       </div>
       <div class="tab-content-wrapper">
-        <article id="step-1" class="tab-content bg-accent text-black">
+        <article id="step-1" class="tab-content bg-accent dark:bg-accentDark text-black">
           <div class="grid md:grid-cols-2 fadeIn">
             <div class="tab-info p-8 text-balance">
               <h3 class="h3">Talk to a Home Buying Expert</h3>
@@ -127,7 +127,7 @@ const features = [
             </div>
           </div>
         </article>
-        <article id="step-2" class="tab-content bg-accent text-black">
+        <article id="step-2" class="tab-content bg-accent dark:bg-accentDark text-black">
           <div class="grid md:grid-cols-2 fadeIn">
             <div class="tab-info p-8 text-balance">
               <h3 class="h3">Receive a Home Appraisal</h3>
@@ -145,7 +145,7 @@ const features = [
             </div>
           </div>
         </article>
-        <article id="step-3" class="tab-content bg-accent text-black">
+        <article id="step-3" class="tab-content bg-accent dark:bg-accentDark text-black">
           <div class="grid md:grid-cols-2 fadeIn">
             <div class="tab-info p-8 text-balance">
               <h3 class="h3">Get a Generous Cash Offer</h3>
@@ -163,7 +163,7 @@ const features = [
             </div>
           </div>
         </article>
-        <article id="step-4" class="tab-content bg-accent text-black">
+        <article id="step-4" class="tab-content bg-accent dark:bg-accentDark text-black">
           <div class="grid md:grid-cols-2 fadeIn">
             <div class="tab-info p-8 text-balance">
               <h3 class="h3">Get Paid</h3>
@@ -184,7 +184,7 @@ const features = [
       </div>
     </section>
 
-    <section class="cont grid md:grid-cols-2 gap-12 text-black mt-40" id="reasons">
+    <section class="cont grid md:grid-cols-2 gap-12 text-black dark:text-white mt-40" id="reasons">
       <div class="">
         <Image class="img-fluid w-full" src={keysImg} alt="" />
       </div>
@@ -269,16 +269,16 @@ const features = [
         </article>
       </div>
     </section>
-    <section class="text-black cont">
+    <section class="text-black dark:text-white cont">
       <p class="eyebrow">Life Happens</p>
       <h2 class="accent-underline h2 max-w-[35ch] mt-2">
         <span class="">Let Us Take The Stress Out</span>
         <span class="">Of Selling Your Home</span>
       </h2>
-      <div class="features-wrapper grid md:grid-cols-3 grid-rows-[auto_auto_auto)] mt-20 gap-8 text-white">
+      <div class="features-wrapper grid md:grid-cols-3 grid-rows-[auto_auto_auto)] mt-20 gap-8 text-white dark:text-black">
         {
           features.map((feature) => (
-            <article class="bg-background p-8 grid grid-cols-subgrid grid-rows-subgrid row-span-3">
+            <article class="bg-background text-white dark:text-white p-8 grid grid-cols-subgrid grid-rows-subgrid row-span-3">
               <h3 class="font-bold text-2xl text-center ">{feature.heading}</h3>
               <p class="text-base">{feature.body}</p>
               <a class="btn btn-primary mt-4 w-min mx-auto" href="/cash">

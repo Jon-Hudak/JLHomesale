@@ -13,6 +13,7 @@ export default {
 					'backgroundLight':"#36495B",
 					offWhite:"#969FA7",
 					accent:"#5FCF80",
+					accentDark:'#268c3e'
 				},
 			
 		},
