@@ -82,7 +82,7 @@ const { title = "JL Home Sale" } = Astro.props;
       />
     </noscript>
     <!-- End Facebook Pixel Code -->
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
   </head>
 
   <body class="dark:bg-neutral-800">
@@ -99,7 +99,7 @@ const { title = "JL Home Sale" } = Astro.props;
     <Footer />
     <!-- Start of LiveChat code -->
     <script async="true" is:inline>
-      document.addEventListener("astro:page-load", () => {
+      // document.addEventListener("astro:page-load", () => {
         (function () {
           var lc = document.createElement("script");
           lc.type = "text/javascript";
@@ -109,7 +109,7 @@ const { title = "JL Home Sale" } = Astro.props;
           var s = document.getElementsByTagName("script")[0];
           s.parentNode.insertBefore(lc, s);
         })();
-      });
+      // });
     </script>
     <!-- End of LiveChat code -->
   </body>
@@ -202,7 +202,7 @@ const { title = "JL Home Sale" } = Astro.props;
   </style>
 
   <script is:inline>
-    document.addEventListener("astro:page-load", () => {
+    // document.addEventListener("astro:page-load", () => {
      
       // This only runs once.
 
@@ -301,10 +301,10 @@ const { title = "JL Home Sale" } = Astro.props;
           newTab.focus();
         }
       }
-    });
+    // });
    
                              
   </script>
 </html>
---></body>
+</body>
 </html>
