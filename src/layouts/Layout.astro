@@ -98,7 +98,7 @@ const { title = "JL Home Sale" } = Astro.props;
     <slot />
     <Footer />
     <!-- Start of LiveChat code -->
-    <script async="true">
+    <script async="true" is:inline>
       document.addEventListener("astro:page-load", () => {
         (function () {
           var lc = document.createElement("script");
