@@ -97,6 +97,21 @@ const { title = "JL Home Sale" } = Astro.props;
     <Header />
     <slot />
     <Footer />
+    <!-- Start of LiveChat code -->
+    <script async="true">
+      document.addEventListener("astro:page-load", () => {
+        (function () {
+          var lc = document.createElement("script");
+          lc.type = "text/javascript";
+          lc.async = true;
+          lc.src =
+            "https://widgets.theglobalcdn.com/jlhomesale.com/widgets-main.js";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(lc, s);
+        })();
+      });
+    </script>
+    <!-- End of LiveChat code -->
   </body>
 
   <style is:global>
@@ -287,5 +302,9 @@ const { title = "JL Home Sale" } = Astro.props;
         }
       }
     });
+   
+                             
   </script>
+</html>
+--></body>
 </html>
