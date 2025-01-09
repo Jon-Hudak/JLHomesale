@@ -29,7 +29,7 @@ const { title = "JL Home Sale" } = Astro.props;
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       crossorigin="anonymous"
     />
-
+    <link rel="icon" type="image/x-icon" href="/favicon.png">
     <!-- Google tag (gtag.js)-->
     <script
       async
@@ -116,7 +116,6 @@ const { title = "JL Home Sale" } = Astro.props;
 
   <style is:global>
     @media (prefers-color-scheme: dark) {
-     
     }
     :root {
       /* --accent: 136, 58, 234;
@@ -159,152 +158,146 @@ const { title = "JL Home Sale" } = Astro.props;
     }
 
     .inputWrapper {
-        color: black;
-        position: relative;
-        font-size: 1rem;
-        margin: 3px;
-      }
+      color: black;
+      position: relative;
+      font-size: 1rem;
+      margin: 3px;
+    }
 
-      .inputWrapper label:not(.inline-label) {
-        position: absolute;
-        top: 20%;
-        left: 1rem;
+    .inputWrapper label:not(.inline-label) {
+      position: absolute;
+      top: 20%;
+      left: 1rem;
 
-        transition: 200ms;
-      }
+      transition: 200ms;
+    }
 
-      .inputWrapper textarea ~ :where(label) {
-        top: 1.5rem;
-      }
-      .inputWrapper:is(:hover, :active, :focus-within) label:not(.inline-label),
-      .inputWrapper > :not(:placeholder-shown) ~ label:not(.inline-label) {
-        scale: 80%;
-        transform-origin: top;
-        top: 0rem;
-        left: 0%;
-        opacity: 70%;
-      }
-      .inputWrapper input,
-      .inputWrapper textarea {
-        @apply text-base border border-neutral-400 rounded-md  w-full;
-      }
-      .inputWrapper input {
-        min-height: 2rem;
-        padding: 1.5rem 1rem 0.75rem 1rem;
-        box-sizing: border-box;
-      
-      }
-      .inputWrapper textarea {
-        padding: 2rem 1rem;
-        box-sizing: border-box;
-      }
-      
+    .inputWrapper textarea ~ :where(label) {
+      top: 1.5rem;
+    }
+    .inputWrapper:is(:hover, :active, :focus-within) label:not(.inline-label),
+    .inputWrapper > :not(:placeholder-shown) ~ label:not(.inline-label) {
+      scale: 80%;
+      transform-origin: top;
+      top: 0rem;
+      left: 0%;
+      opacity: 70%;
+    }
+    .inputWrapper input,
+    .inputWrapper textarea {
+      @apply text-base border border-neutral-400 rounded-md  w-full;
+    }
+    .inputWrapper input {
+      min-height: 2rem;
+      padding: 1.5rem 1rem 0.75rem 1rem;
+      box-sizing: border-box;
+    }
+    .inputWrapper textarea {
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+    }
   </style>
 
   <script is:inline>
     // document.addEventListener("astro:page-load", () => {
-     
-      // This only runs once.
 
-      //tabs
-      if (document.querySelector(".tab-wrapper")) {
-        const tabWrapper = document.querySelector(".tab-wrapper");
-        const tabList = tabWrapper.querySelector("ul");
-        const tabButtons = tabList.querySelectorAll("a");
-        const tabPanels = tabWrapper.querySelectorAll(
-          ".tab-content-wrapper>article"
-        );
+    // This only runs once.
 
-        tabList.setAttribute("role", "tablist");
-        tabList.querySelectorAll("li").forEach((listitem) => {
-          listitem.setAttribute("role", "presentation");
-        });
+    //tabs
+    if (document.querySelector(".tab-wrapper")) {
+      const tabWrapper = document.querySelector(".tab-wrapper");
+      const tabList = tabWrapper.querySelector("ul");
+      const tabButtons = tabList.querySelectorAll("a");
+      const tabPanels = tabWrapper.querySelectorAll(
+        ".tab-content-wrapper>article"
+      );
 
-        tabButtons.forEach((tab, index) => {
-          tab.setAttribute("role", "tab");
-          if (index === 0) {
-            tab.setAttribute("aria-selected", "true");
-          } else {
-            tab.setAttribute("tabindex", "-1");
-            tabPanels[index].setAttribute("hidden", "true");
-          }
-          tabPanels.forEach((panel) => {
-            panel.setAttribute("role", "tabpanel");
-            panel.setAttribute("tabindex", "0");
-          });
-        });
+      tabList.setAttribute("role", "tablist");
+      tabList.querySelectorAll("li").forEach((listitem) => {
+        listitem.setAttribute("role", "presentation");
+      });
 
-        tabList.addEventListener("click", (e) => {
-          //@ts-ignore
-          const clickedTab = e.target.closest("a");
-          if (!clickedTab) return;
-          e.preventDefault();
-          switchTab(clickedTab);
-        });
-        tabWrapper.addEventListener("keydown", (e) => {
-          switch (e.key) {
-            case "ArrowLeft":
-              moveLeft();
-              break;
-            case "ArrowRight":
-              moveRight();
-              break;
-            case "Home":
-              e.preventDefault()
-              switchTab(tabButtons[0]);
-              break;
-            case "End":
-              e.preventDefault();
-              switchTab(tabButtons[tabButtons.length-1]);
-              break;
-          }
-        });
-        function moveLeft() {
-          const currentTab = document.activeElement;
-
-          if (!currentTab.parentElement.previousElementSibling) {
-            switchTab(tabButtons[tabButtons.length - 1]);
-          } else {
-            switchTab(
-              currentTab.parentElement.previousElementSibling.querySelector("a")
-            );
-          }
+      tabButtons.forEach((tab, index) => {
+        tab.setAttribute("role", "tab");
+        if (index === 0) {
+          tab.setAttribute("aria-selected", "true");
+        } else {
+          tab.setAttribute("tabindex", "-1");
+          tabPanels[index].setAttribute("hidden", "true");
         }
-        function moveRight() {
-          const currentTab = document.activeElement;
+        tabPanels.forEach((panel) => {
+          panel.setAttribute("role", "tabpanel");
+          panel.setAttribute("tabindex", "0");
+        });
+      });
 
-          if (!currentTab.parentElement.nextElementSibling) {
+      tabList.addEventListener("click", (e) => {
+        //@ts-ignore
+        const clickedTab = e.target.closest("a");
+        if (!clickedTab) return;
+        e.preventDefault();
+        switchTab(clickedTab);
+      });
+      tabWrapper.addEventListener("keydown", (e) => {
+        switch (e.key) {
+          case "ArrowLeft":
+            moveLeft();
+            break;
+          case "ArrowRight":
+            moveRight();
+            break;
+          case "Home":
+            e.preventDefault();
             switchTab(tabButtons[0]);
-          } else {
-            switchTab(
-              currentTab.parentElement.nextElementSibling.querySelector("a")
-            );
-          }
+            break;
+          case "End":
+            e.preventDefault();
+            switchTab(tabButtons[tabButtons.length - 1]);
+            break;
         }
-        function switchTab(newTab) {
-          const activePanelId = newTab.getAttribute("href");
-          //@ts-ignore
-          const activePanel = document.querySelector(activePanelId);
+      });
+      function moveLeft() {
+        const currentTab = document.activeElement;
 
-          tabButtons.forEach((button) => {
-            button.setAttribute("aria-selected", false);
-            button.setAttribute("tabindex", "-1");
-          });
-
-          tabPanels.forEach((panel) => {
-            panel.setAttribute("hidden", "true");
-          });
-          activePanel.removeAttribute("hidden");
-
-          newTab.setAttribute("aria-selected", true);
-          newTab.setAttribute("tabindex", "0");
-          newTab.focus();
+        if (!currentTab.parentElement.previousElementSibling) {
+          switchTab(tabButtons[tabButtons.length - 1]);
+        } else {
+          switchTab(
+            currentTab.parentElement.previousElementSibling.querySelector("a")
+          );
         }
       }
+      function moveRight() {
+        const currentTab = document.activeElement;
+
+        if (!currentTab.parentElement.nextElementSibling) {
+          switchTab(tabButtons[0]);
+        } else {
+          switchTab(
+            currentTab.parentElement.nextElementSibling.querySelector("a")
+          );
+        }
+      }
+      function switchTab(newTab) {
+        const activePanelId = newTab.getAttribute("href");
+        //@ts-ignore
+        const activePanel = document.querySelector(activePanelId);
+
+        tabButtons.forEach((button) => {
+          button.setAttribute("aria-selected", false);
+          button.setAttribute("tabindex", "-1");
+        });
+
+        tabPanels.forEach((panel) => {
+          panel.setAttribute("hidden", "true");
+        });
+        activePanel.removeAttribute("hidden");
+
+        newTab.setAttribute("aria-selected", true);
+        newTab.setAttribute("tabindex", "0");
+        newTab.focus();
+      }
+    }
     // });
-   
-                             
   </script>
-</html>
-</body>
 </html>
