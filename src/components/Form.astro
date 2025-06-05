@@ -39,6 +39,15 @@ const { page } = Astro.props;
         <input required id="email" name="email" type="email" placeholder="" />
         <label class="formLabel relative" for="email"> Email: </label>
       </div>
+      <!-- UTM
+       {lpurl}?utm_source=google-ads&utm_medium=cpc&utm_campaign={_campaignname}&utm_agid={adgroupid}&utm_term={keyword}&creative={creative}&matchtype={matchtype}&device={device}&placement={placement}&utm_content={_content_type} -->
+      <input type="hidden" name="utm_source" value="">
+      <input type="hidden" name="utm_medium" value="">
+      <input type="hidden" name="utm_campaign" value="">
+      <input type="hidden" name="utm_agid" value="">
+      <input type="hidden" name="utm_term" value="">
+      <input type="hidden" name="utm_content" value="">
+
 
       <div
         class="inputWrapper flex flex-col md:flex-row gap-4 align-content-start pt-4"
