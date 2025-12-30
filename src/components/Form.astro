@@ -157,9 +157,9 @@ const { page } = Astro.props;
     const url ="https://hooks.zapier.com/hooks/catch/9846372/36il180/"
     event.preventDefault();
     const form = document.querySelector("form");
-    console.log("hihi")
+    
   const captchaResponse = grecaptcha.getResponse();
-  console.log('hi')
+  
   
   if (captchaResponse<=0){
     throw new Error("Captcha not complete")
