@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/style.css";
 import { ViewTransitions } from "astro:transitions";
 
-const { title = "JL Home Sale" } = Astro.props;
+const { title = "JL Home Sale", description="" } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,7 +13,7 @@ const { title = "JL Home Sale" } = Astro.props;
   <head>
     <meta HTTP-EQUIV="Content-type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
+    <meta name="description" content={description} />
     <meta name="author" content="" />
 
     <title>{title}</title>
