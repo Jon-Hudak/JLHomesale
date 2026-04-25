@@ -73,6 +73,18 @@ const { title = "JL Home Sale", description="" } = Astro.props;
       fbq("init", "419888609948087");
       fbq("track", "PageView");
     </script>
+    
+    <!--  ClickCease.com tracking-->
+         <script type='text/javascript' is:inline>var script = document.createElement('script');
+         script.async = true; script.type = 'text/javascript';
+         var target = 'https://www.clickcease.com/monitor/stat.js';
+         script.src = target;var elem = document.head;elem.appendChild(script);
+         </script>
+         <noscript>
+         <a href='https://www.clickcease.com' rel='nofollow'><img src='https://monitor.clickcease.com' alt='ClickCease'/></a>
+         </noscript>
+         <!--  ClickCease.com tracking-->
+         
     <noscript data-astro-transition-persist="pixel">
       <img
         height="1"
