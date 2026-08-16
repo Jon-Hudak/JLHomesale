@@ -7,9 +7,14 @@ const page = "step-2";
   name={`${page}-form`}
   class="z-10 py-4 px-4 bg-white text-black max-w-[800px]"
   method="POST"
-  ,
   action="https://hooks.zapier.com/hooks/catch/9846372/36ilapb/"
 >
+  <!-- HONEYPOT FIELD: Hidden from humans, bots will fill it -->
+  <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
+    <label for="alt_phone">Alternate Phone (Leave blank)</label>
+    <input type="text" name="alt_phone" id="alt_phone" tabindex="-1" autocomplete="off" />
+  </div>
+
   <div class="form-row grid sm:grid-cols-2">
     <div class="inputWrapper">
       <input
@@ -65,7 +70,6 @@ const page = "step-2";
   <div class="form-row grid sm:grid-cols-3">
     <div class="inputWrapper">
       <input
-        
         id="bedrooms"
         name="bedrooms"
         inputmode="numeric"
@@ -75,7 +79,6 @@ const page = "step-2";
     </div>
     <div class="inputWrapper">
       <input
-        
         id="bathrooms"
         name="bathrooms"
         inputmode="numeric"
@@ -85,7 +88,6 @@ const page = "step-2";
     </div>
     <div class="inputWrapper">
       <input
-        
         id="square_footage"
         name="square_footage"
         inputmode="numeric"
@@ -101,7 +103,6 @@ const page = "step-2";
     </div>
     <div class="inputWrapper">
       <input
-        
         id="age_of_hvac"
         name="age_of_hvac"
         type="text"
@@ -111,7 +112,6 @@ const page = "step-2";
     </div>
     <div class="inputWrapper">
       <input
-        
         id="age_of_roof"
         name="age_of_roof"
         type="text"
@@ -123,7 +123,6 @@ const page = "step-2";
   <div class="form-row grid grid-cols-1 sm:grid-cols-3">
       <div class="inputWrapper">
         <input
-          
           id="asking_price"
           name="asking_price"
           type="text"
@@ -134,7 +133,6 @@ const page = "step-2";
       </div>
       <div class="inputWrapper col-span-2">
         <input
-          
           id="reason_for_selling"
           name="reason_for_selling"
           type="text"
@@ -148,7 +146,6 @@ const page = "step-2";
   <div class="form-row grid sm:grid-cols-2">
       <div class="inputWrapper">
         <input
-          
           id="tenant_duration"
           name="tenant_duration"
           type="text"
@@ -160,7 +157,6 @@ const page = "step-2";
       </div>
       <div class="inputWrapper">
         <input
-          
           id="lease_end"
           name="lease_end"
           type="text"
@@ -170,7 +166,6 @@ const page = "step-2";
       </div>
       <div class="inputWrapper">
         <input
-          
           id="tenant_monthly_rent"
           name="tenant_monthly_rent"
           type="text"
@@ -182,7 +177,6 @@ const page = "step-2";
       </div>
       <div class="inputWrapper">
         <input
-          
           id="vacancy_duration"
           name="vacancy_duration"
           type="text"
@@ -195,7 +189,6 @@ const page = "step-2";
   </div>
   <div class="inputWrapper">
     <textarea
-      
       id="house_additional_info"
       name="house_additional_info"
       placeholder=""
@@ -258,6 +251,9 @@ const page = "step-2";
 </style>
 
 <script>
+  // START TIMER: Record the exact time the script loads
+  const formLoadTime = Date.now();
+
   async function postFormDataAsJson({ url, formData }) {
     const plainFormData = Object.fromEntries(formData.entries());
     const formDataJsonString = JSON.stringify(plainFormData);
@@ -267,7 +263,7 @@ const page = "step-2";
       body: formDataJsonString,
     };
 
-    const response = await fetch(url,fetchOptions);
+    const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
       const errorMessage = await response.text();
@@ -282,21 +278,49 @@ const page = "step-2";
 
     const form = event.currentTarget;
     const url = form.action;
+    const formData = new FormData(form);
 
+    // --- ANTI-BOT CHECK 1: Honeypot ---
+    if (formData.get("alt_phone")) {
+      console.warn("Bot detected: Honeypot filled.");
+      // Silent drop: Replace form with fake success message
+      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your submission has been received.</div>";
+      return; 
+    }
+
+    // --- ANTI-BOT CHECK 2: Time-to-Submit ---
+    const submitTime = Date.now();
+    if (submitTime - formLoadTime < 3000) {
+      console.warn("Bot detected: Form submitted too fast.");
+      // Silent drop: Replace form with fake success message
+      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your submission has been received.</div>";
+      return;
+    }
+
+    // --- RECAPTCHA CHECK ---
+    const captchaResponse = grecaptcha.getResponse();
+    if (captchaResponse.length === 0) {
+      alert("Please check the 'I am not a robot' box.");
+      return; 
+    }
+
+    // --- REAL SUBMISSION ---
     try {
-      const formData = new FormData(form);
       const responseData = await postFormDataAsJson({ url, formData });
-
       console.log({ responseData });
+      
+      // Redirect ONLY if the submission succeeds
+      window.location.assign("/thank-you");
     } catch (error) {
       console.error(error);
+      alert("There was an error submitting your form. Please try again.");
     }
-    window.location.assign("/thank-you");
   }
 
   const form1 = document.querySelector("form");
   form1.addEventListener("submit", handleFormSubmit);
 </script>
+
 <script>
   //retrieve session storage from step-1 and assign it to form.
   const formKeys = ["email", "phone", "street", "city", "state", "zip"];

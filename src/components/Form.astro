@@ -11,8 +11,6 @@ const { page } = Astro.props;
       method="POST"
       action="?"
     >
-      
-     
       <div class="inputWrapper">
         <input required id="street" name="street" type="text" placeholder="" />
         <label class="formLabel relative" for="street">Street:</label>
@@ -39,15 +37,19 @@ const { page } = Astro.props;
         <input required id="email" name="email" type="email" placeholder="" />
         <label class="formLabel relative" for="email"> Email: </label>
       </div>
-      <!-- UTM
-       {lpurl}?utm_source=google-ads&utm_medium=cpc&utm_campaign={_campaignname}&utm_agid={adgroupid}&utm_term={keyword}&creative={creative}&matchtype={matchtype}&device={device}&placement={placement}&utm_content={_content_type} -->
+
+      <!-- HONEYPOT FIELD: Hidden from humans, bots will fill it -->
+      <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
+        <label for="alt_phone">Alternate Phone (Leave blank)</label>
+        <input type="text" name="alt_phone" id="alt_phone" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <!-- UTM Hidden Fields -->
       <input type="hidden" name="utm_campaign" value="">
       <input type="hidden" name="utm_agid" value="">
       <input type="hidden" name="utm_term" value="">
       <input type="hidden" name="utm_content" value="">
       
-
-
       <div
         class="inputWrapper flex flex-col md:flex-row gap-4 align-content-start pt-4"
       >
@@ -63,17 +65,13 @@ const { page } = Astro.props;
           By checking this box you give consent to receive communication from JL
           Home Sale LLC via email, phone, sms. We do not share your details with
           any third parties. By providing your information, you acknowledge and
-          agree to our <a class="underline hover:text-accent" href="/privacy/"
-            >Privacy Policy
-          </a> and <a class="underline hover:text-accent" href="/terms/"
-            >Terms and Conditions</a
-          > Please note that consent to receive messages is not a condition of purchase.
+          agree to our <a class="underline hover:text-accent" href="/privacy/">Privacy Policy</a> 
+          and <a class="underline hover:text-accent" href="/terms/">Terms and Conditions</a>. 
+          Please note that consent to receive messages is not a condition of purchase.
           Message frequency varies. Standard message and data rates may apply. You
           can opt-out at any time by replying with the keyword “STOP”. For additional
-          assistance or information contact us at <a
-            class="underline hover:text-accent"
-            href="tel:8666986169">(866)698-6169</a
-          > or send text with keyword “HELP"
+          assistance or information contact us at <a class="underline hover:text-accent" href="tel:8666986169">(866)698-6169</a>
+          or send text with keyword “HELP"
         </label>
       </div>
 
@@ -87,6 +85,7 @@ const { page } = Astro.props;
         Get Your Offer Now
       </button>
     </form>
+    
     <style>
       /* .inputWrapper {
         color: black;
@@ -132,18 +131,19 @@ const { page } = Astro.props;
 </div>
 
 <script>
-  
+  // START TIMER: Record the exact time the script loads
+  const formLoadTime = Date.now();
+
   async function postFormDataAsJson({ url, formData }) {
     const plainFormData = Object.fromEntries(formData.entries());
     const formDataJsonString = JSON.stringify(plainFormData);
 
     const fetchOptions = {
       method: "POST",
-   
       body: formDataJsonString,
     };
 
-    const response = await fetch(url,fetchOptions);
+    const response = await fetch(url, fetchOptions);
 
     if (!response.ok) {
       const errorMessage = await response.text();
@@ -154,57 +154,71 @@ const { page } = Astro.props;
   }
 
   async function handleFormSubmit(event) {
-    const url ="https://hooks.zapier.com/hooks/catch/9846372/36il180/"
     event.preventDefault();
-    const form = document.querySelector("form");
     
-  const captchaResponse = grecaptcha.getResponse();
-  
-  
-  if (captchaResponse<=0){
-    throw new Error("Captcha not complete")
+    const url = "https://hooks.zapier.com/hooks/catch/9846372/36il180/";
+    const form = document.querySelector("form");
+    const formData = new FormData(form);
+
+    // --- ANTI-BOT CHECK 1: Honeypot ---
+    // If the hidden 'alt_phone' field has text, it's a bot.
+    if (formData.get("alt_phone")) {
+      console.warn("Bot detected: Honeypot filled.");
+      // Silent drop: Replace form with fake success message, do not send data
+      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your offer request has been received.</div>";
+      return; 
+    }
+
+    // --- ANTI-BOT CHECK 2: Time-to-Submit ---
+    // If submitted in under 3 seconds (3000ms), it's a bot.
+    const submitTime = Date.now();
+    if (submitTime - formLoadTime < 3000) {
+      console.warn("Bot detected: Form submitted too fast.");
+      // Silent drop: Replace form with fake success message, do not send data
+      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your offer request has been received.</div>";
+      return;
+    }
+
+    // --- RECAPTCHA CHECK ---
+    const captchaResponse = grecaptcha.getResponse();
+    // getResponse() returns an empty string if not checked
+    if (captchaResponse.length === 0) {
+      alert("Please check the 'I am not a robot' box.");
+      return; // Stop the submission
+    }
+
+    // --- REAL SUBMISSION ---
+    try {
+      const responseData = await postFormDataAsJson({ url, formData });
+      storeData(formData);
+      
+      // Only REAL users who pass all checks get sent to step 2
+      window.location.assign("/step-2");
+    } catch (error) {
+      console.error("Submission failed:", error);
+      alert("There was an error submitting your form. Please try again.");
+    }
   }
-  const formData = new FormData(form);
-		const responseData = await postFormDataAsJson({ url, formData });
-   
-		// console.log({ responseData });
-    storeData(formData)
 
-  window.location.assign("/step-2");
+  const form1 = document.querySelector("form");
+  form1.addEventListener("submit", handleFormSubmit);
 
-  // var onloadCallback = () => {
-  //     grecaptcha.render('js-form-submit', {
-  //         'sitekey' : '6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL',
-  //         'callback' : onSubmit});
-  //   const form = event.currentTarget;
-  //   const url = form.action;}
-
-	
-	
-}
-
-const form1 = document.querySelector("form");
-form1.addEventListener("submit", handleFormSubmit);
-
-//extract info from form
-function getFormInfo(data){
-
-}
-//move info to session storage
-function storeData(data){
-  for (var p of data) {
-    let name = p[0];
-    let value = p[1];
-    sessionStorage.setItem(name, value);
-
+  //extract info from form
+  function getFormInfo(data){
   }
-  
 
-}
+  //move info to session storage
+  function storeData(data){
+    for (var p of data) {
+      let name = p[0];
+      let value = p[1];
+      sessionStorage.setItem(name, value);
+    }
+  }
 </script>
+
 <!-- Recaptcha -->
 <script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
-
 <!-- <script is:inline>
   document.getElementById("contact-form").addEventListener("submit",(e)=>{
     e.preventDefault()
