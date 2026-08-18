@@ -286,31 +286,6 @@ const page = "step-2";
 
     const form = event.currentTarget;
     const url = form.action;
-    const formData = new FormData(form);
-
-    // --- ANTI-BOT CHECK 1: Honeypot ---
-    if (formData.get("alt_phone")) {
-      console.warn("Bot detected: Honeypot filled.");
-      // Silent drop: Replace form with fake success message
-      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your submission has been received.</div>";
-      return; 
-    }
-
-    // --- ANTI-BOT CHECK 2: Time-to-Submit ---
-    const submitTime = Date.now();
-    if (submitTime - formLoadTime < 3000) {
-      console.warn("Bot detected: Form submitted too fast.");
-      // Silent drop: Replace form with fake success message
-      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your submission has been received.</div>";
-      return;
-    }
-
-    // --- RECAPTCHA CHECK ---
-    const captchaResponse = grecaptcha.getResponse();
-    if (captchaResponse.length === 0) {
-      alert("Please check the 'I am not a robot' box.");
-      return; 
-    }
 
     // --- MANUAL PHONE VALIDATION (SMOOTH NATIVE TOOLTIP) ---
     const phoneInput = form.querySelector('input[name="phone"]');
