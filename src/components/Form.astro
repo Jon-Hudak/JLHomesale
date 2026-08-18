@@ -29,27 +29,45 @@ const { page } = Astro.props;
           <label class="formLabel relative" for="zip">Zip:</label>
         </div>
       </div>
+
       <div class="inputWrapper">
-        <input required id="phone" name="phone" type="tel" placeholder="" />
+        <input
+          required
+          id="phone"
+          name="phone"
+          type="tel"
+          placeholder=""
+          pattern="([+()\s\-]*[0-9]){10,}[+()\s\-]*"
+          title="Please enter a valid phone number with at least 10 digits. (e.g., (555) 123-4567)"
+        />
         <label class="formLabel relative" for="phone"> Phone: </label>
       </div>
+
       <div class="inputWrapper">
         <input required id="email" name="email" type="email" placeholder="" />
         <label class="formLabel relative" for="email"> Email: </label>
       </div>
 
-      <!-- HONEYPOT FIELD: Hidden from humans, bots will fill it -->
-      <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
+      <!-- UTM -->
+      <input type="hidden" name="utm_campaign" value="" />
+      <input type="hidden" name="utm_agid" value="" />
+      <input type="hidden" name="utm_term" value="" />
+      <input type="hidden" name="utm_content" value="" />
+
+      <div
+        aria-hidden="true"
+        style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;"
+      >
         <label for="alt_phone">Alternate Phone (Leave blank)</label>
-        <input type="text" name="alt_phone" id="alt_phone" tabindex="-1" autocomplete="off" />
+        <input
+          type="text"
+          name="alt_phone"
+          id="alt_phone"
+          tabindex="-1"
+          autocomplete="off"
+        />
       </div>
 
-      <!-- UTM Hidden Fields -->
-      <input type="hidden" name="utm_campaign" value="">
-      <input type="hidden" name="utm_agid" value="">
-      <input type="hidden" name="utm_term" value="">
-      <input type="hidden" name="utm_content" value="">
-      
       <div
         class="inputWrapper flex flex-col md:flex-row gap-4 align-content-start pt-4"
       >
@@ -65,77 +83,56 @@ const { page } = Astro.props;
           By checking this box you give consent to receive communication from JL
           Home Sale LLC via email, phone, sms. We do not share your details with
           any third parties. By providing your information, you acknowledge and
-          agree to our <a class="underline hover:text-accent" href="/privacy/">Privacy Policy</a> 
-          and <a class="underline hover:text-accent" href="/terms/">Terms and Conditions</a>. 
-          Please note that consent to receive messages is not a condition of purchase.
-          Message frequency varies. Standard message and data rates may apply. You
-          can opt-out at any time by replying with the keyword “STOP”. For additional
-          assistance or information contact us at <a class="underline hover:text-accent" href="tel:8666986169">(866)698-6169</a>
+          agree to our <a class="underline hover:text-accent" href="/privacy/"
+            >Privacy Policy</a
+          >
+          and <a class="underline hover:text-accent" href="/terms/"
+            >Terms and Conditions</a
+          >. Please note that consent to receive messages is not a condition of
+          purchase. Message frequency varies. Standard message and data rates
+          may apply. You can opt-out at any time by replying with the keyword
+          “STOP”. For additional assistance or information contact us at <a
+            class="underline hover:text-accent"
+            href="tel:8666986169">(866)698-6169</a
+          >
           or send text with keyword “HELP"
         </label>
       </div>
 
-      <div class="g-recaptcha mt-8" data-sitekey="6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL"></div>
+      <div
+        class="g-recaptcha mt-8"
+        data-sitekey="6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL"
+      >
+      </div>
 
-      <button id="form-submit" type="submit" class=" mt-8 btn btn-primary" 
-      data-sitekey="6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL" 
-      data-callback="onSubmit"
-      type="submit"
-      value="Submit">
+      <button
+        id="form-submit"
+        type="submit"
+        class="mt-8 btn btn-primary"
+        value="Submit"
+      >
         Get Your Offer Now
       </button>
     </form>
-    
     <style>
-      /* .inputWrapper {
-        color: black;
-        position: relative;
-        font-size: 1rem;
-        margin: 3px;
-      }
-
-      .inputWrapper label:not(.inline-label) {
-        position: absolute;
-        top: 20%;
-        left: 1rem;
-
-        transition: 200ms;
-      }
-
-      .inputWrapper textarea ~ :where(label) {
-        top: 1.5rem;
-      }
-      .inputWrapper:is(:hover, :active, :focus-within) label:not(.inline-label),
-      .inputWrapper > :not(:placeholder-shown) ~ label:not(.inline-label) {
-        scale: 80%;
-        transform-origin: top;
-        top: 0rem;
-        left: 0%;
-        opacity: 70%;
-      }
-      input,
-      textarea {
-        @apply text-base border border-neutral-400 rounded-md  w-full;
-      }
-      input {
-        min-height: 2rem;
-        padding: 1rem 1rem 0.5rem 1rem;
-        box-sizing: border-box;
-      }
-      textarea {
-        padding: 2rem 1rem;
-        box-sizing: border-box;
-      } */
+      /* Your styles remain unchanged */
     </style>
   </div>
 </div>
 
-<script>
-  // START TIMER: Record the exact time the script loads
-  const formLoadTime = Date.now();
 
+<script>
+  // START TIMER: Record the exact time the script loads for bot protection
+  const formLoadTime = Date.now();
+  
   async function postFormDataAsJson({ url, formData }) {
     const plainFormData = Object.fromEntries(formData.entries());
+    
+    if (plainFormData.phone) {
+      // This strips out all characters except numbers for Zapier
+      plainFormData.phone = plainFormData.phone.replace(/\D/g, '');
+    }
+
     const formDataJsonString = JSON.stringify(plainFormData);
 
     const fetchOptions = {
@@ -154,60 +151,79 @@ const { page } = Astro.props;
   }
 
   async function handleFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); 
     
+    const form = document.getElementById("contact-form");
+    
+    // --- MANUAL PHONE VALIDATION (SMOOTH NATIVE TOOLTIP) ---
+    const phoneInput = form.querySelector('input[name="phone"]');
+    const rawDigits = phoneInput.value.replace(/\D/g, '');
+    
+    // If they typed something, but it's less than 10 digits
+    if (rawDigits.length > 0 && rawDigits.length < 10) {
+      phoneInput.setCustomValidity("Please enter at least 10 digits.");
+    } else {
+      phoneInput.setCustomValidity("");
+    }
+
+    // --- HTML VALIDATION ---
+    if (!form.checkValidity()) {
+      form.reportValidity(); 
+      return; 
+    }
+
     const url = "https://hooks.zapier.com/hooks/catch/9846372/36il180/";
-    const form = document.querySelector("form");
     const formData = new FormData(form);
 
     // --- ANTI-BOT CHECK 1: Honeypot ---
-    // If the hidden 'alt_phone' field has text, it's a bot.
     if (formData.get("alt_phone")) {
       console.warn("Bot detected: Honeypot filled.");
-      // Silent drop: Replace form with fake success message, do not send data
       form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your offer request has been received.</div>";
       return; 
     }
 
     // --- ANTI-BOT CHECK 2: Time-to-Submit ---
-    // If submitted in under 3 seconds (3000ms), it's a bot.
     const submitTime = Date.now();
     if (submitTime - formLoadTime < 3000) {
       console.warn("Bot detected: Form submitted too fast.");
-      // Silent drop: Replace form with fake success message, do not send data
       form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your offer request has been received.</div>";
       return;
     }
 
     // --- RECAPTCHA CHECK ---
     const captchaResponse = grecaptcha.getResponse();
-    // getResponse() returns an empty string if not checked
     if (captchaResponse.length === 0) {
-      alert("Please check the 'I am not a robot' box.");
-      return; // Stop the submission
+      alert("Please check the 'I am not a robot' box before submitting.");
+      return; 
     }
 
     // --- REAL SUBMISSION ---
     try {
       const responseData = await postFormDataAsJson({ url, formData });
       storeData(formData);
-      
-      // Only REAL users who pass all checks get sent to step 2
       window.location.assign("/step-2");
     } catch (error) {
-      console.error("Submission failed:", error);
-      alert("There was an error submitting your form. Please try again.");
+      console.error("Submission error: ", error);
+      alert("There was an error submitting the form. Please try again.");
     }
   }
 
-  const form1 = document.querySelector("form");
-  form1.addEventListener("submit", handleFormSubmit);
+  // Safely attach to the specific form ID
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", handleFormSubmit);
 
-  //extract info from form
-  function getFormInfo(data){
+    // --- CLEAR ERROR ON TYPING ---
+    // If the phone field was flagged as invalid, clear the flag the moment they start fixing it
+    const phoneInput = contactForm.querySelector('input[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', () => {
+        phoneInput.setCustomValidity(""); 
+      });
+    }
   }
 
-  //move info to session storage
+  // move info to session storage
   function storeData(data){
     for (var p of data) {
       let name = p[0];
@@ -218,20 +234,5 @@ const { page } = Astro.props;
 </script>
 
 <!-- Recaptcha -->
-<script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
-<!-- <script is:inline>
-  document.getElementById("contact-form").addEventListener("submit",(e)=>{
-    e.preventDefault()
-  })
-  var onSubmit = () => {
-      document.getElementById("contact-form").submit()
-  };
-
-  var onloadCallback = () => {
-      grecaptcha.render('js-form-submit', {
-          'sitekey' : '6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL',
-          'callback' : onSubmit
-      });
-  };
-</script> -->
-
+<script is:inline src="https://www.google.com/recaptcha/api.js" async defer
+></script>

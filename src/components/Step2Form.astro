@@ -9,8 +9,8 @@ const page = "step-2";
   method="POST"
   action="https://hooks.zapier.com/hooks/catch/9846372/36ilapb/"
 >
-  <!-- HONEYPOT FIELD: Hidden from humans, bots will fill it -->
-  <div style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
+  <!-- HONEYPOT FIELD: Hidden from humans AND screen readers -->
+  <div aria-hidden="true" style="opacity: 0; position: absolute; top: 0; left: 0; height: 0; width: 0; z-index: -1;">
     <label for="alt_phone">Alternate Phone (Leave blank)</label>
     <input type="text" name="alt_phone" id="alt_phone" tabindex="-1" autocomplete="off" />
   </div>
@@ -45,7 +45,7 @@ const page = "step-2";
       <label class="formLabel relative" for="email"> Email: </label>
     </div>
     <div class="inputWrapper">
-      <input required id="phone" name="phone" type="tel" placeholder="" />
+      <input required id="phone" name="phone" type="tel" placeholder="" pattern="([+()\s\-]*[0-9]){10,}[+()\s\-]*" title="Please enter a valid phone number with at least 10 digits. (e.g., (555) 123-4567)"/>
       <label class="formLabel relative" for="phone"> Phone: </label>
     </div>
   </div>
@@ -198,7 +198,7 @@ const page = "step-2";
     >
   </div>
 
-  <div class="g-recaptcha mt-8" data-sitekey="6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL" data-callback="onSubmit"></div>
+  <div class="g-recaptcha mt-8" data-sitekey="6Lc3xSgrAAAAAH2prItylKmJkQh1vvVJ3N_J_JXL"></div>
 
   <button id="form-submit" type="submit" class="mt-8 btn btn-primary">
     Get Your Offer Now
@@ -251,11 +251,19 @@ const page = "step-2";
 </style>
 
 <script>
-  // START TIMER: Record the exact time the script loads
+  // START TIMER: Record the exact time the script loads for bot protection
   const formLoadTime = Date.now();
 
   async function postFormDataAsJson({ url, formData }) {
+    // 1. Convert the FormData into a standard Javascript object
     const plainFormData = Object.fromEntries(formData.entries());
+    
+    // 2. Intercept and clean the phone number if it exists
+    if (plainFormData.phone) {
+      plainFormData.phone = plainFormData.phone.replace(/\D/g, '');
+    }
+
+    // 3. Convert the cleaned object into a JSON string
     const formDataJsonString = JSON.stringify(plainFormData);
 
     const fetchOptions = {
@@ -269,7 +277,7 @@ const page = "step-2";
       const errorMessage = await response.text();
       throw new Error(errorMessage);
     }
-
+    
     return response.json();
   }
 
@@ -304,12 +312,51 @@ const page = "step-2";
       return; 
     }
 
+    // --- MANUAL PHONE VALIDATION (SMOOTH NATIVE TOOLTIP) ---
+    const phoneInput = form.querySelector('input[name="phone"]');
+    if (phoneInput) {
+      const rawDigits = phoneInput.value.replace(/\D/g, '');
+      if (rawDigits.length > 0 && rawDigits.length < 10) {
+        phoneInput.setCustomValidity("Please enter at least 10 digits.");
+      } else {
+        phoneInput.setCustomValidity("");
+      }
+    }
+
+    // --- HTML VALIDATION ---
+    if (!form.checkValidity()) {
+      form.reportValidity(); 
+      return; 
+    }
+
+    const formData = new FormData(form);
+
+    // --- ANTI-BOT CHECK 1: Honeypot ---
+    if (formData.get("alt_phone")) {
+      console.warn("Bot detected: Honeypot filled.");
+      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your submission has been received.</div>";
+      return; 
+    }
+
+    // --- ANTI-BOT CHECK 2: Time-to-Submit ---
+    const submitTime = Date.now();
+    if (submitTime - formLoadTime < 3000) {
+      console.warn("Bot detected: Form submitted too fast.");
+      form.innerHTML = "<div class='p-4 text-green-600 font-bold text-center text-lg'>Thank you! Your submission has been received.</div>";
+      return;
+    }
+
+    // --- RECAPTCHA CHECK ---
+    const captchaResponse = grecaptcha.getResponse();
+    if (captchaResponse.length === 0) {
+      alert("Please check the 'I am not a robot' box before submitting.");
+      return; 
+    }
+
     // --- REAL SUBMISSION ---
     try {
       const responseData = await postFormDataAsJson({ url, formData });
       console.log({ responseData });
-      
-      // Redirect ONLY if the submission succeeds
       window.location.assign("/thank-you");
     } catch (error) {
       console.error(error);
@@ -317,23 +364,35 @@ const page = "step-2";
     }
   }
 
-  const form1 = document.querySelector("form");
-  form1.addEventListener("submit", handleFormSubmit);
-</script>
+  const form1 = document.getElementById("step-2-form");
+  if (form1) {
+    form1.addEventListener("submit", handleFormSubmit);
 
-<script>
-  //retrieve session storage from step-1 and assign it to form.
+    // --- CLEAR ERROR ON TYPING ---
+    const phoneInput = form1.querySelector('input[name="phone"]');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', () => {
+        phoneInput.setCustomValidity(""); 
+      });
+    }
+  }
+
+  // --- RETRIEVE SESSION STORAGE FROM STEP 1 ---
   const formKeys = ["email", "phone", "street", "city", "state", "zip"];
   formKeys.forEach((key) => {
     setSessionData(key);
   });
+  
   function setSessionData(key) {
     if (!sessionStorage.getItem(key) || key === "chk") {
       return;
     }
-    document.getElementById(key).value = sessionStorage.getItem(key);
+    const el = document.getElementById(key);
+    if (el) {
+      el.value = sessionStorage.getItem(key);
+    }
   }
 </script>
 
 <!-- Recaptcha -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script is:inline src="https://www.google.com/recaptcha/api.js" async defer></script>
