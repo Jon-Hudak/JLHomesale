@@ -5,7 +5,7 @@ import Footer from "../components/Footer.astro";
 import "../styles/style.css";
 import { ViewTransitions } from "astro:transitions";
 
-const { title = "JL Home Sale", description="" } = Astro.props;
+const { title = "JL Home Sale", description = "" } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,7 +29,7 @@ const { title = "JL Home Sale", description="" } = Astro.props;
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       crossorigin="anonymous"
     />
-    <link rel="icon" type="image/x-icon" href="/favicon.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
     <!-- Google tag (gtag.js)-->
     <script
       async
@@ -68,14 +68,12 @@ const { title = "JL Home Sale", description="" } = Astro.props;
         window,
         document,
         "script",
-        "https://connect.facebook.net/en_US/fbevents.js"
+        "https://connect.facebook.net/en_US/fbevents.js",
       );
       fbq("init", "419888609948087");
       fbq("track", "PageView");
     </script>
-    
-   
-         
+
     <noscript data-astro-transition-persist="pixel">
       <img
         height="1"
@@ -98,30 +96,36 @@ const { title = "JL Home Sale", description="" } = Astro.props;
     >
     <!-- End Google Tag Manager (noscript) -->
     <!--  ClickCease.com tracking-->
-         <script type='text/javascript' is:inline>var script = document.createElement('script');
-         script.async = true; script.type = 'text/javascript';
-         var target = 'https://www.clickcease.com/monitor/stat.js';
-         script.src = target;var elem = document.head;elem.appendChild(script);
-         </script>
-         <noscript>
-         <a href='https://www.clickcease.com' rel='nofollow'><img src='https://monitor.clickcease.com' alt='ClickCease'/></a>
-         </noscript>
-         <!--  ClickCease.com tracking-->
+    <script type="text/javascript" is:inline>
+      var script = document.createElement("script");
+      script.async = true;
+      script.type = "text/javascript";
+      var target = "https://www.clickcease.com/monitor/stat.js";
+      script.src = target;
+      var elem = document.head;
+      elem.appendChild(script);
+    </script>
+    <noscript>
+      <a href="https://www.clickcease.com" rel="nofollow"
+        ><img src="https://monitor.clickcease.com" alt="ClickCease" /></a
+      >
+    </noscript>
+    <!--  ClickCease.com tracking-->
     <Header />
     <slot />
     <Footer />
     <!-- Start of LiveChat code -->
     <script async="true" is:inline>
       // document.addEventListener("astro:page-load", () => {
-        (function () {
-          var lc = document.createElement("script");
-          lc.type = "text/javascript";
-          lc.async = true;
-          lc.src =
-            "https://widgets.theglobalcdn.com/jlhomesale.com/widgets-main.js";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(lc, s);
-        })();
+      (function () {
+        var lc = document.createElement("script");
+        lc.type = "text/javascript";
+        lc.async = true;
+        lc.src =
+          "https://widgets.theglobalcdn.com/jlhomesale.com/widgets-main.js";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(lc, s);
+      })();
       // });
     </script>
     <!-- End of LiveChat code -->
@@ -222,7 +226,7 @@ const { title = "JL Home Sale", description="" } = Astro.props;
       const tabList = tabWrapper.querySelector("ul");
       const tabButtons = tabList.querySelectorAll("a");
       const tabPanels = tabWrapper.querySelectorAll(
-        ".tab-content-wrapper>article"
+        ".tab-content-wrapper>article",
       );
 
       tabList.setAttribute("role", "tablist");
@@ -276,7 +280,7 @@ const { title = "JL Home Sale", description="" } = Astro.props;
           switchTab(tabButtons[tabButtons.length - 1]);
         } else {
           switchTab(
-            currentTab.parentElement.previousElementSibling.querySelector("a")
+            currentTab.parentElement.previousElementSibling.querySelector("a"),
           );
         }
       }
@@ -287,7 +291,7 @@ const { title = "JL Home Sale", description="" } = Astro.props;
           switchTab(tabButtons[0]);
         } else {
           switchTab(
-            currentTab.parentElement.nextElementSibling.querySelector("a")
+            currentTab.parentElement.nextElementSibling.querySelector("a"),
           );
         }
       }
@@ -313,7 +317,55 @@ const { title = "JL Home Sale", description="" } = Astro.props;
     }
     // });
   </script>
-  
+
   <!-- UTM Script: -->
-  <script>var queryForm=function(e){var t=!(!e||!e.reset)&&e.reset,n=window.location.toString().split("?");if(n.length>1){var o=n[1].split("&");for(s in o){var r=o[s].split("=");(t||null===sessionStorage.getItem(r[0]))&&sessionStorage.setItem(r[0],decodeURIComponent(r[1]))}}for(var i=document.querySelectorAll("input[type=hidden], input[type=text]"),s=0;s<i.length;s++){var a=sessionStorage.getItem(i[s].name);a&&(document.getElementsByName(i[s].name)[0].value=a)}};setTimeout(function(){queryForm()},3e3);</script>
+  <script>
+    var queryForm = function (e) {
+      var t = !(!e || !e.reset) && e.reset,
+        n = window.location.toString().split("?");
+      if (n.length > 1) {
+        var o = n[1].split("&");
+        for (s in o) {
+          var r = o[s].split("=");
+          (t || null === sessionStorage.getItem(r[0])) &&
+            sessionStorage.setItem(r[0], decodeURIComponent(r[1]));
+        }
+      }
+      for (
+        var i = document.querySelectorAll(
+            "input[type=hidden], input[type=text]",
+          ),
+          s = 0;
+        s < i.length;
+        s++
+      ) {
+        var a = sessionStorage.getItem(i[s].name);
+        a && (document.getElementsByName(i[s].name)[0].value = a);
+      }
+    };
+    setTimeout(function () {
+      queryForm();
+    }, 3e3);
+  </script>
 </html>
+
+<script>
+  function captureGCLID() {
+    var params = new URLSearchParams(window.location.search);
+    var gclid = params.get("gclid");
+    
+    if (!gclid) {
+      gclid = sessionStorage.getItem("gclid");
+    }
+
+    if (gclid) {
+      sessionStorage.setItem("gclid", gclid);
+
+      var field = document.getElementById("gclid_field");
+
+      if (field) field.value = gclid;
+    }
+  }
+
+  window.addEventListener("load", captureGCLID);
+</script>
