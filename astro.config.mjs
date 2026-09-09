@@ -1,10 +1,24 @@
-import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
+import { defineConfig, fontProviders } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
 
-import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.jlhomesale.com',
-  integrations: [tailwind(), sitemap()]
+  integrations: [],
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Geist",
+      cssVariable: "--font-geist",
+    },
+  ],
+  markdown: {
+    shikiConfig: {
+      theme: "dark-plus",
+    },
+  },
+  site: "https://jlhomesale.com",
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

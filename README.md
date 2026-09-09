@@ -1,42 +1,32 @@
-# Astro Starter Kit: Basics
+# Introducing Barebones 🦴
 
-```sh
-npm create astro@latest -- --template basics
-```
+![barebones-cover](https://github.com/user-attachments/assets/bde6d3af-472f-4320-96ec-b70040098ea9)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+[View demo](https://barebones.trevortylerlee.com/)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Welcome to Barebones, an open source template for [Astro](https://astro.build/) designed for simplicity and flexibility. Whether you're a seasoned developer or just starting out, Barebones provides everything you need to kickstart your next blog with minimal setup.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+Head over to the [repository](https://github.com/trevortylerlee/barebones) and check out our [documentation](https://barebones.trevortylerlee.com/docs) to get started.
 
-## 🚀 Project Structure
+## Key features
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Fast by default:** Leverage the power of Astro, Tailwind CSS, and Markdown to create fast, lightweight web pages.
+- **Minimal and customizable:** Solid foundation to build upon and meet your unique needs. Zero frameworks installed.
+- **SEO-friendly:** Sitemap, an [RSS feed](https://barebones.trevortylerlee.com/rss.xml), and Open Graph protocol support out of the box.
+- **Accessible to all:** System, dark, and light mode support. Keyboard navigation and semantic HTML.
+- **Free and open source:** Join the community and contribute to make this project even better!
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Core Web Vitals
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Performance: **100**
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Accessibility: **100**
 
-Any static assets, like images, can be placed in the `public/` directory.
+Best Practices: **100**
 
-## 🧞 Commands
+SEO: **100**
+
+## Commands
 
 All commands are run from the root of the project, from a terminal:
 
@@ -48,7 +38,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
