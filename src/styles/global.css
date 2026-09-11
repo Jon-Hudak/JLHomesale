@@ -3,6 +3,7 @@
 
 :root {
   color-scheme: light dark;
+
 }
 .dark {
   color-scheme: dark;
@@ -30,6 +31,7 @@
   --color-dark-bg: var(--color-neutral-950);
   --color-dark-link: oklch(73.9% 0.1387 282.47);
   --color-dark-muted-text: var(--color-neutral-300);
+  --color-secondary-background: oklch(96.5% .006 245);
 }
 
 @theme inline {
@@ -56,4 +58,7 @@
   :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   color: var(--color-dark-link);
   text-decoration-color: var(--color-dark-link);
+}
+.eyebrow {
+  @apply text-green-400 font-bold uppercase;
 }

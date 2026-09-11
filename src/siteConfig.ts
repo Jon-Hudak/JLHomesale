@@ -27,17 +27,17 @@ export const NAV_LINKS: NavigationLinks = {
   },
 };
 
-export const SOCIAL_LINKS: SocialLinks = {
-  email: {
-    label: "Email",
-    href: "mailto:ttl@trevortylerlee.com",
-  },
-  github: {
-    label: "GitHub",
-    href: "https://github.com/trevortylerlee",
-  },
-  twitter: {
-    label: "X (formerly Twitter)",
-    href: "https://twitter.com/boogerbuttcheek",
-  },
-};
+// export const SOCIAL_LINKS: SocialLinks = {
+//   email: {
+//     label: "Email",
+//     href: "mailto:ttl@trevortylerlee.com",
+//   },
+//   github: {
+//     label: "GitHub",
+//     href: "https://github.com/trevortylerlee",
+//   },
+//   twitter: {
+//     label: "X (formerly Twitter)",
+//     href: "https://twitter.com/boogerbuttcheek",
+//   },
+// };

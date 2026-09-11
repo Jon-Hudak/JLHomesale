@@ -1,24 +1,69 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-
-import Introduction from "@/components/Introduction.astro";
-import Posts from "@/components/Posts.astro";
-import Projects from "@/components/Projects.astro";
 import SeoPage from "@/components/SeoPage.astro";
-import SocialLinks from "@/components/SocialLinks.astro";
+import OfferForm from "@/components/OfferForm.astro";
 ---
 
 <BaseLayout>
   <SeoPage slot="head" />
+  <section class="grid md:grid-cols-2">
+    <div>
+        <p class="uppercase eyebrow">Helping Homeowners Nationwide</p>
+  <h1 class="font-sans text-6xl">Moving made simple</h1>
+
+  <p>Sell your property as-is, with no agent commissions on our purchase. Start with the address.</p>
+
   <div>
-    <Introduction />
-    <div class="prose dark:prose-invert prose-neutral my-12"><hr /></div>
-    <Posts />
-    <div class="mt-12">
-      <Projects />
-    </div>
-    <div class="mt-12">
-      <SocialLinks />
-    </div>
+
+    <OfferForm/>
+    <ul class="grid grid-cols-2">
+      <li class="flex gap-2 place-items-center"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check size-4 shrink-0 text-accent" aria-hidden="true" data-tsd-source="/src/routes/index.tsx:68:19"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg></span>Written Offer</li>
+      <li class="flex gap-2 place-items-center"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check size-4 shrink-0 text-accent" aria-hidden="true" data-tsd-source="/src/routes/index.tsx:68:19"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg></span>As-is condition</li>
+      <li class="flex gap-2 place-items-center"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check size-4 shrink-0 text-accent" aria-hidden="true" data-tsd-source="/src/routes/index.tsx:68:19"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg></span>No agent commissions</li>
+      <li class="flex gap-2 place-items-center"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check size-4 shrink-0 text-accent" aria-hidden="true" data-tsd-source="/src/routes/index.tsx:68:19"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg></span>You pick the date</li>
+    </ul>
   </div>
+
+    </div>
+    <div class="hero-photo-shape relative">
+      <!-- TODO Change this to Astro Image -->
+      <img src="/src/assets/images/hero-home.jpg"/>
+
+      <div class="bg-white  absolute left-2 top-28 flex items-center gap-3 rounded-full bg-card px-4 py-3 shadow-lift sm:-left-8" data-tsd-source="/src/routes/index.tsx:78:13"><span class="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground" data-tsd-source="/src/routes/index.tsx:79:15"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check size-5" aria-hidden="true" data-tsd-source="/src/routes/index.tsx:79:122"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg></span><span class="text-xs leading-4" data-tsd-source="/src/routes/index.tsx:80:15"><strong class="block" data-tsd-source="/src/routes/index.tsx:80:51">As-is condition</strong>Reviewed as it sits</span></div>
+
+      <ul class="flex flex-wrap gap-x-6">
+        <li>Off-market process — no listing required</li>
+
+
+
+        <li>Licensed title company closings</li>
+        <li>As-is purchases</li>
+        <li>All 50 states</li>
+      </ul>
+    </div>
+  </section>
+  <section class="bg-secondary-background">
+    <p class="eyebrow">Trusted Home Buyers</p>
+    <h2>
+      Skip the stress and expense of listing with an agent
+    </h2>
+      <p>
+        JL Home Sale offers a straightforward, off-market way to sell your house, putting you in control of the process. Here's why homeowners across the country work with us.
+      </p>
+<a href="/how">See How It Works</a>
+<ul class="grid grid-cols-2">
+  <li class="flex flex-col">In closed transactions<span class="text-3xl">$38M+</span></li>
+  <li class="flex flex-col">Years buying homes<span class="text-3xl">12</span></li>
+  <li class="flex flex-col">Properties acquired<span class="text-3xl">310+</span></li>
+  <li class="flex flex-col">Homeowners helped<span class="text-3xl">425+</span></li>
+</ul>
+  </section>
+
 </BaseLayout>
+<style>
+
+  .hero-photo-shape {
+    clip-path: polygon(19% 0, 100% 12%, 100% 100%, 0 100%, 0 29%);
+    border-radius: 1.75rem;
+    }
+</style>
