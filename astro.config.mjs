@@ -6,10 +6,10 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   integrations: [],
   fonts: [
-    {
+       {
       provider: fontProviders.fontsource(),
-      name: "Geist",
-      cssVariable: "--font-geist",
+      name: "Montserrat",
+      cssVariable: "--font-mont",
     },
   ],
   markdown: {

@@ -5,11 +5,11 @@ import type {
 } from "@/types.ts";
 
 export const SITE: SiteConfiguration = {
-  title: "Barebones",
-  description: "A barebones starter theme. Built with Astro, Tailwind CSS, and Markdown.",
-  href: "https://barebones.trevortylerlee.com",
-  author: "Trevor Tyler Lee",
-  locale: "en-CA",
+  title: "JL Homesale",
+  description: "Sell your property as-is, with no agent commissions on our purchase.",
+  href: "https://jlhomesale.com",
+  author: "Jon Hudak",
+  locale: "en-US",
 };
 
 export const NAV_LINKS: NavigationLinks = {

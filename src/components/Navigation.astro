@@ -1,14 +1,17 @@
 ---
 import { NAV_LINKS, SITE } from "@/siteConfig.ts";
+import "@/styles/global.css";
 ---
 
 <header
-  class="mx-auto flex max-w-screen-sm flex-wrap items-center justify-between p-3 pb-8 sm:p-6 absolute top-0 inset-x-0"
+  class="page-layout items-center justify-between p-3 pb-8 sm:p-6 bg-accent sticky top-0 z-100"
 >
+<div class="flex items-center justify-between">
+
   <a
-    href="/"
-    class="text-lg font-semibold text-black sm:text-xl dark:text-white"
-    >{SITE.title}</a
+  href="/"
+  class="font-sans text-lg font-semibold text-white sm:text-2xl bg-accent tracking-wide "
+  ><span class="font-extralight">JL</span><span class="font-semibold"> Home Sale</span></a
   >
   <nav>
     <ul class="flex list-none items-center gap-2 p-0 sm:gap-3">
@@ -25,4 +28,5 @@ import { NAV_LINKS, SITE } from "@/siteConfig.ts";
       }
     </ul>
   </nav>
+</div>
 </header>

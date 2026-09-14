@@ -1,0 +1,47 @@
+---
+interface Props {
+  as?: "button" | "a";
+  hasArrow?: boolean;
+  href?: string;
+  class?: string;
+}
+
+const { 
+  as: Tag = "button", 
+  hasArrow = false, 
+  href,
+  class: className = "" 
+} = Astro.props;
+---
+
+<Tag
+  href={Tag === "a" ? href : undefined}
+  class:list={[
+    "justify-self-start group inline-flex items-center justify-center gap-2 rounded-full bg-[#243545] px-8 py-4 text-base font-bold text-white transition-all duration-200 hover:-translate-y-1 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#243545]",
+    className
+  ]}
+>
+
+  <slot>Get Offer</slot>
+  
+  {
+    hasArrow && (
+      <svg
+        class="transition-transform duration-200 group-hover:translate-x-1"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+    )
+  }
+</Tag>

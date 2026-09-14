@@ -1,261 +1,267 @@
-    
-        <h1>Request Your Property Offer</h1>
-        
-        <form id="offerForm" novalidate>
-            
-            <!-- Property Address -->
-            <div class="form-group">
-                <label for="propertyAddress">Property Address <span aria-hidden="true">*</span></label>
-                <input 
-                    type="text" 
-                    id="propertyAddress" 
-                    name="propertyAddress" 
-                    required 
-                    autocomplete="street-address"
-                    placeholder="123 Main St, City, State, Zip">
-                <div id="addressError" class="error-message" aria-live="polite">Please enter your property address.</div>
-            </div>
+---
+import Button from "@/components/Button.astro";
 
-            <!-- Phone Number -->
-            <div class="form-group">
-                <label for="phoneNumber">Phone Number <span aria-hidden="true">*</span></label>
-                <input 
-                    type="tel" 
-                    id="phoneNumber" 
-                    name="phoneNumber" 
-                    required 
-                    maxlength="14"
-                    autocomplete="tel"
-                    placeholder="(555) 555-5555">
-                <div id="phoneError" class="error-message" aria-live="polite">Please enter a valid 10-digit phone number.</div>
-            </div>
+---
 
-            <!-- Email Address -->
-            <div class="form-group">
-                <label for="emailAddress">Email Address <span aria-hidden="true">*</span></label>
-                <input 
-                    type="email" 
-                    id="emailAddress" 
-                    name="emailAddress" 
-                    required 
-                    autocomplete="email"
-                    placeholder="name@example.com">
-                <div id="emailError" class="error-message" aria-live="polite">Please enter a valid email address.</div>
-            </div>
 
-            <!-- Consent Checkbox & Disclosure -->
-            <div class="checkbox-group">
-                <input 
-                    type="checkbox" 
-                    id="consentCheck" 
-                    name="consentCheck" 
-                    required>
-                <label for="consentCheck">
-                    I agree to be contacted by phone, text, or email about my property, including by automated means. Consent is not a condition of any sale. See our <a href="#terms" target="_blank">Terms of Use</a> and <a href="#privacy" target="_blank">Privacy Policy</a>.
-                </label>
-            </div>
-            <div id="consentError" class="error-message" aria-live="polite" style="margin-top: -0.75rem; margin-bottom: 1rem;">You must agree to the terms to proceed.</div>
 
-            <!-- Submit Button -->
-            <button type="submit">Get Offer</button>
+<form id="offerForm" novalidate class="p-6 border-2 border-lightSecAccent rounded-xl grid grid-cols-2 gap-2 bg-neutral-100 ">
+  <!-- Property Address -->
+  <div class="form-group col-span-2 ">
+    <label for="propertyAddress"
+      >Property Address <span aria-hidden="true">*</span></label
+    >
+    <input
+      type="text"
+      id="propertyAddress"
+      name="propertyAddress"
+      required
+      autocomplete="street-address"
+      placeholder="123 Main St, City, State, Zip"
+    />
+    <div id="addressError" class="error-message" aria-live="polite">
+      Please enter your property address.
+    </div>
+  </div>
 
-        </form>
-   
+  <!-- Phone Number -->
+  <div class="form-group mt-4">
+    <label for="phoneNumber"
+      >Phone Number <span aria-hidden="true">*</span></label
+    >
+    <input
+      type="tel"
+      id="phoneNumber"
+      name="phoneNumber"
+      required
+      maxlength="14"
+      autocomplete="tel"
+      placeholder="(555) 555-5555"
+    />
+    <div id="phoneError" class="error-message" aria-live="polite">
+      Please enter a valid 10-digit phone number.
+    </div>
+  </div>
+
+  <!-- Email Address -->
+  <div class="form-group mt-4">
+    <label for="emailAddress"
+      >Email Address <span aria-hidden="true">*</span></label
+    >
+    <input
+      type="email"
+      id="emailAddress"
+      name="emailAddress"
+      required
+      autocomplete="email"
+      placeholder="name@example.com"
+    />
+    <div id="emailError" class="error-message" aria-live="polite">
+      Please enter a valid email address.
+    </div>
+  </div>
+
+  <!-- Consent Checkbox & Disclosure -->
+  <div class="checkbox-group col-span-2">
+    <input type="checkbox" id="consentCheck" name="consentCheck" required />
+    <label for="consentCheck">
+      I agree to be contacted by phone, text, or email about my property,
+      including by automated means. Consent is not a condition of any sale. See
+      our <a href="#terms" target="_blank">Terms of Use</a> and <a
+        href="#privacy"
+        target="_blank">Privacy Policy</a
+      >.
+    </label>
+  </div>
+  <div
+    id="consentError"
+    class="error-message"
+    aria-live="polite"
+    style="margin-top: -0.75rem; margin-bottom: 1rem;"
+  >
+    You must agree to the terms to proceed.
+  </div>
+
+  <!-- Submit Button -->
+   <div class="col-span-2">
+
+       <Button class="button" type="submit" hasArrow={true}>Get Offer</Button>
+    </div>
+</form>
+
 <style>
-        body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f4f6f8;
-            color: #333;
-            margin: 0;
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+  .form-container {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+  } 
 
-        .form-container {
-            background: #ffffff;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-        }
+  label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
 
-        h1 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #111;
-        }
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
 
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
+  /* Focus states for accessibility */
+  input:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
+  }
 
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
+  /* Error state styling */
+  input.invalid {
+    border-color: #d93025;
+  }
 
-        input[type="text"],
-        input[type="tel"],
-        input[type="email"] {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
+  .error-message {
+    color: #d93025;
+    font-size: 0.85rem;
+    margin-top: 0.35rem;
+    display: none;
+  }
 
-        /* Focus states for accessibility */
-        input:focus {
-            outline: none;
-            border-color: #0056b3;
-            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.15);
-        }
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 1rem 0;
+  }
 
-        /* Error state styling */
-        input.invalid {
-            border-color: #d93025;
-        }
+  .checkbox-group input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    cursor: pointer;
+  }
 
-        .error-message {
-            color: #d93025;
-            font-size: 0.85rem;
-            margin-top: 0.35rem;
-            display: none;
-        }
+  .checkbox-group label {
+    font-weight: normal;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: #555;
+    cursor: pointer;
+  }
 
-        .checkbox-group {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            margin: 1.5rem 0;
-        }
+  button[type="submit"] {
+    background-color: #0056b3;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
 
-        .checkbox-group input[type="checkbox"] {
-            margin-top: 0.25rem;
-            width: 1.1rem;
-            height: 1.1rem;
-            cursor: pointer;
-        }
+  button[type="submit"]:hover {
+    background-color: #004085;
+  }
 
-        .checkbox-group label {
-            font-weight: normal;
-            font-size: 0.875rem;
-            line-height: 1.4;
-            color: #555;
-            cursor: pointer;
-        }
+  button[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.4);
+  }
+</style>
+<script>
+  const form = document.getElementById("offerForm");
+  const phoneInput = document.getElementById("phoneNumber");
+  const phoneError = document.getElementById("phoneError");
+  const addressInput = document.getElementById("propertyAddress");
+  const addressError = document.getElementById("addressError");
+  const emailInput = document.getElementById("emailAddress");
+  const emailError = document.getElementById("emailError");
+  const consentCheck = document.getElementById("consentCheck");
+  const consentError = document.getElementById("consentError");
 
-        button[type="submit"] {
-            background-color: #0056b3;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            padding: 0.85rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+  // Optional: Auto-format phone number as user types (e.g., (555) 555-5555)
+  phoneInput.addEventListener("input", (e) => {
+    let digits = e.target.value.replace(/\D/g, "");
+    if (digits.length > 10) digits = digits.substring(0, 10);
 
-        button[type="submit"]:hover {
-            background-color: #004085;
-        }
+    let formatted = "";
+    if (digits.length > 0) {
+      formatted = "(" + digits.substring(0, 3);
+    }
+    if (digits.length >= 4) {
+      formatted += ") " + digits.substring(3, 6);
+    }
+    if (digits.length >= 7) {
+      formatted += "-" + digits.substring(6, 10);
+    }
+    e.target.value = formatted;
+  });
 
-        button[type="submit"]:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.4);
-        }
-    </style>
-    <script>
-        const form = document.getElementById('offerForm');
-        const phoneInput = document.getElementById('phoneNumber');
-        const phoneError = document.getElementById('phoneError');
-        const addressInput = document.getElementById('propertyAddress');
-        const addressError = document.getElementById('addressError');
-        const emailInput = document.getElementById('emailAddress');
-        const emailError = document.getElementById('emailError');
-        const consentCheck = document.getElementById('consentCheck');
-        const consentError = document.getElementById('consentError');
+  // Form Submission validation
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    let isValid = true;
 
-        // Optional: Auto-format phone number as user types (e.g., (555) 555-5555)
-        phoneInput.addEventListener('input', (e) => {
-            let digits = e.target.value.replace(/\D/g, '');
-            if (digits.length > 10) digits = digits.substring(0, 10);
-            
-            let formatted = '';
-            if (digits.length > 0) {
-                formatted = '(' + digits.substring(0, 3);
-            }
-            if (digits.length >= 4) {
-                formatted += ') ' + digits.substring(3, 6);
-            }
-            if (digits.length >= 7) {
-                formatted += '-' + digits.substring(6, 10);
-            }
-            e.target.value = formatted;
-        });
+    // 1. Validate Address
+    if (!addressInput.value.trim()) {
+      addressInput.classList.add("invalid");
+      addressError.style.display = "block";
+      isValid = false;
+    } else {
+      addressInput.classList.remove("invalid");
+      addressError.style.display = "none";
+    }
 
-        // Form Submission validation
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            let isValid = true;
+    // 2. Robust 10-Digit Phone Validation
+    // Extracts all digits to guarantee it counts precisely 10 numbers regardless of formatting symbols.
+    const rawPhoneDigits = phoneInput.value.replace(/\D/g, "");
+    if (rawPhoneDigits.length !== 10) {
+      phoneInput.classList.add("invalid");
+      phoneError.style.display = "block";
+      isValid = false;
+    } else {
+      phoneInput.classList.remove("invalid");
+      phoneError.style.display = "none";
+    }
 
-            // 1. Validate Address
-            if (!addressInput.value.trim()) {
-                addressInput.classList.add('invalid');
-                addressError.style.display = 'block';
-                isValid = false;
-            } else {
-                addressInput.classList.remove('invalid');
-                addressError.style.display = 'none';
-            }
+    // 3. Validate Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailInput.value.trim())) {
+      emailInput.classList.add("invalid");
+      emailError.style.display = "block";
+      isValid = false;
+    } else {
+      emailInput.classList.remove("invalid");
+      emailError.style.display = "none";
+    }
 
-            // 2. Robust 10-Digit Phone Validation
-            // Extracts all digits to guarantee it counts precisely 10 numbers regardless of formatting symbols.
-            const rawPhoneDigits = phoneInput.value.replace(/\D/g, '');
-            if (rawPhoneDigits.length !== 10) {
-                phoneInput.classList.add('invalid');
-                phoneError.style.display = 'block';
-                isValid = false;
-            } else {
-                phoneInput.classList.remove('invalid');
-                phoneError.style.display = 'none';
-            }
+    // 4. Validate Consent Checkbox
+    if (!consentCheck.checked) {
+      consentError.style.display = "block";
+      isValid = false;
+    } else {
+      consentError.style.display = "none";
+    }
 
-            // 3. Validate Email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(emailInput.value.trim())) {
-                emailInput.classList.add('invalid');
-                emailError.style.display = 'block';
-                isValid = false;
-            } else {
-                emailInput.classList.remove('invalid');
-                emailError.style.display = 'none';
-            }
-
-            // 4. Validate Consent Checkbox
-            if (!consentCheck.checked) {
-                consentError.style.display = 'block';
-                isValid = false;
-            } else {
-                consentError.style.display = 'none';
-            }
-
-            // If everything is correct
-            if (isValid) {
-                alert('Success! Form is valid and ready to submit.');
-                // form.submit(); // Uncomment this when connecting to your backend
-            }
-        });
-    </script>
-
-    
+    // If everything is correct
+    if (isValid) {
+      alert("Success! Form is valid and ready to submit.");
+      // form.submit(); // Uncomment this when connecting to your backend
+    }
+  });
+</script>

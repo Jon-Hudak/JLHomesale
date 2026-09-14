@@ -1,0 +1,21 @@
+---
+import Card from "./Card.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  iconUrl?: string; // For image-based icons
+}
+
+const { title, description, iconUrl } = Astro.props;
+---
+
+<Card as="li" class="flex flex-col gap-4">
+  {iconUrl && (
+    <img src={iconUrl} alt="" class="size-12 object-contain" aria-hidden="true" />
+  )}
+  <div>
+    <h3 class="mb-2 text-xl font-bold text-gray-900">{title}</h3>
+    <p class="text-gray-600 leading-relaxed">{description}</p>
+  </div>
+</Card>

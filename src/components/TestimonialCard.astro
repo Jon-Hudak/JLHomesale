@@ -1,0 +1,33 @@
+---
+import Card from "./Card.astro";
+
+interface Props {
+  quote: string;
+  name: string;
+  location: string;
+}
+
+const { quote, name, location } = Astro.props;
+
+// Automatically grab the first letter of the name for the avatar
+const initial = name ? name.charAt(0).toUpperCase() : "";
+---
+
+{/* h-full ensures all cards in the grid stretch to match the tallest one */}
+<Card as="li" class="flex h-full flex-col justify-between gap-6">
+  <p class="text-gray-700 leading-relaxed">
+    “{quote}”
+  </p>
+  
+  <div class="flex items-center gap-4 mt-auto">
+    {/* The big gray circle with the initial */}
+    <span class="flex size-14 shrink-0 items-center justify-center rounded-full bg-gray-200 text-2xl font-bold text-gray-600">
+      {initial}
+    </span>
+    
+    <div>
+      <p class="font-bold text-gray-900">{name}</p>
+      <small class="text-gray-500 text-sm">{location}</small>
+    </div>
+  </div>
+</Card>
