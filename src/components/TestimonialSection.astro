@@ -1,0 +1,20 @@
+---
+import {
+  testimonials,
+ 
+} from "@/data/homeContent";
+import TestimonialCard from "./TestimonialCard.astro";
+---
+
+<h2 class="h2 text-center">What sellers say</h2>
+    <ul class="grid lg:grid-cols-3 gap-6 mt-12">
+      {
+        testimonials.map((t) => (
+          <TestimonialCard
+            quote={t.quote}
+            name={t.name}
+            location={t.location}
+          />
+        ))
+      }
+    </ul>

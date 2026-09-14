@@ -3,21 +3,20 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import SeoPage from "@/components/SeoPage.astro";
 import OfferForm from "@/components/OfferForm.astro";
 import { Image } from "astro:assets";
-import TestimonialCard from "@/components/TestimonialCard.astro";
 import FeatureCard from "@/components/FeatureCard.astro";
 import Button from "@/components/Button.astro";
 
-import beforeHouse from "@/assets/images/before-house.jpg";
-import afterHouse from "@/assets/images/after-house.jpg";
-
 import {
-  faqs,
   testimonials,
   situations,
   features,
   contactFeatures,
 } from "@/data/homeContent";
 import FAQ from "@/components/FAQ.astro";
+import BeforeAfter from "@/components/BeforeAfter.astro";
+import MetricsSection from "@/components/MetricsSection.astro";
+import TestimonialSection from "@/components/TestimonialSection.astro";
+import ValueBar from "@/components/ValueBar.astro";
 ---
 
 <BaseLayout>
@@ -167,95 +166,16 @@ import FAQ from "@/components/FAQ.astro";
       </div>
     </div>
   </section>
-  <div class="border-y border-neutral-400 colored-stripe py-8">
-    <ul class="flex flex-wrap gap-x-6 font-bold place-content-center">
-      <li>Off-market process — no listing required</li>
-      <li>Licensed title company closings</li>
-      <li>As-is purchases</li>
-      <li>All 50 states</li>
-    </ul>
-  </div>
+  <ValueBar />
   <section class="colored-stripe full py-24">
-    <div class="grid lg:grid-cols-2 gap-16">
-      <div class="">
-        <p class="eyebrow">Trusted Home Buyers</p>
-        <h2 class="h2 mt-2">
-          Skip the stress and expense of listing with an agent
-        </h2>
-        <p class="mt-2">
-          JL Home Sale offers a straightforward, off-market way to sell your
-          house, putting you in control of the process. Here's why homeowners
-          across the country work with us.
-        </p>
-        <Button as="a" href="/how" class="mt-4">See How It Works</Button>
-      </div>
-      <div class="grid place-items-center">
-        <ul class="grid grid-cols-2 gap-8">
-          <li class="pl-4 flex flex-col border-l-2 border-lightSecAccent">
-            In closed transactions<span class="text-3xl">$38M+</span>
-          </li>
-          <li class="pl-4 flex flex-col border-l-2 border-lightSecAccent">
-            Years buying homes<span class="text-3xl">12</span>
-          </li>
-          <li class="pl-4 flex flex-col border-l-2 border-lightSecAccent">
-            Properties acquired<span class="text-3xl">310+</span>
-          </li>
-          <li class="pl-4 flex flex-col border-l-2 border-lightSecAccent">
-            Homeowners helped<span class="text-3xl">425+</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <MetricsSection />
   </section>
 
   <section class="pt-12 pb-24">
-    <h2 class="h2 text-center">What sellers say</h2>
-    <ul class="grid lg:grid-cols-3 gap-6 mt-12">
-      {
-        testimonials.map((t) => (
-          <TestimonialCard
-            quote={t.quote}
-            name={t.name}
-            location={t.location}
-          />
-        ))
-      }
-    </ul>
+    <TestimonialSection />
   </section>
   <section class="pb-24">
-    <div class="grid grid-cols-2">
-      <div>
-        <p class="eyebrow">Before / After</p>
-        <h2 class="h2 mt-2">Homes in any condition</h2>
-
-        <p class="mt-2">
-          We understand the housing market and make fair written offers on homes
-          in any condition when a property fits what we're looking for. No
-          repair lists, no financing delays — just a straightforward sale on
-          your schedule.
-        </p>
-        <small
-          >Want to know how we get to our number? <a href="/how"
-            >See how it works</a
-          > and why sellers choose JL Home Sale.</small
-        >
-      </div>
-
-      <div class="grid grid-cols-2 gap-4">
-        <figure class="rounded-lg border border-neutral-300">
-          <Image src={beforeHouse} alt="Before JL Home Sale" />
-          <figcaption class="pl-2 uppercase font-bold text-sm mt-3 self-center">
-            Before
-          </figcaption>
-        </figure>
-        <figure class="rounded-lg border border-neutral-400">
-          <Image src={afterHouse} alt="After JL Home Sale" />
-          <figcaption class="pl-2 uppercase font-bold text-sm mt-3 self-center">
-            After
-          </figcaption>
-        </figure>
-      </div>
-    </div>
+    <BeforeAfter />
   </section>
   <section class="colored-stripe pt-16 pb-24">
     <p class="eyebrow">Work With Us</p>

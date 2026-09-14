@@ -1,0 +1,50 @@
+---
+import BeforeAfter from "@/components/BeforeAfter.astro";
+import ConditionsSection from "@/components/ConditionsSection.astro";
+import FAQ from "@/components/FAQ.astro";
+import MetricsSection from "@/components/MetricsSection.astro";
+import OfferForm from "@/components/OfferForm.astro";
+import SeoPage from "@/components/SeoPage.astro";
+import StepsSection from "@/components/StepsSection.astro";
+import TestimonialSection from "@/components/TestimonialSection.astro";
+import ValueBar from "@/components/ValueBar.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout contentSpace="65">
+  <SeoPage slot="head" />
+  <section class="py-16 pb-24">
+    <h1 class="h1 text-center">Tell us about your property</h1>
+    <p class="text-center text-pretty mt-4">
+      Start with the address, phone, and email. Once you submit, we'll ask a few
+      details about the home so our team can prepare a written, no-obligation
+      offer.
+    </p>
+
+    <div class="mt-8">
+      <OfferForm />
+    </div>
+  </section>
+
+  <ValueBar />
+
+  <section class="colored-stripe py-16 pb-24">
+    <ConditionsSection />
+  </section>
+
+  <section class="py-16 pb-24">
+    <MetricsSection />
+  </section>
+  <section class="py-16 pb-24">
+    <BeforeAfter />
+  </section>
+  <section class="py-16 pb-24">
+    <StepsSection />
+  </section>
+  <section class="py-16 pb-24">
+    <TestimonialSection />
+  </section>
+  <section class="py-16 pb-24">
+    <FAQ />
+  </section>
+</BaseLayout>
