@@ -8,7 +8,6 @@ import Button from "@/components/Button.astro";
 
 import {
   situations,
-  features,
   contactFeatures,
 } from "@/data/homeContent";
 import FAQ from "@/components/FAQ.astro";
@@ -17,6 +16,8 @@ import MetricsSection from "@/components/MetricsSection.astro";
 import TestimonialSection from "@/components/TestimonialSection.astro";
 import ValueBar from "@/components/ValueBar.astro";
 import FeaturesSection from "@/components/FeaturesSection.astro";
+
+import heroImg from "@/assets/images/hero-home.jpg"
 ---
 
 <BaseLayout>
@@ -39,10 +40,9 @@ import FeaturesSection from "@/components/FeaturesSection.astro";
       <div
         class="hero-photo-shape h-[500px] sm:h-[590px] place-self-end relative"
       >
-        <!-- TODO Change this to Astro Image -->
-        <img
-          src="/src/assets/images/hero-home.jpg"
-          class="object-cover size-full mt-auto rounded-b-4xl"
+        <Image
+          src={heroImg}
+          class="object-cover size-full mt-auto rounded-b-4xl" height={600} alt="Two story house at sunset"
         />
       </div>
       <ul class="grid grid-cols-2 mt-2 h-full content-end justify-between">
