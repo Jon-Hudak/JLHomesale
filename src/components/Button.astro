@@ -4,26 +4,42 @@ interface Props {
   hasArrow?: boolean;
   href?: string;
   class?: string;
+  variant?: "primary" | "secondary" | "accent" | "outline";
 }
 
-const { 
-  as: Tag = "button", 
-  hasArrow = false, 
+const {
+  as: Tag = "button",
+  hasArrow = false,
   href,
-  class: className = "" 
+  variant = "primary",
+  class: className = "",
 } = Astro.props;
+
+const baseStyles =
+  "justify-self-start group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold transition-all duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 hover:cursor-pointer";
+
+const variantStyles: Record<string, string> = {
+  // Dark slate button
+  primary:
+    "bg-[#243545] text-white hover:bg-slate-700 focus-visible:outline-[#243545] shadow-sm",
+  // White card pill (best on dark/colored stripes)
+  secondary:
+    "bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 focus-visible:outline-white shadow-sm",
+  // High-converting emerald green (matches your offer calculator pill)
+  accent:
+    "bg-green-600 text-white hover:bg-green-500 focus-visible:outline-green-600 shadow-sm",
+  // Subtle transparent outline (good for secondary CTAs like "See How It Works")
+  outline:
+    "border-2 border-[#243545] text-[#243545] hover:bg-[#243545] hover:text-white focus-visible:outline-[#243545]",
+};
 ---
 
 <Tag
   href={Tag === "a" ? href : undefined}
-  class:list={[
-    "justify-self-start group inline-flex items-center justify-center gap-2 rounded-full bg-[#243545] px-8 py-4 text-base font-bold text-white transition-all duration-200 hover:-translate-y-1 hover:bg-slate-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#243545]",
-    className
-  ]}
+  class:list={[baseStyles, variantStyles[variant], className]}
 >
-
   <slot>Get Offer</slot>
-  
+
   {
     hasArrow && (
       <svg

@@ -16,7 +16,7 @@ const {contentSpace}=Astro.props;
   <body class="bg-bg dark:bg-dark-bg font-sans text-base">
     <Navigation />
     <div class="mx-auto">
-      <main class="min-h-[80vh] page-layout" style={contentSpace ? `--content-space: ${contentSpace}ch;` : undefined}>
+      <main class="min-h-[80vh] page-layout">
         <slot />
       </main>
       <Footer />

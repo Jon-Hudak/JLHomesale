@@ -63,7 +63,7 @@ import Button from "@/components/Button.astro";
 
   <!-- Consent Checkbox & Disclosure -->
   <div class="checkbox-group col-span-2">
-    <input type="checkbox" id="consentCheck" name="consentCheck" required />
+    <input class="" type="checkbox" id="consentCheck" name="consentCheck" required />
     <label for="consentCheck">
       I agree to be contacted by phone, text, or email about my property,
       including by automated means. Consent is not a condition of any sale. See
@@ -147,11 +147,18 @@ import Button from "@/components/Button.astro";
   }
 
   .checkbox-group input[type="checkbox"] {
-    margin-top: 0.25rem;
-    width: 1.1rem;
-    height: 1.1rem;
-    cursor: pointer;
-  }
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  color-scheme: light;
+  accent-color: var(--color-accent);
+  color: #fff; 
+  background-color: #fff;
+  margin-top: 0.25rem;
+  width: 1.15rem;
+  height: 1.15rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
 
   .checkbox-group label {
     font-weight: normal;

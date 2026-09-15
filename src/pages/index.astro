@@ -7,7 +7,6 @@ import FeatureCard from "@/components/FeatureCard.astro";
 import Button from "@/components/Button.astro";
 
 import {
-  testimonials,
   situations,
   features,
   contactFeatures,
@@ -17,11 +16,12 @@ import BeforeAfter from "@/components/BeforeAfter.astro";
 import MetricsSection from "@/components/MetricsSection.astro";
 import TestimonialSection from "@/components/TestimonialSection.astro";
 import ValueBar from "@/components/ValueBar.astro";
+import FeaturesSection from "@/components/FeaturesSection.astro";
 ---
 
 <BaseLayout>
   <SeoPage slot="head" />
-  <section class="grid lg:grid-cols-2 lg:breakout-right gap-x-8 mt-12 pb-16">
+  <section class="feature grid lg:grid-cols-2 lg:breakout-right gap-x-8 mt-12 pb-16">
     <div class="">
       <p class="uppercase eyebrow">Helping Homeowners Nationwide</p>
       <h1 class="h1 mt-4">Moving made simple</h1>
@@ -168,32 +168,22 @@ import ValueBar from "@/components/ValueBar.astro";
   </section>
   <ValueBar />
   <section class="colored-stripe full py-24">
-    <MetricsSection />
+    <div class="feature">
+
+      <MetricsSection />
+    </div>
   </section>
 
-  <section class="pt-12 pb-24">
+  <section class="feature pt-12 pb-24">
     <TestimonialSection />
   </section>
-  <section class="pb-24">
+  <section class="feature pb-24">
     <BeforeAfter />
   </section>
   <section class="colored-stripe pt-16 pb-24">
-    <p class="eyebrow">Work With Us</p>
-    <h2 class="h2 mt-2">Why homeowners choose JL Home Sale</h2>
-
-    <ul class="grid lg:grid-cols-3 gap-6 mt-8">
-      {
-        features.map((f) => (
-          <FeatureCard
-            description={f.description}
-            title={f.title}
-            iconUrl={f.iconUrl}
-          />
-        ))
-      }
-    </ul>
+    <FeaturesSection/>
   </section>
-  <section class="pt-16 pb-24">
+  <section class="feature pt-16 pb-24">
     <p class="eyebrow text-center">Situations We Help With</p>
     <h2 class="h2 mt-2 text-center">Every property has a story</h2>
     <p class="mt-2 text-center max-w-[65ch] mx-auto text-pretty">
@@ -210,12 +200,12 @@ import ValueBar from "@/components/ValueBar.astro";
   </section>
 
   <section
-    class="place-self-center w-full max-w-4xl px-4 pb-24 sm:px-6 lg:px-8"
+    class="feature place-self-center w-full max-w-4xl px-4 pb-16 sm:px-6 lg:px-8"
     aria-labelledby="faq-heading"
   >
     <FAQ />
   </section>
-  <section class="pt-16 pb-24">
+  <section class="feature pt-16 pb-24">
     <p class="eyebrow text-center">Contact us</p>
     <h2 class="h2 mt-2 text-center">We aim to make selling stress-free</h2>
     <p class="mt-4 text-center max-w-[65ch] mx-auto">
@@ -230,7 +220,7 @@ import ValueBar from "@/components/ValueBar.astro";
     <ul class="grid lg:grid-cols-3 gap-6 mt-8">
       {
         contactFeatures.map((s) => (
-          <FeatureCard title={s.title} description={s.description} />
+          <FeatureCard title={s.title} description={s.description} icon={s.icon} />
         ))
       }
     </ul>

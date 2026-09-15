@@ -1,19 +1,25 @@
 ---
 import ImgCard from "./ImgCard.astro";
+import { Image } from "astro:assets";
+
+import imgCondition1 from "@/assets/images/condition1.jpg"
+import imgCondition2 from "@/assets/images/condition2.jpg"
+import imgCondition3 from "@/assets/images/condition3.jpg"
+import imgCondition4 from "@/assets/images/condition4.jpg"
 ---
 
 <p class="eyebrow text-center">Properties We Review</p>
-<h2 class="h2 text-center">Every condition, every situation</h2>
-<p class="text-center">
+<h2 class="h2 text-center mt-2">Every condition, every situation</h2>
+<p class="text-center mt-4">
   Updated homes, houses that need real work, and occupied rentals all get the
   same review. Nothing has to be cleaned out or repaired before you send the
   address.
 </p>
 
-<ul class="grid md:grid-cols-2 lg:grid-cols-4 feature gap-6">
+<ul class="mt-8 grid md:grid-cols-2 lg:grid-cols-4 feature gap-6">
   <li>
     <ImgCard
-      ><img class="w-full" src="https://picsum.photos/300/200" alt="" />
+      ><Image class="w-full" src={imgCondition1} alt="A well maintained house on a sunny day." height={400}/>
       <div class="px-8 py-4">
         <h3 class="font-bold text-lg">Move-in ready</h3>
         <p class="text-sm">Ohio single-family, seller chose the closing date</p>
@@ -22,7 +28,7 @@ import ImgCard from "./ImgCard.astro";
   </li>
   <li>
     <ImgCard
-      ><img class="w-full" src="https://picsum.photos/300/200" alt="" />
+      ><Image class="w-full" src={imgCondition2} alt="A poorly maintained house" height={400}/>
       <div class="px-8 py-4">
         <h3 class="font-bold text-lg">Needed major work</h3>
         <p class="text-sm">Reviewed as it sits — roof and yard included</p>
@@ -31,7 +37,7 @@ import ImgCard from "./ImgCard.astro";
   </li>
   <li>
     <ImgCard
-      ><img class="w-full" src="https://picsum.photos/300/200" alt="" />
+      ><Image class="w-full" src={imgCondition3} alt="Three people signing paperwork over a kitchen table" height={400}/>
       <div class="px-8 py-4">
         <h3 class="font-bold text-lg">Straightforward paperwork</h3>
         <p class="text-sm">Closings handled by a licensed title company</p>
@@ -40,7 +46,7 @@ import ImgCard from "./ImgCard.astro";
   </li>
   <li>
     <ImgCard
-      ><img class="w-full" src="https://picsum.photos/300/200" alt="" />
+      ><Image class="w-full" src={imgCondition4} alt="A scenic 2-story home" height={400}/>
       <div class="px-8 py-4">
         <h3 class="font-bold text-lg">Occupied rental</h3>
         <p class="text-sm">

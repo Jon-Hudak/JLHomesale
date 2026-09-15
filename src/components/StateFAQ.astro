@@ -1,0 +1,64 @@
+---
+// src/data/stateFaqs.ts
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function getStateFaqs(stateName: string): FAQItem[] {
+  return [
+    {
+      question: `Do you buy houses anywhere in ${stateName}?`,
+      answer: `Yes. We review properties throughout ${stateName} — cities, suburbs, and rural areas alike — and close through licensed local title companies or real estate attorneys.`,
+    },
+    {
+      question: `What condition does my ${stateName} house need to be in?`,
+      answer: `Any condition. We review homes as-is, in whatever shape they are in when we look at the property.`,
+    },
+    {
+      question: `How is my offer calculated in ${stateName}?`,
+      answer: `We look at recent comparable sales near your property, the current condition of the home, repair costs, and local ${stateName} market conditions, then present a written offer you are free to decline.`,
+    },
+    {
+      question: "What does it cost to request an offer?",
+      answer:
+        "Nothing. Requesting an offer is free, there are no agent commissions on our purchase, and nothing is binding until a written agreement is signed by both sides.",
+    },
+    {
+      question: "How quickly can we close?",
+      answer:
+        "Many purchases close within a few weeks, but you choose the date. If you need more time to plan your move, we work around your schedule.",
+    },
+  ];
+}
+
+const { stateData } = Astro.props;
+const faqs = getStateFaqs(stateData.name);
+---
+
+<!-- State FAQ Section -->
+<section
+  class="place-self-center w-full max-w-4xl px-4 py-20 sm:px-6 lg:px-8 text-pretty"
+  aria-labelledby="state-faq-heading"
+>
+  <p class="eyebrow text-center">Frequently Asked Questions</p>
+  <h2 id="state-faq-heading" class="h2 mt-2 text-center text-3xl font-bold">
+    Selling your home in {stateData.name}
+  </h2>
+
+  <div class="mt-10 space-y-4">
+    {
+      faqs.map((faq) => (
+        <details class="group rounded-xl border border-slate-200 bg-white p-6 transition-colors open:bg-slate-50">
+          <summary class="flex cursor-pointer items-center justify-between font-bold text-slate-900 list-none">
+            <span class="text-lg">{faq.question}</span>
+            <span class="ml-4 shrink-0 transition-transform duration-200 group-open:rotate-45 text-2xl leading-none text-slate-400">
+              +
+            </span>
+          </summary>
+          <p class="mt-4 text-slate-600 leading-relaxed">{faq.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>

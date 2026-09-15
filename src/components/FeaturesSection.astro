@@ -1,0 +1,25 @@
+---
+import FeatureCard from "@/components/FeatureCard.astro";
+
+import {
+  features,
+ 
+} from "@/data/homeContent";
+---
+<div class="feature">
+
+      <p class="eyebrow">Work With Us</p>
+      <h2 class="h2 mt-2">Why homeowners choose JL Home Sale</h2>
+      
+      <ul class="grid lg:grid-cols-3 gap-6 mt-8">
+        {
+          features.map((f) => (
+            <FeatureCard
+            description={f.description}
+            title={f.title}
+            icon ={f.icon}
+            />
+          ))
+        }
+    </ul>
+  </div>

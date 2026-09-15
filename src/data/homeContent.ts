@@ -98,53 +98,53 @@ export const features = [
   {
     title: "As-is condition",
     description: "We review houses as-is, in whatever condition they are in today.",
-    iconUrl: "" // Add your image paths here later
+    icon: "wrench"
   },
   {
     title: "We do the work",
     description: "From paperwork to legal complexities, and even moving assistance, we've got you covered.",
-    iconUrl: "" 
+    icon: "people" 
   },
   {
     title: "No commissions",
     description: "No agent commissions or listing fees on our purchase — the amount in your written offer is the amount discussed at closing.",
-    iconUrl: ""
+    icon: "receipt"
   },
   {
     title: "Close on your schedule",
     description: "Need a quick closing or a few extra weeks to find your next place? You pick the date.",
-    iconUrl: ""
+    icon: "clock"
   },
   {
     title: "Nationwide service",
     description: "We work with homeowners in all 50 states and close through licensed local title companies and attorneys.",
-    iconUrl: ""
+    icon: "location"
   }
 ];
 export const contactFeatures=[
      {
     title: "Speed",
     description: "Many of our purchases close in a matter of weeks, not months.",
-    iconUrl: ""
+    icon: "speed"
   },
      {
     title: "Simplicity",
     description: "A short, private process instead of listings, open houses, and repair negotiations.",
-    iconUrl: ""
+    icon: "sparkle"
   },
      {
     title: "No commissions",
     description: "No agent commissions or listing fees on our purchase.",
-    iconUrl: ""
+    icon: "receipt"
   },
      {
     title: "Flexibility",
     description: "Choose a closing date that works for you.",
-    iconUrl: ""
+    icon: "calendar"
   },
      {
     title: "Trustworthy transactions",
     description: "Every deal is processed through licensed professionals for security and peace of mind.",
-    iconUrl: ""
+    icon: "shield"
   },
 ]

@@ -1,0 +1,219 @@
+---
+// src/pages/locations/[state].astro
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SeoPage from "@/components/SeoPage.astro";
+import OfferForm from "@/components/OfferForm.astro";
+import Button from "@/components/Button.astro";
+import { states, type StateData } from "@/data/states";
+import ValueBar from "@/components/ValueBar.astro";
+import StepsSection from "@/components/StepsSection.astro";
+import FeaturesSection from "@/components/FeaturesSection.astro";
+import StateFAQ from "@/components/StateFAQ.astro";
+
+export async function getStaticPaths() {
+  return states.map((state) => ({
+    params: { state: state.slug },
+    props: { stateData: state },
+  }));
+}
+
+interface Props {
+  stateData: StateData;
+}
+
+const { stateData } = Astro.props;
+---
+
+<BaseLayout>
+  <SeoPage
+    slot="head"
+    title={`Sell Your House Fast in ${stateData.name} | JL Home Sale`}
+    description={`Sell your property as-is in ${stateData.name}. No agent commissions, no repairs, close on your timeline.`}
+  />
+
+
+  <section class="page-layout-subgrid mt-12 pb-24">
+    <div class="gap-8 items-center">
+      <div>
+        <p class="eyebrow text-center">
+          {stateData.name} ({stateData.abbreviation})
+        </p>
+        <h1
+          class="h1 mt-4 text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight text-center text-pretty"
+        >
+          {stateData.headline || `We buy houses in ${stateData.name}`}
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 text-pretty text-center">
+          Sell your {stateData.name} property as-is, with no agent commissions on
+          our purchase. Start with the address and a specialist will follow up with
+          a written offer you are free to decline.
+        </p>
+        <div class="mt-8">
+          <OfferForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ValueBar />
+
+  <section class="feature pt-16 pb-16">
+    <div class="grid grid-cols-2 gap-8 mt-8">
+      <div class="flow">
+        <h2 class="h2 text-pretty">
+          Selling a house as-is in {stateData.name}
+        </h2>
+
+        <p>
+          Listing a home in {stateData.name} usually means repairs, inspections, showings,
+          and waiting on buyer financing. We take a different path: we review the
+          property in its current condition, present a written offer, and close through
+          a licensed local title company or real estate attorney familiar with {
+            stateData.name
+          } closings.
+        </p>
+
+        <p>
+          We are a real estate investment company, not a licensed brokerage. We
+          may purchase a property directly or assign the contract to another
+          buyer, and nothing is binding until a written agreement is signed.
+        </p>
+      </div>
+      <div>
+        <ul class="space-y-4">
+          <li
+            class="flex items-center gap-4 border border-neutral-300 rounded-lg p-4"
+          >
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >Homes reviewed statewide across Alabama
+          </li>
+          <li
+            class="flex items-center gap-4 border border-neutral-300 rounded-lg p-4"
+          >
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >Any condition — inherited, vacant, tenant-occupied, or deferred
+            maintenance
+          </li>
+          <li
+            class="flex items-center gap-4 border border-neutral-300 rounded-lg p-4"
+          >
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >No agent commissions or listing fees on our purchase
+          </li>
+          <li
+            class="flex items-center gap-4 border border-neutral-300 rounded-lg p-4"
+          >
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >You choose the closing date
+          </li>
+          <li
+            class="flex items-center gap-4 border border-neutral-300 rounded-lg p-4"
+          >
+            <span
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >Written offer with the numbers explained
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature pb-24">
+    <StepsSection />
+  </section>
+  <section class="colored-stripe pt-16 pb-24">
+    <FeaturesSection />
+  </section>
+  <section class="feature pb-8">
+    <StateFAQ stateData={stateData} />
+  </section>
+  <section>
+    <h2 class="h2 text-pretty text-center">
+      See what your {stateData.name} home could sell for
+    </h2>
+    <p class="mt-4 mb-8 text-center">
+      Enter the property address to get started. A specialist reviews your
+      property and follows up with a written offer — no obligation to accept.
+    </p>
+    <OfferForm />
+  </section>
+</BaseLayout>
