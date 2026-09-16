@@ -188,7 +188,7 @@ body{
 
 
 .h1{
-  @apply font-sans text-5xl font-bold;
+  @apply font-sans text-5xl font-bold text-pretty;
 }
 .h2{
   @apply text-3xl font-bold;

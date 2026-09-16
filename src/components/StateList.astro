@@ -1,0 +1,40 @@
+---
+import { states } from "@/data/states";
+---
+
+<div class="page-layout pt-16 pb-24 bg-slate-300">
+  <h2 class="h2">We buy houses in all 50 states</h2>
+  <ul
+    class="columns-1 sm:columns-2 md:columns-3 xl:columns-4 full mx-8 xl:mx-48 space-y-2 mt-8"
+  >
+    {
+      states.map((state) => (
+        <li class="gap-4 place-items-center border border-neutral-300 rounded-lg text-sm bg-white hover:bg-neutral-200 transition-all group shadow hover:-translate-y-0.5">
+          <a class="w-full flex p-2 " href={`/${state.slug}`}>We Buy Houses in {state.name}
+          <span class="ml-auto">
+            <svg
+              
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-up-right size-4 shrink-0 text-accent opacity-70 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100 stroke-lightSecAccent"
+              aria-hidden="true"
+              data-tsd-source="/src/components/StateLinks.tsx:38:21"
+            >
+              <>
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </>
+            </svg>
+          </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

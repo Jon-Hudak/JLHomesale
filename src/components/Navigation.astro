@@ -5,25 +5,183 @@ import Button from "@/components/Button.astro";
 ---
 
 <header
-  class="page-layout items-center justify-between p-3 pb-8 sm:p-6 bg-accent sticky top-0 z-100"
+  class="page-layout items-center justify-between p-3 pb-4 sm:pb-8 sm:p-6 bg-accent sticky top-0 z-40"
 >
-  <div class="flex items-center justify-between">
+  <div class="flex items-center justify-between feature">
+    <!-- Logo -->
     <a
       href="/"
       class="font-sans text-lg font-semibold text-white sm:text-2xl bg-accent tracking-wide"
-      ><span class="font-extralight">JL</span><span class="font-semibold">
-        Home Sale</span
-      ></a
     >
-    <nav>
+      <span class="font-extralight">JL </span>
+      <span class="font-semibold">Home Sale</span>
+    </a>
+
+    <!-- Desktop Navigation (hidden on mobile, visible on md+) -->
+    <nav class="hidden md:block" aria-label="Desktop Navigation">
       <ul
-        class="flex list-none items-center gap-2 p-0 sm:gap-4 text-white font-bold place-items-center"
+        class="flex list-none items-center gap-2 p-0 sm:gap-4 text-white font-bold place-items-center text-sm"
       >
-        <li class="max-h-min self-center">
-         <a href="tel:+18666986169">(866) 698-6169</a>
-        </li>
-        <li><Button variant="accent" href="/sell">Sell Your House</Button></li>
+        <li>
+  <a href="/" class="group relative inline-block py-2 text-white transition-colors duration-200">
+    <span>Home</span>
+    <span class="absolute bottom-1 left-0 h-[2px] w-0 bg-lightSecAccent transition-all duration-300 ease-out group-hover:w-full"></span>
+  </a>
+</li>
+<li>
+  <a href="/sell" class="group relative inline-block py-2 text-white transition-colors duration-200">
+    <span>Sell Your Home</span>
+    <span class="absolute bottom-1 left-0 h-[2px] w-0 bg-lightSecAccent transition-all duration-300 ease-out group-hover:w-full"></span>
+  </a>
+</li>
+<li>
+  <a href="/how" class="group relative inline-block py-2 text-white transition-colors duration-200">
+    <span>How It Works</span>
+    <span class="absolute bottom-1 left-0 h-[2px] w-0 bg-lightSecAccent transition-all duration-300 ease-out group-hover:w-full"></span>
+  </a>
+</li>
+<li>
+  <a href="/cash" class="group relative inline-block py-2 text-white transition-colors duration-200">
+    <span>Get Your Offer Now</span>
+    <span class="absolute bottom-1 left-0 h-[2px] w-0 bg-lightSecAccent transition-all duration-300 ease-out group-hover:w-full"></span>
+  </a>
+</li>
+<li class="">
+  <a href="tel:+18666986169" class="group relative inline-block py-2 text-white/90 font-bold transition-colors duration-200">
+    <span>(866) 698-6169</span>
+    <span class="absolute bottom-1 left-0 h-[2px] w-0 bg-lightSecAccent transition-all duration-300 ease-out group-hover:w-full"></span>
+  </a>
+</li>
       </ul>
     </nav>
+
+    <!-- Mobile Hamburger Button -->
+    <button
+      id="menu-toggle-btn"
+      type="button"
+      aria-label="Open main menu"
+      aria-expanded="false"
+      class="md:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-white rounded-md"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        ></path>
+      </svg>
+    </button>
   </div>
 </header>
+
+<!-- Mobile Backdrop Overlay -->
+<div
+  id="menu-backdrop"
+  class="fixed inset-0 bg-black/50 z-40 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
+  aria-hidden="true"
+></div>
+
+<!-- Mobile Sidebar Drawer -->
+<div
+  id="mobile-menu"
+  class="fixed top-0 right-0 bottom-0 w-64 sm:w-80 bg-accent z-50 shadow-xl flex flex-col p-6 translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+  aria-label="Mobile Navigation"
+>
+  <!-- Drawer Header / Close Button -->
+  <div class="flex items-center justify-between pb-6 border-b border-white/20">
+    <span class="text-white font-semibold text-lg">Menu</span>
+    <button
+      id="menu-close-btn"
+      type="button"
+      aria-label="Close menu"
+      class="text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Nav Links -->
+  <nav class="mt-6 flex-1">
+    <ul class="flex flex-col gap-4 text-white font-semibold text-base">
+      <li>
+        <a href="/" class="block py-2 hover:opacity-80 transition-opacity">Home</a>
+      </li>
+      <li>
+        <a href="/sell" class="block py-2 hover:opacity-80 transition-opacity">Sell Your Home</a>
+      </li>
+      <li>
+        <a href="/how" class="block py-2 hover:opacity-80 transition-opacity">How It Works</a>
+      </li>
+      <li>
+        <a href="/cash" class="block py-2 hover:opacity-80 transition-opacity">Get Your Offer Now</a>
+      </li>
+      <li class="pt-4 border-t border-white/20">
+        <a href="tel:+18666986169" class="block py-2 text-white/90 underline font-bold">
+          (866) 698-6169
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<script>
+  function setupMobileMenu() {
+    const toggleBtn = document.getElementById("menu-toggle-btn");
+    const closeBtn = document.getElementById("menu-close-btn");
+    const backdrop = document.getElementById("menu-backdrop");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const navLinks = mobileMenu?.querySelectorAll("a");
+
+    const openMenu = () => {
+      mobileMenu?.classList.remove("translate-x-full");
+      backdrop?.classList.remove("opacity-0", "pointer-events-none");
+      document.body.classList.add("overflow-hidden");
+      toggleBtn?.setAttribute("aria-expanded", "true");
+    };
+
+    const closeMenu = () => {
+      mobileMenu?.classList.add("translate-x-full");
+      backdrop?.classList.add("opacity-0", "pointer-events-none");
+      document.body.classList.remove("overflow-hidden");
+      toggleBtn?.setAttribute("aria-expanded", "false");
+    };
+
+    toggleBtn?.addEventListener("click", openMenu);
+    closeBtn?.addEventListener("click", closeMenu);
+    backdrop?.addEventListener("click", closeMenu);
+
+    // Close menu when a link inside the drawer is clicked
+    navLinks?.forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    // Close on escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+  }
+
+  // Runs on initial load and on Astro View Transitions navigation
+  setupMobileMenu();
+  document.addEventListener("astro:page-load", setupMobileMenu);
+</script>
