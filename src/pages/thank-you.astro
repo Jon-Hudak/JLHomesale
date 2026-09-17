@@ -1,0 +1,52 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro"; // Adjust path to your base layout
+import Button from "@/components/Button.astro";
+---
+
+<BaseLayout title="Request Received | JL Home Sale">
+  <main class="min-h-[80vh] flex items-center justify-center bg-neutral-100 px-4 py-16">
+    <div class="max-w-2xl w-full bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 text-center">
+      
+      <!-- Checkmark Icon -->
+      <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+        <svg
+          class="w-8 h-8 text-green-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M5 13l4 4L19 7"
+          ></path>
+        </svg>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-3 tracking-tight">
+        Offer Request Received!
+      </h1>
+      <p class="text-slate-600 text-base sm:text-lg mb-10 leading-relaxed">
+        Thank you for submitting your property details. Our acquisitions team has begun researching recent comps in your neighborhood.
+      </p>
+
+
+      <!-- Urgent / Need Faster Help CTA -->
+      <div class="border-t border-slate-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-left">
+          <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Need an offer faster?</p>
+          <a href="tel:+18666986169" class="text-lg font-bold text-[#243545] hover:text-green-600 transition-colors">
+            (866) 698-6169
+          </a>
+        </div>
+        <Button as="a" href="/" variant="outline" class="w-full sm:w-auto">
+          Return Home
+        </Button>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
