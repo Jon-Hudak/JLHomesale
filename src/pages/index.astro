@@ -22,10 +22,10 @@ import heroImg from "@/assets/images/hero-home.jpg"
 
 <BaseLayout>
   <SeoPage slot="head" />
-  <section class="full mx-64 grid lg:grid-cols-2 lg:breakout-right gap-x-8 mt-12 pb-16">
+  <section class="full mx-8 xl:mx-64 grid lg:grid-cols-2 lg:breakout-right gap-x-8 gap-y-4 mt-12 pb-16">
     <div class="">
       <p class="uppercase eyebrow">Helping Homeowners Nationwide</p>
-      <h1 class="font-bold mt-4 text-3xl">Selling your home has never been easier</h1>
+      <h1 class="font-bold mt-4 text-3xl text-pretty">Selling your home has never been easier</h1>
 
       <p class="mt-4 text-lg text-pretty">
         Sell your property as-is, with no agent commissions on our purchase.
@@ -190,13 +190,14 @@ import heroImg from "@/assets/images/hero-home.jpg"
       Most homeowners who contact us aren't in a rush to move — they just want a
       straightforward path that doesn't involve contractors and open houses.
     </p>
-    <ul class="grid lg:grid-cols-3 gap-6 mt-8">
+    <ul class="grid md:grid-cols-3 gap-6 mt-8 text-pretty">
       {
         situations.map((s) => (
           <FeatureCard title={s.title} description={s.description} />
         ))
       }
     </ul>
+    <div><a href="/situations" class="a text-center mt-4 block">Read more about each situation</a></div>
   </section>
 
   <section
@@ -217,7 +218,7 @@ import heroImg from "@/assets/images/hero-home.jpg"
       class="mt-4 text-3xl underline font-semibold text-center justify-self-center block"
       >(866) 698-6169</a
     >
-    <ul class="grid lg:grid-cols-3 gap-6 mt-8">
+    <ul class="grid md:grid-cols-3 gap-6 mt-8">
       {
         contactFeatures.map((s) => (
           <FeatureCard title={s.title} description={s.description} icon={s.icon} />

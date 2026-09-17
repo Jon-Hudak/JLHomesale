@@ -197,6 +197,10 @@ body{
   @apply text-xl font-bold;
 }
 
+a.a{
+  @apply underline font-semibold
+}
+
 .flow > * + * {
   margin-block-start: var(--flow-space, 1em);
 }

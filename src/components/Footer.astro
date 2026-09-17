@@ -1,13 +1,97 @@
 ---
-import { SITE } from "@/siteConfig";
-import ThemeToggle from "@/components/ThemeToggle.astro";
-import StateList from "@/components/StateList.astro";
-
-const year = new Date().getFullYear();
+const currentYear = new Date().getFullYear();
 ---
 
-<footer
-  class="mx-auto bg-accent flex w-full flex-col items-start gap-6 pt-16 pb-24 sm:flex-row sm:items-center sm:justify-between sm:gap-8"
->
- 
+<footer class="bg-accent text-white">
+  <div class="max-w-7xl mx-auto px-6 py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+      
+      <!-- Brand & About -->
+      <div class="md:col-span-6 lg:col-span-6 space-y-4">
+        <a href="/" class="inline-block text-3xl font-semibold tracking-tight">
+          <span class="font-light">JL</span> Home Sale
+        </a>
+        <p class="text-slate-300 text-sm md:text-base leading-relaxed max-w-md">
+          We work with homeowners in all 50 states who want to sell as-is. You choose the closing date, sell as-is, and pay no agent commissions on our purchase.
+        </p>
+        <div class="pt-2">
+          <a 
+            href="tel:+18666986169" 
+            class="inline-flex items-center gap-2 text-emerald-400 font-bold text-base hover:text-emerald-300 transition-colors"
+          >
+            <!-- Phone Icon -->
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z" />
+            </svg>
+            <span>(866) 698-6169</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Company Links -->
+      <div class="md:col-span-3 lg:col-span-3">
+        <h3 class="font-bold text-white mb-4 text-base">Company</h3>
+        <ul class="space-y-3 text-sm text-slate-300">
+          <li>
+            <a href="/how" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>How it works</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="/situations" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>Situations we help with</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="/where-we-buy" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>Where we buy</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="/faq" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>FAQ</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get Started Links -->
+      <div class="md:col-span-3 lg:col-span-3">
+        <h3 class="font-bold text-white mb-4 text-base">Get started</h3>
+        <ul class="space-y-3 text-sm text-slate-300">
+          <li>
+            <a href="/sell" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>Sell your home</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="/privacy" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>Privacy policy</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+          <li>
+            <a href="/terms" class="relative group inline-block py-0.5 hover:text-white transition-colors">
+              <span>Terms of use</span>
+              <span class="absolute bottom-0 left-0 w-0 h-[2px] bg-white transition-all duration-300 ease-out group-hover:w-full"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="border-t border-slate-600">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-xs leading-relaxed text-slate-400">
+      <p>
+        &copy; {currentYear} JL Home Sale. We are a real estate investment company, not a licensed brokerage, and we do not provide legal, tax, or financial advice. Offers are based on property condition, location, and market data, and are always presented with no obligation to accept.
+      </p>
+    </div>
+  </div>
 </footer>

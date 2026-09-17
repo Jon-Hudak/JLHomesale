@@ -1,0 +1,142 @@
+---
+import FAQ from "@/components/FAQ.astro";
+import Card from "@/components/Card.astro";
+import OfferForm from "@/components/OfferForm.astro";
+import SeoPage from "@/components/SeoPage.astro";
+import StepsSection from "@/components/StepsSection.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <SeoPage slot="head" />
+  <section class="pt-16 pb-24">
+    <h1 class="h font-bold text-4xl text-pretty text-center">
+      Real stories. Straightforward solutions.
+    </h1>
+    <p class="mt-4 text-center">
+      Every property and every move is different. See how an off-market sale can
+      help when a traditional listing is not the right fit.
+    </p>
+    <div class="max-w-2xl mx-auto mt-8">
+      <OfferForm />
+    </div>
+  </section>
+
+  <section class="feature pb-24">
+    <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <Card as="li">
+      <div class="flow">
+        <h3 class="h3">Inherited or probate property</h3>
+
+        <p>
+          Out-of-state heirs, estate timelines, and homes full of belongings —
+          we work with the estate's attorney and buy as-is.
+        </p>
+        <p>
+          Estates often involve heirs in different states, a house full of
+          belongings, and a court timeline. We coordinate with the estate's
+          attorney, buy the property as-is, and can wait for letters
+          testamentary before closing.
+        </p>
+        <p>
+          You don't need to clear the house. Take what matters to the family and
+          leave the rest.
+        </p>
+      </div>
+    </Card>
+    <Card as="li">
+      <div class="flow">
+        <h3 class="h3">Tired landlord</h3>
+
+        <p>
+          Occupied units, non-paying tenants, or a portfolio you're ready to
+          exit. We can purchase with tenants in place.
+        </p>
+        <p>
+          Turnovers, repair calls, and non-paying tenants add up. We purchase
+          occupied single-family homes and small multifamily properties and
+          honor existing leases, so you don't have to remove anyone to sell.
+        </p>
+        <p>
+          Portfolios across multiple states can be handled under one closing
+          schedule.
+        </p>
+      </div>
+    </Card>
+    <Card as="li">
+      <div class="flow">
+        <h3 class="h3">Relocation or new job</h3>
+        <p>
+          When the start date is fixed, a firm closing date matters more than
+          squeezing out the last dollar.
+        </p>
+        <p>
+          When a start date is fixed, a firm target closing date is worth more
+          than the last few percent of sale price. Pick your date and we'll
+          build the schedule around it.
+        </p>
+      </div>
+    </Card>
+    <Card as="li">
+      <div class="flow">
+        <h3 class="h3">Home needs major repairs</h3>
+        <p>
+          Foundation, roof, fire or water damage, or a failed inspection that
+          ended a retail contract.
+        </p>
+        <p>
+          Roof, foundation, plumbing, fire or water damage, or an inspection
+          report that ended a retail contract — none of it disqualifies a
+          property. We price the work into the offer instead of asking you to do
+          it.
+        </p>
+      </div>
+    </Card>
+    <Card as="li">
+      <div class="flow">
+        <h3 class="h3">Divorce or life change</h3>
+        <p>
+          A clean, documented sale with a title company keeps the process simple
+          when two parties need to move on.
+        </p>
+        <p>
+          A documented sale through a licensed title company gives both parties
+          a clean record of the transaction and a defined timeline.
+        </p>
+        <p>
+          We are not attorneys and do not provide legal advice; we work
+          alongside whoever is advising you.
+        </p>
+      </div>
+    </Card>
+    <Card as="li">
+      <div class="flow">
+        <h3 class="h3">Behind on payments</h3>
+        <p>
+          If you're facing a payment problem, we can look at options with you.
+          We are not attorneys and never charge upfront fees.
+        </p>
+        <p>
+          If you're behind, time matters. We can review the property with you
+          and explain the options we see. We never charge upfront fees and we
+          can't promise any particular outcome with your lender.
+        </p>
+      </div>
+    </Card>
+</ul>
+  </section>
+</BaseLayout>
+
+<section class="colored-stripe pt-16 pb-24">
+  <h2 class="h2 text-center">See what your home could sell for</h2>
+  <p class="text-center mt-4">
+    Enter the property address to get started. A specialist reviews your
+    property and follows up with a written offer — no obligation to accept.
+  </p>
+  <div class="mt-8">
+    <OfferForm />
+    <small class="block text-center mt-2">
+      No obligation. Homes reviewed as-is.
+    </small>
+  </div>
+</section>

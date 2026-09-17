@@ -51,5 +51,60 @@ import Favicons from "@/components/Favicons.astro";
       document.documentElement.classList.remove("dark");
     }
   </script>
+
+ <!-- UTM Script: -->
+  <script>
+    var queryForm = function (e) {
+      var t = !(!e || !e.reset) && e.reset,
+        n = window.location.toString().split("?");
+      if (n.length > 1) {
+        var o = n[1].split("&");
+        for (s in o) {
+          var r = o[s].split("=");
+          (t || null === sessionStorage.getItem(r[0])) &&
+            sessionStorage.setItem(r[0], decodeURIComponent(r[1]));
+        }
+      }
+      for (
+        var i = document.querySelectorAll(
+            "input[type=hidden], input[type=text]",
+          ),
+          s = 0;
+        s < i.length;
+        s++
+      ) {
+        var a = sessionStorage.getItem(i[s].name);
+        a && (document.getElementsByName(i[s].name)[0].value = a);
+      }
+    };
+    setTimeout(function () {
+      queryForm();
+    }, 3e3);
+
+</script>
+<script>
+  function captureGCLID() {
+    var params = new URLSearchParams(window.location.search);
+    var gclid = params.get("gclid");
+    
+    if (!gclid) {
+      gclid = sessionStorage.getItem("gclid");
+    }
+
+    if (gclid) {
+      sessionStorage.setItem("gclid", gclid);
+
+      var field = document.getElementById("gclid_field");
+
+      if (field) field.value = gclid;
+    }
+  }
+
+  window.addEventListener("load", captureGCLID);
+</script>
+
+
+
+
   <slot />
 </head>

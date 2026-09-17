@@ -1,11 +1,13 @@
 ---
 import { faqs } from "@/data/homeContent"; 
+
+const {hasHeader=true} = Astro.props;
 ---
 
 
-    <h2 id="faq-heading" class="h2 text-center">
+    {hasHeader&&<h2 id="faq-heading" class="h2 text-center">
     Frequently Asked Questions
-  </h2>
+  </h2>}
   <p class="text-center mt-4 max-w-[65ch] mx-auto">Straight answers to what homeowners ask us most. If something here is not covered, call us and we will walk you through it before you decide anything.</p>
   
   <div class="space-y-4 mt-8">

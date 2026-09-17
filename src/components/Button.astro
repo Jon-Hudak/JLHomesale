@@ -2,41 +2,37 @@
 interface Props {
   as?: "button" | "a";
   hasArrow?: boolean;
-  href?: string;
-  class?: string;
   variant?: "primary" | "secondary" | "accent" | "outline";
+  // Allows any other standard HTML attributes to pass through
+  [key: string]: any; 
 }
 
 const {
   as: Tag = "button",
   hasArrow = false,
-  href,
   variant = "primary",
   class: className = "",
+  ...rest // This captures id, type, href, target, etc.
 } = Astro.props;
 
 const baseStyles =
-  "justify-self-start group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold transition-all duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 hover:cursor-pointer";
+  "justify-self-start group inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-base font-bold transition-all duration-200 hover:-translate-y-1 focus-visible:outline-2 focus-visible:outline-offset-2 hover:cursor-pointer w-full md:w-min text-nowrap";
 
 const variantStyles: Record<string, string> = {
-  // Dark slate button
   primary:
     "bg-[#243545] text-white hover:bg-slate-700 focus-visible:outline-[#243545] shadow-sm",
-  // White card pill (best on dark/colored stripes)
   secondary:
     "bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 focus-visible:outline-white shadow-sm",
-  // High-converting emerald green (matches your offer calculator pill)
   accent:
     "bg-green-600 text-white hover:bg-green-500 focus-visible:outline-green-600 shadow-sm",
-  // Subtle transparent outline (good for secondary CTAs like "See How It Works")
   outline:
     "border-2 border-[#243545] text-[#243545] hover:bg-[#243545] hover:text-white focus-visible:outline-[#243545]",
 };
 ---
 
 <Tag
-  href={Tag === "a" ? href : undefined}
   class:list={[baseStyles, variantStyles[variant], className]}
+  {...rest}
 >
   <slot>Get Offer</slot>
 
