@@ -2,9 +2,13 @@
 import Button from "@/components/Button.astro";
 ---
 
-<div class="max-w-xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl p-6 sm:p-8">
+<div
+  class="max-w-xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl p-6 sm:p-8"
+>
   <div class="mb-6 border-b border-slate-100 pb-5">
-    <span class="inline-block text-xs font-bold uppercase tracking-wider text-green-700 bg-green-50 px-2.5 py-1 rounded-md mb-2">
+    <span
+      class="inline-block text-xs font-bold uppercase tracking-wider text-green-700 bg-green-50 px-2.5 py-1 rounded-md mb-2"
+    >
       Step 2 of 2
     </span>
     <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 text-pretty">
@@ -18,7 +22,13 @@ import Button from "@/components/Button.astro";
   <form id="cashOfferForm" novalidate class="space-y-4">
     <!-- Bot Trap: Honeypot -->
     <div class="hidden" aria-hidden="true">
-      <input type="text" name="company_website" id="company_website" tabindex="-1" autocomplete="off" />
+      <input
+        type="text"
+        name="company_website"
+        id="company_website"
+        tabindex="-1"
+        autocomplete="off"
+      />
     </div>
 
     <!-- Hidden Attribution Fields -->
@@ -32,7 +42,10 @@ import Button from "@/components/Button.astro";
     <!-- Step 1 Carryover: Property Address -->
     <div>
       <div class="flex items-center justify-between mb-1">
-        <label for="propertyAddress" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider">
+        <label
+          for="propertyAddress"
+          class="block font-semibold text-xs text-slate-700 uppercase tracking-wider"
+        >
           Property Address
         </label>
         <span class="text-xs text-slate-400">Step 1 Completed</span>
@@ -44,13 +57,18 @@ import Button from "@/components/Button.astro";
         required
         class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent"
       />
-      <p id="addressError" class="hidden text-xs text-red-600 mt-1">Please enter your property address.</p>
+      <p id="addressError" class="hidden text-xs text-red-600 mt-1">
+        Please enter your property address.
+      </p>
     </div>
 
     <!-- First Name & Last Name -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
-        <label for="firstName" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+        <label
+          for="firstName"
+          class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1"
+        >
           First Name <span class="text-red-500">*</span>
         </label>
         <input
@@ -62,11 +80,16 @@ import Button from "@/components/Button.astro";
           placeholder="Jane"
           class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
         />
-        <p id="firstNameError" class="hidden text-xs text-red-600 mt-1">First name is required.</p>
+        <p id="firstNameError" class="hidden text-xs text-red-600 mt-1">
+          First name is required.
+        </p>
       </div>
 
       <div>
-        <label for="lastName" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+        <label
+          for="lastName"
+          class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1"
+        >
           Last Name <span class="text-red-500">*</span>
         </label>
         <input
@@ -78,14 +101,19 @@ import Button from "@/components/Button.astro";
           placeholder="Doe"
           class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
         />
-        <p id="lastNameError" class="hidden text-xs text-red-600 mt-1">Last name is required.</p>
+        <p id="lastNameError" class="hidden text-xs text-red-600 mt-1">
+          Last name is required.
+        </p>
       </div>
     </div>
 
     <!-- Phone & Email -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
-        <label for="phoneNumber" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+        <label
+          for="phoneNumber"
+          class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1"
+        >
           Phone Number <span class="text-red-500">*</span>
         </label>
         <input
@@ -93,16 +121,21 @@ import Button from "@/components/Button.astro";
           id="phoneNumber"
           name="phoneNumber"
           required
-          maxlength="14"
+          maxlength="17"
           autocomplete="tel"
           placeholder="(555) 555-5555"
           class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
         />
-        <p id="phoneError" class="hidden text-xs text-red-600 mt-1">Enter a valid 10-digit number.</p>
+        <p id="phoneError" class="hidden text-xs text-red-600 mt-1">
+          Enter a valid 10-digit phone number.
+        </p>
       </div>
 
       <div>
-        <label for="emailAddress" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+        <label
+          for="emailAddress"
+          class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1"
+        >
           Email Address <span class="text-red-500">*</span>
         </label>
         <input
@@ -114,7 +147,9 @@ import Button from "@/components/Button.astro";
           placeholder="jane@example.com"
           class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
         />
-        <p id="emailError" class="hidden text-xs text-red-600 mt-1">Enter a valid email address.</p>
+        <p id="emailError" class="hidden text-xs text-red-600 mt-1">
+          Enter a valid email address.
+        </p>
       </div>
     </div>
 
@@ -126,15 +161,23 @@ import Button from "@/components/Button.astro";
           id="consentCheck"
           name="consentCheck"
           required
-          class="shrink-0 mt-1 h-8 w-8 md:h-4 md:w-4 rounded border-slate-300 text-accent  focus:ring-accent "
+          class="shrink-0 mt-1 h-8 w-8 md:h-4 md:w-4 rounded border-slate-300 text-accent focus:ring-accent"
         />
         <label for="consentCheck" class="text-xs text-slate-600 leading-normal">
-          I agree to be contacted by phone, text, or email about my property, including by automated means. Consent is not a condition of sale. See our 
-          <a href="/terms" target="_blank" class="underline text-slate-800">Terms of Use</a> and 
-          <a href="/privacy" target="_blank" class="underline text-slate-800">Privacy Policy</a>.
+          I agree to be contacted by phone, text, or email about my property,
+          including by automated means. Consent is not a condition of sale. See
+          our
+          <a href="/terms" target="_blank" class="underline text-slate-800"
+            >Terms of Use</a
+          > and
+          <a href="/privacy" target="_blank" class="underline text-slate-800"
+            >Privacy Policy</a
+          >.
         </label>
       </div>
-      <p id="consentError" class="hidden text-xs text-red-600 mt-1">You must agree before proceeding.</p>
+      <p id="consentError" class="hidden text-xs text-red-600 mt-1">
+        You must agree before proceeding.
+      </p>
     </div>
 
     <!-- Submit CTA -->
@@ -153,14 +196,14 @@ import Button from "@/components/Button.astro";
 </div>
 
 <style>
-    .checkbox-group input[type="checkbox"] {
-  appearance: auto;
-  -webkit-appearance: checkbox;
-  color-scheme: light;
-  accent-color: var(--color-accent); /* or your preferred hex color */
-  background-color: #fff;
-  color: #fff;
-}
+  .checkbox-group input[type="checkbox"] {
+    appearance: auto;
+    -webkit-appearance: checkbox;
+    color-scheme: light;
+    accent-color: var(--color-accent);
+    background-color: #fff;
+    color: #fff;
+  }
 </style>
 
 <script>
@@ -171,7 +214,14 @@ import Button from "@/components/Button.astro";
     const pageLoadTime = Date.now();
 
     // 1. Attribution Tracking (UTMs + GCLID)
-    const trackParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+    const trackParams = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+      "gclid",
+    ];
     const urlParams = new URLSearchParams(window.location.search);
 
     trackParams.forEach((param) => {
@@ -179,16 +229,20 @@ import Button from "@/components/Button.astro";
       if (urlVal) {
         sessionStorage.setItem(param, urlVal);
       }
-      
+
       const storedVal = sessionStorage.getItem(param);
       if (storedVal) {
-        const input = document.getElementById(param === "gclid" ? "gclid_field" : param) as HTMLInputElement;
+        const input = document.getElementById(
+          param === "gclid" ? "gclid_field" : param,
+        ) as HTMLInputElement;
         if (input) input.value = storedVal;
       }
     });
 
     // 2. Pull Step 1 Address
-    const addressInput = document.getElementById("propertyAddress") as HTMLInputElement;
+    const addressInput = document.getElementById(
+      "propertyAddress",
+    ) as HTMLInputElement;
     const storedAddress = sessionStorage.getItem("lead_property_address");
     if (storedAddress && addressInput) {
       addressInput.value = storedAddress;
@@ -209,25 +263,62 @@ import Button from "@/components/Button.astro";
       return { street: fullAddress, city: "", state: "", zip: "" };
     }
 
-    // 3. Form elements
-    const firstNameInput = document.getElementById("firstName") as HTMLInputElement;
-    const lastNameInput = document.getElementById("lastName") as HTMLInputElement;
-    const phoneInput = document.getElementById("phoneNumber") as HTMLInputElement;
-    const emailInput = document.getElementById("emailAddress") as HTMLInputElement;
-    const consentCheck = document.getElementById("consentCheck") as HTMLInputElement;
-    const honeypot = document.getElementById("company_website") as HTMLInputElement;
-    const submitBtn = document.getElementById("submitLeadBtn") as HTMLButtonElement;
+    // Helper: Normalize incoming numbers (+1, 1-800, leading 1) to clean 10 digits
+    function extractCore10Digits(val: string): string {
+      let digits = val.replace(/\D/g, "");
+      // If 11 digits and starts with country code 1, strip it
+      if (digits.length === 11 && digits.startsWith("1")) {
+        digits = digits.substring(1);
+      }
+      // If > 10 digits and starts with 1, strip leading 1 and take 10
+      else if (digits.length > 10 && digits.startsWith("1")) {
+        digits = digits.substring(1).slice(0, 10);
+      } else {
+        digits = digits.slice(0, 10);
+      }
+      return digits;
+    }
 
-    // Phone auto-format
-    phoneInput?.addEventListener("input", (e) => {
-      const target = e.target as HTMLInputElement;
-      let digits = target.value.replace(/\D/g, "").substring(0, 10);
+    function formatPhoneNumber(digits: string): string {
       let formatted = "";
       if (digits.length > 0) formatted = "(" + digits.substring(0, 3);
       if (digits.length >= 4) formatted += ") " + digits.substring(3, 6);
       if (digits.length >= 7) formatted += "-" + digits.substring(6, 10);
-      target.value = formatted;
-    });
+      return formatted;
+    }
+
+    // 3. Form elements
+    const firstNameInput = document.getElementById(
+      "firstName",
+    ) as HTMLInputElement;
+    const lastNameInput = document.getElementById(
+      "lastName",
+    ) as HTMLInputElement;
+    const phoneInput = document.getElementById(
+      "phoneNumber",
+    ) as HTMLInputElement;
+    const emailInput = document.getElementById(
+      "emailAddress",
+    ) as HTMLInputElement;
+    const consentCheck = document.getElementById(
+      "consentCheck",
+    ) as HTMLInputElement;
+    const honeypot = document.getElementById(
+      "company_website",
+    ) as HTMLInputElement;
+    const submitBtn = document.getElementById(
+      "submitLeadBtn",
+    ) as HTMLButtonElement;
+
+    // Handle typing and auto-fill formats (+1, (555), raw digits)
+    const handlePhoneInput = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      const digits = extractCore10Digits(target.value);
+      target.value = formatPhoneNumber(digits);
+    };
+
+    phoneInput?.addEventListener("input", handlePhoneInput);
+    phoneInput?.addEventListener("change", handlePhoneInput);
 
     // 4. Form Submit
     form.addEventListener("submit", async (e) => {
@@ -239,8 +330,11 @@ import Button from "@/components/Button.astro";
 
       let isValid = true;
 
-      // Validate Fields visually
-      const checkField = (input: HTMLInputElement, errorId: string, customCondition = false) => {
+      const checkField = (
+        input: HTMLInputElement,
+        errorId: string,
+        customCondition = false,
+      ) => {
         if (!input.value.trim() || customCondition) {
           document.getElementById(errorId)?.classList.remove("hidden");
           isValid = false;
@@ -253,11 +347,16 @@ import Button from "@/components/Button.astro";
       checkField(firstNameInput, "firstNameError");
       checkField(lastNameInput, "lastNameError");
 
-      const rawDigits = phoneInput.value.replace(/\D/g, "");
+      // Phone check: Extract core 10 digits regardless of how it was typed/pasted
+      const rawDigits = extractCore10Digits(phoneInput.value);
       checkField(phoneInput, "phoneError", rawDigits.length !== 10);
 
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      checkField(emailInput, "emailError", !emailRegex.test(emailInput.value.trim()));
+      checkField(
+        emailInput,
+        "emailError",
+        !emailRegex.test(emailInput.value.trim()),
+      );
 
       if (!consentCheck.checked) {
         document.getElementById("consentError")?.classList.remove("hidden");
@@ -285,9 +384,9 @@ import Button from "@/components/Button.astro";
         zip = parsed.zip;
       }
 
-      // Payload Construction
       const hookBase = "https://hooks.zapier.com/hooks/catch/";
-      const hookId = "9846372/4d8t1vf/"; 
+      const hookId = "9846372/4d8t1vf/";
+
       const payload = {
         propertyAddress: addressInput.value.trim(),
         propertyStreet: street,
@@ -297,8 +396,8 @@ import Button from "@/components/Button.astro";
         firstName: firstNameInput.value.trim(),
         lastName: lastNameInput.value.trim(),
         fullName: `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`,
-        phoneNumber: rawDigits,
-        formattedPhone: phoneInput.value,
+        phoneNumber: rawDigits, // Strictly 10 digits (e.g. 5551234567)
+        formattedPhone: formatPhoneNumber(rawDigits),
         emailAddress: emailInput.value.trim(),
         consent: consentCheck.checked,
         utm_source: sessionStorage.getItem("utm_source") || "",
@@ -331,7 +430,9 @@ import Button from "@/components/Button.astro";
         console.error(err);
         submitBtn.disabled = false;
         submitBtn.textContent = "Get My Cash Offer";
-        alert("There was an issue sending your details. Please call us directly.");
+        alert(
+          "There was an issue sending your details. Please call us directly.",
+        );
       }
     });
   }
