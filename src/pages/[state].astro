@@ -9,6 +9,8 @@ import ValueBar from "@/components/ValueBar.astro";
 import StepsSection from "@/components/StepsSection.astro";
 import FeaturesSection from "@/components/FeaturesSection.astro";
 import StateFAQ from "@/components/StateFAQ.astro";
+import AutoAddress from "@/components/AutoAddress.astro";
+
 
 export async function getStaticPaths() {
   return states.map((state) => ({
@@ -31,7 +33,6 @@ const { stateData } = Astro.props;
     description={`Sell your property as-is in ${stateData.name}. No agent commissions, no repairs, close on your timeline.`}
   />
 
-
   <section class="page-layout-subgrid mt-12 pb-24">
     <div class="gap-8 items-center">
       <div>
@@ -49,7 +50,8 @@ const { stateData } = Astro.props;
           a written offer you are free to decline.
         </p>
         <div class="mt-8">
-          <OfferForm />
+          <!-- <OfferForm /> -->
+          <AutoAddress />
         </div>
       </div>
     </div>
@@ -58,7 +60,7 @@ const { stateData } = Astro.props;
   <ValueBar />
 
   <section class="feature pt-16 pb-16">
-    <div class="grid grid-cols-2 gap-8 mt-8">
+    <div class="grid md:grid-cols-2 gap-8 mt-8">
       <div class="flow">
         <h2 class="h2 text-pretty">
           Selling a house as-is in {stateData.name}
@@ -214,6 +216,7 @@ const { stateData } = Astro.props;
       Enter the property address to get started. A specialist reviews your
       property and follows up with a written offer — no obligation to accept.
     </p>
-    <OfferForm />
+    <!-- <OfferForm /> -->
+    <AutoAddress />
   </section>
 </BaseLayout>

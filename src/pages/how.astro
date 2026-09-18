@@ -1,21 +1,21 @@
 ---
-
+import AutoAddress from "@/components/AutoAddress.astro";
 import FAQ from "@/components/FAQ.astro";
-import OfferForm from "@/components/OfferForm.astro";
 import SeoPage from "@/components/SeoPage.astro";
 import StepsSection from "@/components/StepsSection.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout contentSpace="65">
-    <SeoPage slot="head" />
+  <SeoPage slot="head" />
   <section class="py-16 feature">
     <h1 class="h1 text-center">Steps to sell</h1>
     <StepsSection />
   </section>
   <section class="pb-24">
     <div class="max-w-2xl mx-auto">
-      <OfferForm />
+      <!-- <OfferForm /> -->
+      <AutoAddress />
     </div>
     <div class="flow mt-8">
       <h3 class="h3">How we build the number</h3>
@@ -43,11 +43,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       </p>
     </div>
   </section>
- 
 
-
-
-    
   <section
     class="place-self-center w-full max-w-4xl px-4 pb-24 sm:px-6 lg:px-8"
     aria-labelledby="faq-heading"
@@ -56,13 +52,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   </section>
 
   <section class="colored-stripe pt-16 pb-24">
-    <h2 class="h2">See what your home could sell for</h2>
-    <p mt-4>
+    <h2 class="h2 text-center">See what your home could sell for</h2>
+    <p class="mt-4 text-center">
       Enter the property address to get started. A specialist reviews your
       property and follows up with a written offer — no obligation to accept.
     </p>
     <div class="mt-8">
-      <OfferForm />
+      <AutoAddress />
       <small class="block text-center mt-2">
         No obligation. Homes reviewed as-is.
       </small>

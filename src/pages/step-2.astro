@@ -1,10 +1,11 @@
 ---
-import AutoAddress from "@/components/AutoAddress.astro";
 import BeforeAfter from "@/components/BeforeAfter.astro";
 import ConditionsSection from "@/components/ConditionsSection.astro";
 import FAQ from "@/components/FAQ.astro";
 import MetricsSection from "@/components/MetricsSection.astro";
+import OfferForm from "@/components/OfferForm.astro";
 import SeoPage from "@/components/SeoPage.astro";
+import Step2Form from "@/components/Step2Form.astro";
 import StepsSection from "@/components/StepsSection.astro";
 import TestimonialSection from "@/components/TestimonialSection.astro";
 import ValueBar from "@/components/ValueBar.astro";
@@ -16,12 +17,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
   <section class="pt-16 pb-24">
     <h1 class="h1 text-center">Tell us about your property</h1>
     <p class="text-center text-pretty mt-4">
-     Enter your street address below to start your written, no-obligation offer.
+      Enter your street address below to start your written, no-obligation offer.
     </p>
 
     <div class="mt-8">
-      <!-- <OfferForm /> -->
-      <AutoAddress />
+      <Step2Form />
     </div>
   </section>
 

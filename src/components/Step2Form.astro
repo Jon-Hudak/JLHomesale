@@ -1,0 +1,341 @@
+---
+import Button from "@/components/Button.astro";
+---
+
+<div class="max-w-xl mx-auto bg-white border border-slate-200 shadow-xl rounded-2xl p-6 sm:p-8">
+  <div class="mb-6 border-b border-slate-100 pb-5">
+    <span class="inline-block text-xs font-bold uppercase tracking-wider text-green-700 bg-green-50 px-2.5 py-1 rounded-md mb-2">
+      Step 2 of 2
+    </span>
+    <h1 class="text-2xl sm:text-3xl font-bold text-slate-900 text-pretty">
+      Where should we send your offer?
+    </h1>
+    <p class="text-slate-600 text-sm mt-4">
+      Confirm your details below to finalize your preliminary valuation.
+    </p>
+  </div>
+
+  <form id="cashOfferForm" novalidate class="space-y-4">
+    <!-- Bot Trap: Honeypot -->
+    <div class="hidden" aria-hidden="true">
+      <input type="text" name="company_website" id="company_website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <!-- Hidden Attribution Fields -->
+    <input type="hidden" name="utm_source" id="utm_source" />
+    <input type="hidden" name="utm_medium" id="utm_medium" />
+    <input type="hidden" name="utm_campaign" id="utm_campaign" />
+    <input type="hidden" name="utm_term" id="utm_term" />
+    <input type="hidden" name="utm_content" id="utm_content" />
+    <input type="hidden" name="gclid" id="gclid_field" />
+
+    <!-- Step 1 Carryover: Property Address -->
+    <div>
+      <div class="flex items-center justify-between mb-1">
+        <label for="propertyAddress" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider">
+          Property Address
+        </label>
+        <span class="text-xs text-slate-400">Step 1 Completed</span>
+      </div>
+      <input
+        type="text"
+        id="propertyAddress"
+        name="propertyAddress"
+        required
+        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-slate-800 text-sm font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent"
+      />
+      <p id="addressError" class="hidden text-xs text-red-600 mt-1">Please enter your property address.</p>
+    </div>
+
+    <!-- First Name & Last Name -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="firstName" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+          First Name <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          required
+          autocomplete="given-name"
+          placeholder="Jane"
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+        />
+        <p id="firstNameError" class="hidden text-xs text-red-600 mt-1">First name is required.</p>
+      </div>
+
+      <div>
+        <label for="lastName" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+          Last Name <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          required
+          autocomplete="family-name"
+          placeholder="Doe"
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+        />
+        <p id="lastNameError" class="hidden text-xs text-red-600 mt-1">Last name is required.</p>
+      </div>
+    </div>
+
+    <!-- Phone & Email -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label for="phoneNumber" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+          Phone Number <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="tel"
+          id="phoneNumber"
+          name="phoneNumber"
+          required
+          maxlength="14"
+          autocomplete="tel"
+          placeholder="(555) 555-5555"
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+        />
+        <p id="phoneError" class="hidden text-xs text-red-600 mt-1">Enter a valid 10-digit number.</p>
+      </div>
+
+      <div>
+        <label for="emailAddress" class="block font-semibold text-xs text-slate-700 uppercase tracking-wider mb-1">
+          Email Address <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="email"
+          id="emailAddress"
+          name="emailAddress"
+          required
+          autocomplete="email"
+          placeholder="jane@example.com"
+          class="w-full px-3.5 py-2.5 border border-slate-300 rounded-lg text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
+        />
+        <p id="emailError" class="hidden text-xs text-red-600 mt-1">Enter a valid email address.</p>
+      </div>
+    </div>
+
+    <!-- Terms & Privacy Consent -->
+    <div class="pt-2">
+      <div class="flex items-start gap-2.5 checkbox-group place-items-start">
+        <input
+          type="checkbox"
+          id="consentCheck"
+          name="consentCheck"
+          required
+          class="shrink-0 mt-1 h-8 w-8 md:h-4 md:w-4 rounded border-slate-300 text-accent  focus:ring-accent "
+        />
+        <label for="consentCheck" class="text-xs text-slate-600 leading-normal">
+          I agree to be contacted by phone, text, or email about my property, including by automated means. Consent is not a condition of sale. See our 
+          <a href="/terms" target="_blank" class="underline text-slate-800">Terms of Use</a> and 
+          <a href="/privacy" target="_blank" class="underline text-slate-800">Privacy Policy</a>.
+        </label>
+      </div>
+      <p id="consentError" class="hidden text-xs text-red-600 mt-1">You must agree before proceeding.</p>
+    </div>
+
+    <!-- Submit CTA -->
+    <div class="pt-4">
+      <Button
+        id="submitLeadBtn"
+        type="submit"
+        variant="accent"
+        hasArrow={true}
+        class="w-full !py-3.5 !rounded-xl !text-base shadow-lg"
+      >
+        Get My Cash Offer
+      </Button>
+    </div>
+  </form>
+</div>
+
+<style>
+    .checkbox-group input[type="checkbox"] {
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  color-scheme: light;
+  accent-color: var(--color-accent); /* or your preferred hex color */
+  background-color: #fff;
+  color: #fff;
+}
+</style>
+
+<script>
+  function initStepTwoForm() {
+    const form = document.getElementById("cashOfferForm") as HTMLFormElement;
+    if (!form) return;
+
+    const pageLoadTime = Date.now();
+
+    // 1. Attribution Tracking (UTMs + GCLID)
+    const trackParams = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"];
+    const urlParams = new URLSearchParams(window.location.search);
+
+    trackParams.forEach((param) => {
+      const urlVal = urlParams.get(param);
+      if (urlVal) {
+        sessionStorage.setItem(param, urlVal);
+      }
+      
+      const storedVal = sessionStorage.getItem(param);
+      if (storedVal) {
+        const input = document.getElementById(param === "gclid" ? "gclid_field" : param) as HTMLInputElement;
+        if (input) input.value = storedVal;
+      }
+    });
+
+    // 2. Pull Step 1 Address
+    const addressInput = document.getElementById("propertyAddress") as HTMLInputElement;
+    const storedAddress = sessionStorage.getItem("lead_property_address");
+    if (storedAddress && addressInput) {
+      addressInput.value = storedAddress;
+    }
+
+    // Fallback Regex Parser for addresses typed manually without picking an OSM option
+    function parseAddressString(fullAddress: string) {
+      const regex = /^(.*?),\s*([^,]+),\s*([A-Za-z]{2})\s*(\d{5}(?:-\d{4})?)?$/;
+      const match = fullAddress.match(regex);
+      if (match) {
+        return {
+          street: match[1].trim(),
+          city: match[2].trim(),
+          state: match[3].trim().toUpperCase(),
+          zip: match[4] ? match[4].trim() : "",
+        };
+      }
+      return { street: fullAddress, city: "", state: "", zip: "" };
+    }
+
+    // 3. Form elements
+    const firstNameInput = document.getElementById("firstName") as HTMLInputElement;
+    const lastNameInput = document.getElementById("lastName") as HTMLInputElement;
+    const phoneInput = document.getElementById("phoneNumber") as HTMLInputElement;
+    const emailInput = document.getElementById("emailAddress") as HTMLInputElement;
+    const consentCheck = document.getElementById("consentCheck") as HTMLInputElement;
+    const honeypot = document.getElementById("company_website") as HTMLInputElement;
+    const submitBtn = document.getElementById("submitLeadBtn") as HTMLButtonElement;
+
+    // Phone auto-format
+    phoneInput?.addEventListener("input", (e) => {
+      const target = e.target as HTMLInputElement;
+      let digits = target.value.replace(/\D/g, "").substring(0, 10);
+      let formatted = "";
+      if (digits.length > 0) formatted = "(" + digits.substring(0, 3);
+      if (digits.length >= 4) formatted += ") " + digits.substring(3, 6);
+      if (digits.length >= 7) formatted += "-" + digits.substring(6, 10);
+      target.value = formatted;
+    });
+
+    // 4. Form Submit
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // Bot gates
+      if (honeypot && honeypot.value.trim() !== "") return;
+      if ((Date.now() - pageLoadTime) / 1000 < 2) return;
+
+      let isValid = true;
+
+      // Validate Fields visually
+      const checkField = (input: HTMLInputElement, errorId: string, customCondition = false) => {
+        if (!input.value.trim() || customCondition) {
+          document.getElementById(errorId)?.classList.remove("hidden");
+          isValid = false;
+        } else {
+          document.getElementById(errorId)?.classList.add("hidden");
+        }
+      };
+
+      checkField(addressInput, "addressError");
+      checkField(firstNameInput, "firstNameError");
+      checkField(lastNameInput, "lastNameError");
+
+      const rawDigits = phoneInput.value.replace(/\D/g, "");
+      checkField(phoneInput, "phoneError", rawDigits.length !== 10);
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      checkField(emailInput, "emailError", !emailRegex.test(emailInput.value.trim()));
+
+      if (!consentCheck.checked) {
+        document.getElementById("consentError")?.classList.remove("hidden");
+        isValid = false;
+      } else {
+        document.getElementById("consentError")?.classList.add("hidden");
+      }
+
+      if (!isValid) return;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Calculating Offer...";
+
+      // Resolve Address Breakdown
+      let street = sessionStorage.getItem("lead_property_street") || "";
+      let city = sessionStorage.getItem("lead_property_city") || "";
+      let state = sessionStorage.getItem("lead_property_state") || "";
+      let zip = sessionStorage.getItem("lead_property_zip") || "";
+
+      if (!street || !city) {
+        const parsed = parseAddressString(addressInput.value.trim());
+        street = parsed.street;
+        city = parsed.city;
+        state = parsed.state;
+        zip = parsed.zip;
+      }
+
+      // Payload Construction
+      const hookBase = "https://hooks.zapier.com/hooks/catch/";
+      const hookId = "9846372/4d8t1vf/"; 
+      const payload = {
+        propertyAddress: addressInput.value.trim(),
+        propertyStreet: street,
+        propertyCity: city,
+        propertyState: state,
+        propertyZip: zip,
+        firstName: firstNameInput.value.trim(),
+        lastName: lastNameInput.value.trim(),
+        fullName: `${firstNameInput.value.trim()} ${lastNameInput.value.trim()}`,
+        phoneNumber: rawDigits,
+        formattedPhone: phoneInput.value,
+        emailAddress: emailInput.value.trim(),
+        consent: consentCheck.checked,
+        utm_source: sessionStorage.getItem("utm_source") || "",
+        utm_medium: sessionStorage.getItem("utm_medium") || "",
+        utm_campaign: sessionStorage.getItem("utm_campaign") || "",
+        utm_term: sessionStorage.getItem("utm_term") || "",
+        utm_content: sessionStorage.getItem("utm_content") || "",
+        gclid: sessionStorage.getItem("gclid") || "",
+        submittedAt: new Date().toISOString(),
+        sourceUrl: window.location.href,
+      };
+
+      try {
+        const res = await fetch(hookBase + hookId, {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) throw new Error("Submission failed");
+
+        // Clean up Session Storage
+        sessionStorage.removeItem("lead_property_address");
+        sessionStorage.removeItem("lead_property_street");
+        sessionStorage.removeItem("lead_property_city");
+        sessionStorage.removeItem("lead_property_state");
+        sessionStorage.removeItem("lead_property_zip");
+
+        window.location.href = "/thank-you";
+      } catch (err) {
+        console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Get My Cash Offer";
+        alert("There was an issue sending your details. Please call us directly.");
+      }
+    });
+  }
+
+  initStepTwoForm();
+  document.addEventListener("astro:page-load", initStepTwoForm);
+</script>

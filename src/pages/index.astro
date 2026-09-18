@@ -6,10 +6,7 @@ import { Image } from "astro:assets";
 import FeatureCard from "@/components/FeatureCard.astro";
 import Button from "@/components/Button.astro";
 
-import {
-  situations,
-  contactFeatures,
-} from "@/data/homeContent";
+import { situations, contactFeatures } from "@/data/homeContent";
 import FAQ from "@/components/FAQ.astro";
 import BeforeAfter from "@/components/BeforeAfter.astro";
 import MetricsSection from "@/components/MetricsSection.astro";
@@ -17,23 +14,115 @@ import TestimonialSection from "@/components/TestimonialSection.astro";
 import ValueBar from "@/components/ValueBar.astro";
 import FeaturesSection from "@/components/FeaturesSection.astro";
 
-import heroImg from "@/assets/images/hero-home.jpg"
+import heroImg from "@/assets/images/hero-home.jpg";
+import AutoAddress from "@/components/AutoAddress.astro";
+
 ---
 
 <BaseLayout>
   <SeoPage slot="head" />
-  <section class="full mx-8 xl:mx-64 grid lg:grid-cols-2 lg:breakout-right gap-x-8 gap-y-4 mt-12 pb-16">
+
+  <section
+    class="feature mx-8 xl:mx64 grid lg:grid-cols-2 lg:breakout-right gap-x-8 gap-y-4 mt-12 pb-16"
+  >
     <div class="">
       <p class="uppercase eyebrow">Helping Homeowners Nationwide</p>
-      <h1 class="font-bold mt-4 text-3xl text-pretty">Selling your home has never been easier</h1>
+      <h1 class="font-bold mt-4 text-3xl text-pretty">
+        Selling your home has never been easier
+      </h1>
 
       <p class="mt-4 text-lg text-pretty">
         Sell your property as-is, with no agent commissions on our purchase.
         Start with the address.
       </p>
 
-      <div class="mt-12">
-        <OfferForm />
+      <div class="mt-8">
+        <AutoAddress />
+        <!-- <OfferForm /> -->
+        <ul
+          class="mt-6 gap-2 grid grid-cols-2 h-full content-end justify-between"
+        >
+          <li class="flex gap-2 place-items-center">
+            <span class=""
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >Written Offer
+          </li>
+          <li class="flex gap-2 place-items-center">
+            <span class=""
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >As-is condition
+          </li>
+          <li class="flex gap-2 place-items-center">
+            <span class=""
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >No agent commissions
+          </li>
+          <li class="flex gap-2 place-items-center">
+            <span class=""
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
+                aria-hidden="true"
+                data-tsd-source="/src/routes/index.tsx:68:19"
+                ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
+                ></path></svg
+              ></span
+            >You pick the date
+          </li>
+        </ul>
       </div>
     </div>
     <div class="relative grid self-end">
@@ -42,91 +131,11 @@ import heroImg from "@/assets/images/hero-home.jpg"
       >
         <Image
           src={heroImg}
-          class="object-cover size-full mt-auto rounded-b-4xl" height={600} alt="Two story house at sunset"
+          class="object-cover size-full mt-auto rounded-b-4xl"
+          height={600}
+          alt="Two story house at sunset"
         />
       </div>
-      <ul class="grid grid-cols-2 mt-2 h-full content-end justify-between">
-        <li class="flex gap-2 place-items-center">
-          <span class=""
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
-              aria-hidden="true"
-              data-tsd-source="/src/routes/index.tsx:68:19"
-              ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
-              ></path></svg
-            ></span
-          >Written Offer
-        </li>
-        <li class="flex gap-2 place-items-center">
-          <span class=""
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
-              aria-hidden="true"
-              data-tsd-source="/src/routes/index.tsx:68:19"
-              ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
-              ></path></svg
-            ></span
-          >As-is condition
-        </li>
-        <li class="flex gap-2 place-items-center">
-          <span class=""
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
-              aria-hidden="true"
-              data-tsd-source="/src/routes/index.tsx:68:19"
-              ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
-              ></path></svg
-            ></span
-          >No agent commissions
-        </li>
-        <li class="flex gap-2 place-items-center">
-          <span class=""
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-circle-check size-4 shrink-0 text-accent stroke-secAccent"
-              aria-hidden="true"
-              data-tsd-source="/src/routes/index.tsx:68:19"
-              ><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"
-              ></path></svg
-            ></span
-          >You pick the date
-        </li>
-      </ul>
       <div
         class="bg-white absolute left-2 top-28 flex items-center gap-3 rounded-full bg-card px-4 py-3 shadow-lift sm:-left-8"
         data-tsd-source="/src/routes/index.tsx:78:13"
@@ -169,7 +178,6 @@ import heroImg from "@/assets/images/hero-home.jpg"
   <ValueBar />
   <section class="colored-stripe full py-24">
     <div class="feature">
-
       <MetricsSection />
     </div>
   </section>
@@ -181,7 +189,7 @@ import heroImg from "@/assets/images/hero-home.jpg"
     <BeforeAfter />
   </section>
   <section class="colored-stripe pt-16 pb-24">
-    <FeaturesSection/>
+    <FeaturesSection />
   </section>
   <section class="feature pt-16 pb-24">
     <p class="eyebrow text-center">Situations We Help With</p>
@@ -197,7 +205,11 @@ import heroImg from "@/assets/images/hero-home.jpg"
         ))
       }
     </ul>
-    <div><a href="/situations" class="a text-center mt-4 block">Read more about each situation</a></div>
+    <div>
+      <a href="/situations" class="a text-center mt-4 block"
+        >Read more about each situation</a
+      >
+    </div>
   </section>
 
   <section
@@ -207,21 +219,20 @@ import heroImg from "@/assets/images/hero-home.jpg"
     <FAQ />
   </section>
   <section class="feature pt-16 pb-24">
-    <p class="eyebrow text-center">Contact us</p>
     <h2 class="h2 mt-2 text-center">We aim to make selling stress-free</h2>
     <p class="mt-4 text-center max-w-[65ch] mx-auto">
       Your satisfaction is our priority. Reach out today and we'll walk you
       through your options — no pressure, no obligation.
     </p>
-    <a
-      href="tel:8666986169"
-      class="mt-4 text-3xl underline font-semibold text-center justify-self-center block"
-      >(866) 698-6169</a
-    >
+
     <ul class="grid md:grid-cols-3 gap-6 mt-8">
       {
         contactFeatures.map((s) => (
-          <FeatureCard title={s.title} description={s.description} icon={s.icon} />
+          <FeatureCard
+            title={s.title}
+            description={s.description}
+            icon={s.icon}
+          />
         ))
       }
     </ul>
@@ -233,7 +244,7 @@ import heroImg from "@/assets/images/hero-home.jpg"
       property and follows up with a written offer — no obligation to accept.
     </p>
     <div class="max-w-2xl mx-auto mt-8">
-      <OfferForm />
+      <AutoAddress />
       <small class="text-center block"
         >No obligation. Homes reviewed as-is.</small
       >
