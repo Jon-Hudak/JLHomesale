@@ -4,6 +4,16 @@ import { SITE } from "@/siteConfig";
 import { Font } from "astro:assets";
 
 import Favicons from "@/components/Favicons.astro";
+
+import { getImage } from 'astro:assets';
+// Update this path to exactly match where your hero image lives
+import heroHouse from '@/assets/images/hero-home.jpg'; 
+
+const preloadedHero = await getImage({ 
+  src: heroHouse, 
+  format: 'avif', 
+  widths: [400, 800, 1600]
+});
 ---
 
 <head>
@@ -38,11 +48,22 @@ import Favicons from "@/components/Favicons.astro";
 
   <Favicons />
   <Font cssVariable="--font-mont" preload />
+
+ 
+  <link 
+    rel="preload" 
+    as="image" 
+    href={preloadedHero.src} 
+    imagesrcset={preloadedHero.srcSet.attribute} 
+    imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1600px"
+    fetchpriority="high" 
+  />
+
   <!-- Consolidated Modern Attribution Tracker -->
   <script is:inline>
     (() => {
       try {
-        // 1. Immediately grab query params and save to session
+   
         const params = new URLSearchParams(window.location.search);
         const keys = [
           "utm_source",
@@ -58,7 +79,7 @@ import Favicons from "@/components/Favicons.astro";
           if (val) sessionStorage.setItem(key, val);
         });
 
-        // 2. Safe function to sync session data to hidden inputs
+    
         const syncHiddenFields = () => {
           keys.forEach((key) => {
             const val = sessionStorage.getItem(key);
@@ -71,7 +92,7 @@ import Favicons from "@/components/Favicons.astro";
           });
         };
 
-        // 3. Run safely on direct loads and Astro View Transitions
+    
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", syncHiddenFields);
         } else {
@@ -98,26 +119,23 @@ import Favicons from "@/components/Favicons.astro";
   </script>
 
 <!-- Facebook Pixel  -->
+
 <script is:inline>
-  const initFb = () => {
-    if (window.fbq) return;
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-    document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    
-    fbq('init', '419888609948087'); 
-    fbq('track', 'PageView');
-  };
+  window.addEventListener("load", () => {
+    // A tiny 50ms buffer ensures the browser completes the visual paint cycle
+    setTimeout(() => {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      
+      fbq('init', '419888609948087');  {code}
+      fbq('track', 'PageView');
+    }, 50);
+  }, { once: true });
 
-  if ('requestIdleCallback' in window) {
-    requestIdleCallback(initFb);
-  } else {
-    setTimeout(initFb, 250); // Fallback for Safari
-  }
-
-  // Handle Astro View Transitions
+  // Astro View Transitions Support
   document.addEventListener("astro:page-load", () => {
     if (typeof fbq === "function") fbq("track", "PageView");
   });

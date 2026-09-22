@@ -13,6 +13,7 @@ export default defineConfig({
       provider: fontProviders.fontsource(),
       name: "Montserrat",
       cssVariable: "--font-mont",
+      display:"swap"
     },
   ],
   markdown: {
