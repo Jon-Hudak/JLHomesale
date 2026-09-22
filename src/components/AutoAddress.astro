@@ -71,7 +71,6 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
     const apiKey = (widgets[0] as HTMLElement).dataset.apiKey;
     if (!apiKey) return;
 
-    // 1. Centralized Loader
     const loadGoogleMapsSdk = () => {
       if (window.googleMapsInitPromise) return window.googleMapsInitPromise;
 
@@ -93,10 +92,13 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
       return window.googleMapsInitPromise;
     };
 
-    // 2. Background Idle Loading
-    setTimeout(() => {
-      loadGoogleMapsSdk();
-    }, 500);
+    if (document.readyState === "complete") {
+  setTimeout(loadGoogleMapsSdk, 100);
+} else {
+  window.addEventListener("load", () => {
+    setTimeout(loadGoogleMapsSdk, 100);
+  });
+}
 
     widgets.forEach((widget) => {
       if ((widget as HTMLElement).dataset.initialized === "true") return;

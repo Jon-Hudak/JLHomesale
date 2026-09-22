@@ -35,49 +35,106 @@ import Favicons from "@/components/Favicons.astro";
     title={SITE.title}
     href={new URL("rss.xml", SITE.href || Astro.url.origin)}
   />
- <link rel="preconnect" href="https://maps.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
+
   <Favicons />
   <Font cssVariable="--font-mont" preload />
-<!-- Consolidated Modern Attribution Tracker -->
-<script is:inline>
-  (() => {
-    try {
-      // 1. Immediately grab query params and save to session
-      const params = new URLSearchParams(window.location.search);
-      const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
-      
-      keys.forEach((key) => {
-        const val = params.get(key);
-        if (val) sessionStorage.setItem(key, val);
-      });
+  <!-- Consolidated Modern Attribution Tracker -->
+  <script is:inline>
+    (() => {
+      try {
+        // 1. Immediately grab query params and save to session
+        const params = new URLSearchParams(window.location.search);
+        const keys = [
+          "utm_source",
+          "utm_medium",
+          "utm_campaign",
+          "utm_term",
+          "utm_content",
+          "gclid",
+        ];
 
-      // 2. Safe function to sync session data to hidden inputs
-      const syncHiddenFields = () => {
         keys.forEach((key) => {
-          const val = sessionStorage.getItem(key);
-          if (!val) return;
-          // Matches either id="gclid_field" or name="gclid"
-          const field = document.getElementById(`${key}_field`) || document.querySelector(`input[name="${key}"]`);
-          if (field) field.value = val;
+          const val = params.get(key);
+          if (val) sessionStorage.setItem(key, val);
         });
-      };
 
-      // 3. Run safely on direct loads and Astro View Transitions
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', syncHiddenFields);
-      } else {
-        syncHiddenFields();
+        // 2. Safe function to sync session data to hidden inputs
+        const syncHiddenFields = () => {
+          keys.forEach((key) => {
+            const val = sessionStorage.getItem(key);
+            if (!val) return;
+            // Matches either id="gclid_field" or name="gclid"
+            const field =
+              document.getElementById(`${key}_field`) ||
+              document.querySelector(`input[name="${key}"]`);
+            if (field) field.value = val;
+          });
+        };
+
+        // 3. Run safely on direct loads and Astro View Transitions
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", syncHiddenFields);
+        } else {
+          syncHiddenFields();
+        }
+        document.addEventListener("astro:page-load", syncHiddenFields);
+      } catch (e) {
+        console.warn("Attribution tracking error", e);
       }
-      document.addEventListener('astro:page-load', syncHiddenFields);
-    } catch (e) {
-      console.warn("Attribution tracking error", e);
+    })();
+  </script>
+
+  <!-- Google tag (gtag.js)-->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11160695389"
+  ></script>
+  <script is:inline>
+    //@ts-nocheck
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
     }
-  })();
-</script>
+    gtag("js", new Date());
+    gtag("config", "AW-11160695389");
+  </script>
 
+  <!-- Facebook Pixel Code -->
+  <script is:inline>
+    //@ts-nocheck
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod
+          ? n.callMethod.apply(n, arguments)
+          : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(
+      window,
+      document,
+      "script",
+      "https://connect.facebook.net/en_US/fbevents.js",
+    );
+    fbq("init", "419888609948087");
+    fbq("track", "PageView");
+  </script>
 
-
+  <noscript data-astro-transition-persist="pixel">
+    <img
+      height="1"
+      width="1"
+      src="https://www.facebook.com/tr?id=419888609948087&ev=PageView
+		  &noscript=1"
+    />
+  </noscript>
 
   <slot />
 </head>
