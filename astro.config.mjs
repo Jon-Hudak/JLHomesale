@@ -2,9 +2,12 @@ import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 
+import partytown from "@astrojs/partytown";
+
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [],
+  integrations: [partytown()],
   fonts: [
        {
       provider: fontProviders.fontsource(),
