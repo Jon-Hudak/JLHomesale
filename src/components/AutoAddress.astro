@@ -63,7 +63,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
   </form>
 </div>
 
-<script type="text/partytown">
+<script>
   async function initNewPlacesAPI() {
     const widgets = document.querySelectorAll(".address-lookup-widget");
     if (widgets.length === 0) return;
@@ -71,6 +71,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
     const apiKey = (widgets[0] as HTMLElement).dataset.apiKey;
     if (!apiKey) return;
 
+    // 1. Honest, Native Async/Defer Loader (No Timer Hacks)
     const loadGoogleMapsSdk = () => {
       if (window.googleMapsInitPromise) return window.googleMapsInitPromise;
 
@@ -83,6 +84,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
           delete window.__googleMapsCallback;
         };
         const script = document.createElement("script");
+        // loading=async alongside defer ensures it won't block the page rendering
         script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly&loading=async&callback=__googleMapsCallback`;
         script.async = true;
         script.defer = true;
@@ -92,13 +94,9 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
       return window.googleMapsInitPromise;
     };
 
-    if (document.readyState === "complete") {
-  setTimeout(loadGoogleMapsSdk, 100);
-} else {
-  window.addEventListener("load", () => {
-    setTimeout(loadGoogleMapsSdk, 100);
-  });
-}
+    // Kick off the script download immediately. 
+    // Thanks to async/defer, the browser will download it in the background while rendering the page.
+    loadGoogleMapsSdk();
 
     widgets.forEach((widget) => {
       if ((widget as HTMLElement).dataset.initialized === "true") return;
@@ -138,11 +136,13 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
 
         debounceTimer = setTimeout(async () => {
           try {
+            // Await the loader in case they type faster than the background script downloads
             await loadGoogleMapsSdk();
 
             if (!Places) Places = window.google.maps.places;
             if (!sessionToken) sessionToken = new Places.AutocompleteSessionToken();
 
+            // Pure nationwide search (No geo bias, no region limitations)
             const request = {
               input: query,
               includedRegionCodes: ["US"],
