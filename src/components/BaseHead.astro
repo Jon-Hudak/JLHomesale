@@ -97,20 +97,30 @@ import Favicons from "@/components/Favicons.astro";
     gtag("config", "AW-11160695389");
   </script>
 
-<!-- Load Facebook Pixel natively, safely after LCP -->
+<!-- Facebook Pixel  -->
 <script is:inline>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-      document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      
-      fbq('init', '419888609948087'); // Replace {code}
-      fbq('track', 'PageView');
-    }, 100);
-  }, { once: true });
+  const initFb = () => {
+    if (window.fbq) return;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', '419888609948087'); 
+    fbq('track', 'PageView');
+  };
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initFb);
+  } else {
+    setTimeout(initFb, 250); // Fallback for Safari
+  }
+
+  // Handle Astro View Transitions
+  document.addEventListener("astro:page-load", () => {
+    if (typeof fbq === "function") fbq("track", "PageView");
+  });
 </script>
 
   <noscript data-astro-transition-persist="pixel">

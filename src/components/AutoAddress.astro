@@ -110,20 +110,19 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
     const apiKey = (widgets[0] as HTMLElement).dataset.apiKey;
     if (!apiKey) return;
 
+    // The Loader Function (Does nothing until called)
     const loadGoogleMapsSdk = () => {
       if (window.googleMapsInitPromise) return window.googleMapsInitPromise;
 
       window.googleMapsInitPromise = new Promise((resolve, reject) => {
-        if (window.google?.maps?.places?.AutocompleteSuggestion) {
-          return resolve(null);
-        }
+        if (window.google?.maps?.places?.AutocompleteSuggestion) return resolve(null);
+        
         window.__googleMapsCallback = () => {
           resolve(null);
           delete window.__googleMapsCallback;
         };
         const script = document.createElement("script");
-        // loading=async alongside defer ensures it won't block the page rendering
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly&loading=async&callback=__googleMapsCallback`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly&callback=__googleMapsCallback`;
         script.async = true;
         script.defer = true;
         script.onerror = reject;
@@ -132,35 +131,25 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
       return window.googleMapsInitPromise;
     };
 
-    // Wait for the browser to finish painting the LCP image before downloading Maps in the background
-    if (document.readyState === "complete") {
-      loadGoogleMapsSdk();
-    } else {
-      window.addEventListener("load", loadGoogleMapsSdk, { once: true });
-    }
-
     widgets.forEach((widget) => {
       if ((widget as HTMLElement).dataset.initialized === "true") return;
       (widget as HTMLElement).dataset.initialized = "true";
 
-      const form = widget.querySelector(
-        "[data-address-form]",
-      ) as HTMLFormElement;
-      const input = widget.querySelector(
-        "[data-address-input]",
-      ) as HTMLInputElement;
-
-      const dropdownContainer = widget.querySelector(
-        "[data-address-dropdown-container]",
-      ) as HTMLElement;
-      const dropdown = widget.querySelector(
-        "[data-address-dropdown]",
-      ) as HTMLUListElement;
-      const spinner = widget.querySelector(
-        "[data-address-spinner]",
-      ) as HTMLElement;
+      const form = widget.querySelector("[data-address-form]") as HTMLFormElement;
+      const input = widget.querySelector("[data-address-input]") as HTMLInputElement;
+      
+      const dropdownContainer = widget.querySelector("[data-address-dropdown-container]") as HTMLElement;
+      const dropdown = widget.querySelector("[data-address-dropdown]") as HTMLUListElement;
+      const spinner = widget.querySelector("[data-address-spinner]") as HTMLElement;
 
       if (!form || !input || !dropdown || !dropdownContainer) return;
+
+      // FACADE PATTERN: Download Maps instantly when the user shows intent to use it.
+      // This is completely invisible to Lighthouse, but instant for the user.
+      const triggerLoad = () => loadGoogleMapsSdk();
+      input.addEventListener("mouseenter", triggerLoad, { once: true });
+      input.addEventListener("focus", triggerLoad, { once: true });
+      input.addEventListener("touchstart", triggerLoad, { once: true, passive: true });
 
       let debounceTimer: ReturnType<typeof setTimeout>;
       let activeIndex = -1;
@@ -187,14 +176,13 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
 
         debounceTimer = setTimeout(async () => {
           try {
-            // Await the loader in case they type faster than the background script downloads
+           
             await loadGoogleMapsSdk();
 
             if (!Places) Places = window.google.maps.places;
-            if (!sessionToken)
-              sessionToken = new Places.AutocompleteSessionToken();
+            if (!sessionToken) sessionToken = new Places.AutocompleteSessionToken();
 
-            // Pure nationwide search (No geo bias, no region limitations)
+
             const request = {
               input: query,
               includedRegionCodes: ["US"],
