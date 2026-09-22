@@ -11,7 +11,8 @@ import heroHouse from '@/assets/images/hero-home.jpg';
 
 const preloadedHero = await getImage({ 
   src: heroHouse, 
-  format: 'avif', 
+  format: 'avif',     
+  quality: 72,
   widths: [400, 800, 1600]
 });
 ---
@@ -57,6 +58,7 @@ const preloadedHero = await getImage({
     imagesrcset={preloadedHero.srcSet.attribute} 
     imagesizes="(max-width: 640px) 400px, (max-width: 1024px) 800px, 1600px"
     fetchpriority="high" 
+
   />
 
   <!-- Consolidated Modern Attribution Tracker -->
