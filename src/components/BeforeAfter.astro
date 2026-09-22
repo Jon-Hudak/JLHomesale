@@ -5,30 +5,49 @@ import afterHouse from "@/assets/images/after-house.jpg";
 ---
 
 <div class="grid md:grid-cols-2 gap-8 place-items-start">
-      <div>
-        <p class="eyebrow">Before / After</p>
-        <h2 class="h2 mt-2">Homes in any condition</h2>
+  <div>
+    <p class="eyebrow">Before / After</p>
+    <h2 class="h2 mt-2">Homes in any condition</h2>
 
-        <p class="mt-2">
-          We understand the housing market and make fair written offers on homes
-          in any condition when a property fits what we're looking for. No
-          repair lists, no financing delays — just a straightforward sale on
-          your schedule.
-        </p>
-      </div>
+    <p class="mt-2">
+      We understand the housing market and make fair written offers on homes
+      in any condition when a property fits what we're looking for. No
+      repair lists, no financing delays — just a straightforward sale on
+      your schedule.
+    </p>
+  </div>
 
-      <div class="grid sm:grid-cols-2 gap-4">
-        <figure class="rounded-lg border border-neutral-300 py-2">
-          <Image src={beforeHouse} alt="Before JL Home Sale" />
-          <figcaption class="pl-2 uppercase font-bold text-sm mt-3 self-center">
-            Before
-          </figcaption>
-        </figure>
-        <figure class="rounded-lg border border-neutral-400 py-2">
-          <Image src={afterHouse} alt="After JL Home Sale" />
-          <figcaption class="pl-2 uppercase font-bold text-sm mt-3 self-center">
-            After
-          </figcaption>
-        </figure>
-      </div>
-    </div>
+  <div class="grid sm:grid-cols-2 gap-4 w-full">
+    <figure class="rounded-lg border border-neutral-300 p-2 overflow-hidden bg-white">
+      <Image
+        src={beforeHouse}
+        alt="Before renovation: distressed home exterior"
+        format="avif"
+        widths={[300, 500, 700]}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-48 sm:h-52 object-cover rounded"
+      />
+      <figcaption class="pl-1 uppercase font-bold text-sm mt-2">
+        Before
+      </figcaption>
+    </figure>
+
+    <figure class="rounded-lg border border-neutral-400 p-2 overflow-hidden bg-white">
+      <Image
+        src={afterHouse}
+        alt="After renovation: fully updated modern home exterior"
+        format="avif"
+        widths={[300, 500, 700]}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-48 sm:h-52 object-cover rounded"
+      />
+      <figcaption class="pl-1 uppercase font-bold text-sm mt-2">
+        After
+      </figcaption>
+    </figure>
+  </div>
+</div>

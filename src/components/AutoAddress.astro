@@ -1,17 +1,20 @@
 ---
 import Button from "@/components/Button.astro";
-const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY_HERE";
+const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
 ---
 
-<div class="address-lookup-widget w-full shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)]" data-api-key={GOOGLE_API_KEY}>
+<div
+  class="address-lookup-widget w-full shadow-[0_10px_30px_-5px_rgba(0,0,0,0.08)]"
+  data-api-key={GOOGLE_API_KEY}
+>
   <form data-address-form class="relative group" novalidate>
     <div
       class="relative flex items-center bg-white p-1.5 pl-3 rounded-2xl shadow-lg shadow-slate-900/5 border-2 border-slate-300/80 transition-all duration-200 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
     >
       <div class="text-[#008751] flex items-center pointer-events-none mr-2 flex-shrink-0">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
       </div>
 
@@ -34,22 +37,29 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
       </div>
 
       <div class="flex-shrink-0 ml-1">
-        <Button
-          type="submit"
-          variant="accent"
-          hasArrow={true}
-          class="!px-4 !py-2.5 !text-sm !font-semibold !rounded-xl !w-auto shadow-md shadow-emerald-900/15 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150"
-        >
+        <Button type="submit" variant="accent" hasArrow={true} class="!px-4 !py-2.5 !text-sm !font-semibold !rounded-xl !w-auto shadow-md">
           Get Offer
         </Button>
       </div>
     </div>
 
-    <ul
-      data-address-dropdown
-      class="hidden absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden divide-y divide-slate-100 max-h-60 overflow-y-auto"
-      role="listbox"
-    ></ul>
+    <!-- The outer container toggles visibility, keeping the ul for options only -->
+    <div 
+      data-address-dropdown-container 
+      class="hidden absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden"
+    >
+      <ul data-address-dropdown class="divide-y divide-slate-100 max-h-60 overflow-y-auto" role="listbox"></ul>
+
+      <div class="flex items-center justify-end px-3.5 py-2 bg-slate-50 border-t border-slate-100 select-none">
+  <img 
+    src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png" 
+    alt="Powered by Google" 
+    class="h-3.5 w-auto object-contain opacity-60"
+    loading="lazy"
+    decoding="async"
+  />
+</div>
+    </div>
   </form>
 </div>
 
@@ -61,51 +71,62 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
     const apiKey = (widgets[0] as HTMLElement).dataset.apiKey;
     if (!apiKey) return;
 
-    // 1. Astro-safe Google Maps Loader
-    if (!window.googleMapsInitPromise) {
+    // 1. Centralized Loader
+    const loadGoogleMapsSdk = () => {
+      if (window.googleMapsInitPromise) return window.googleMapsInitPromise;
+
       window.googleMapsInitPromise = new Promise((resolve, reject) => {
         if (window.google?.maps?.places?.AutocompleteSuggestion) {
           return resolve(null);
         }
+        window.__googleMapsCallback = () => {
+          resolve(null);
+          delete window.__googleMapsCallback;
+        };
         const script = document.createElement("script");
-        // Using 'weekly' version to ensure we get the latest Place features
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&v=weekly&loading=async&callback=__googleMapsCallback`;
         script.async = true;
         script.defer = true;
-        script.onload = resolve;
         script.onerror = reject;
         document.head.appendChild(script);
       });
-    }
+      return window.googleMapsInitPromise;
+    };
 
-    await window.googleMapsInitPromise;
-
-    // Grab the new API classes
-    const { AutocompleteSuggestion } = window.google.maps.places;
+    // 2. Background Idle Loading
+    setTimeout(() => {
+      loadGoogleMapsSdk();
+    }, 500);
 
     widgets.forEach((widget) => {
+      if ((widget as HTMLElement).dataset.initialized === "true") return;
+      (widget as HTMLElement).dataset.initialized = "true";
+
       const form = widget.querySelector("[data-address-form]") as HTMLFormElement;
       const input = widget.querySelector("[data-address-input]") as HTMLInputElement;
+      
+      const dropdownContainer = widget.querySelector("[data-address-dropdown-container]") as HTMLElement;
       const dropdown = widget.querySelector("[data-address-dropdown]") as HTMLUListElement;
       const spinner = widget.querySelector("[data-address-spinner]") as HTMLElement;
 
-      if (!form || !input || !dropdown) return;
+      if (!form || !input || !dropdown || !dropdownContainer) return;
 
       let debounceTimer: ReturnType<typeof setTimeout>;
       let activeIndex = -1;
+      let sessionToken: any = null;
+      let Places: any = null;
 
       const closeDropdown = () => {
-        dropdown.classList.add("hidden");
+        dropdownContainer.classList.add("hidden");
         dropdown.innerHTML = "";
         activeIndex = -1;
       };
 
-      // 2. Query the New Autocomplete API
       input.addEventListener("input", () => {
         clearTimeout(debounceTimer);
         const query = input.value.trim();
 
-        if (query.length < 3) {
+        if (query.length < 2) {
           closeDropdown();
           spinner?.classList.add("hidden");
           return;
@@ -115,14 +136,19 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
 
         debounceTimer = setTimeout(async () => {
           try {
+            await loadGoogleMapsSdk();
+
+            if (!Places) Places = window.google.maps.places;
+            if (!sessionToken) sessionToken = new Places.AutocompleteSessionToken();
+
             const request = {
               input: query,
               includedRegionCodes: ["US"],
+              sessionToken: sessionToken,
             };
-            
-            // New programmatic fetch call
-            const { suggestions } = await AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
-            
+
+            const { suggestions } = await Places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
+
             spinner?.classList.add("hidden");
             dropdown.innerHTML = "";
             activeIndex = -1;
@@ -132,7 +158,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
               return;
             }
 
-            suggestions.forEach((suggestion) => {
+            suggestions.forEach((suggestion: any) => {
               const prediction = suggestion.placePrediction;
               if (!prediction) return;
 
@@ -142,13 +168,9 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
               const li = document.createElement("li");
               li.setAttribute("role", "option");
               li.className = "flex items-start gap-2.5 px-4 py-3 cursor-pointer hover:bg-slate-50 transition-colors";
-              
               li.innerHTML = `
                 <div class="mt-0.5 text-[#008751] flex-shrink-0">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                  </svg>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-semibold text-slate-900 truncate">${primaryText}</p>
@@ -156,7 +178,6 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
                 </div>
               `;
 
-              // 3. Resolve the Place Details using the new Place object
               li.addEventListener("click", async () => {
                 input.value = primaryText + (secondaryText ? ", " + secondaryText : "");
                 input.value = input.value.replace(/, USA$/, "");
@@ -167,12 +188,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
                   const place = prediction.toPlace();
                   await place.fetchFields({ fields: ["addressComponents", "formattedAddress"] });
 
-                  let streetNumber = "";
-                  let route = "";
-                  let city = "";
-                  let state = "";
-                  let zip = "";
-
+                  let streetNumber = "", route = "", city = "", state = "", zip = "";
                   for (const component of place.addressComponents || []) {
                     const types = component.types;
                     if (types.includes("street_number")) streetNumber = component.longText;
@@ -182,15 +198,13 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
                     if (types.includes("postal_code")) zip = component.longText;
                   }
 
-                  const street = `${streetNumber} ${route}`.trim();
-                  const fullAddress = place.formattedAddress ? place.formattedAddress.replace(/, USA$/, "") : "";
-
-                  sessionStorage.setItem("lead_property_address", fullAddress);
-                  sessionStorage.setItem("lead_property_street", street);
+                  sessionStorage.setItem("lead_property_address", place.formattedAddress?.replace(/, USA$/, "") || "");
+                  sessionStorage.setItem("lead_property_street", `${streetNumber} ${route}`.trim());
                   sessionStorage.setItem("lead_property_city", city);
                   sessionStorage.setItem("lead_property_state", state);
                   sessionStorage.setItem("lead_property_zip", zip);
 
+                  sessionToken = new Places.AutocompleteSessionToken();
                   input.focus();
                 } catch (error) {
                   console.error("Failed to fetch place details:", error);
@@ -198,24 +212,21 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
                   spinner?.classList.add("hidden");
                 }
               });
-
               dropdown.appendChild(li);
             });
-
-            dropdown.classList.remove("hidden");
+            
+            dropdownContainer.classList.remove("hidden");
           } catch (error) {
-            console.error("Autocomplete error:", error);
             spinner?.classList.add("hidden");
             closeDropdown();
           }
-        }, 300);
+        }, 100);
       });
 
-      // Keyboard support
       input.addEventListener("keydown", (e) => {
         const items = dropdown.querySelectorAll("li");
-        if (!items.length || dropdown.classList.contains("hidden")) return;
-
+        if (!items.length || dropdownContainer.classList.contains("hidden")) return;
+        
         if (e.key === "ArrowDown") {
           e.preventDefault();
           activeIndex = (activeIndex + 1) % items.length;
@@ -227,9 +238,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
         } else if (e.key === "Enter" && activeIndex > -1) {
           e.preventDefault();
           (items[activeIndex] as HTMLElement).click();
-        } else if (e.key === "Escape") {
-          closeDropdown();
-        }
+        } else if (e.key === "Escape") closeDropdown();
       });
 
       function updateSelection(items: NodeListOf<HTMLLIElement>) {
@@ -237,9 +246,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
           if (idx === activeIndex) {
             item.classList.add("bg-slate-100");
             item.scrollIntoView({ block: "nearest" });
-          } else {
-            item.classList.remove("bg-slate-100");
-          }
+          } else item.classList.remove("bg-slate-100");
         });
       }
 
@@ -250,10 +257,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
       form.addEventListener("submit", (e) => {
         e.preventDefault();
         const val = input.value.trim();
-        if (!val) {
-          input.focus();
-          return;
-        }
+        if (!val) return input.focus();
         if (sessionStorage.getItem("lead_property_address") !== val) {
           sessionStorage.setItem("lead_property_address", val);
         }
@@ -266,6 +270,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "YOUR_API_KEY
     interface Window {
       googleMapsInitPromise?: Promise<any>;
       google: any;
+      __googleMapsCallback?: () => void;
     }
   }
 

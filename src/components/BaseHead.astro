@@ -35,72 +35,45 @@ import Favicons from "@/components/Favicons.astro";
     title={SITE.title}
     href={new URL("rss.xml", SITE.href || Astro.url.origin)}
   />
+ <link rel="preconnect" href="https://maps.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
   <Favicons />
   <Font cssVariable="--font-mont" preload />
-  <script is:inline>
-    const theme = localStorage.getItem("currentTheme") || "system";
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    const isDark = theme === "dark" || (theme === "system" && prefersDark);
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-      document.documentElement.classList.remove("light");
-    } else {
-      document.documentElement.classList.add("light");
-      document.documentElement.classList.remove("dark");
-    }
-  </script>
+<!-- Consolidated Modern Attribution Tracker -->
+<script is:inline>
+  (() => {
+    try {
+      // 1. Immediately grab query params and save to session
+      const params = new URLSearchParams(window.location.search);
+      const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid'];
+      
+      keys.forEach((key) => {
+        const val = params.get(key);
+        if (val) sessionStorage.setItem(key, val);
+      });
 
- <!-- UTM Script: -->
-  <script>
-    var queryForm = function (e) {
-      var t = !(!e || !e.reset) && e.reset,
-        n = window.location.toString().split("?");
-      if (n.length > 1) {
-        var o = n[1].split("&");
-        for (s in o) {
-          var r = o[s].split("=");
-          (t || null === sessionStorage.getItem(r[0])) &&
-            sessionStorage.setItem(r[0], decodeURIComponent(r[1]));
-        }
+      // 2. Safe function to sync session data to hidden inputs
+      const syncHiddenFields = () => {
+        keys.forEach((key) => {
+          const val = sessionStorage.getItem(key);
+          if (!val) return;
+          // Matches either id="gclid_field" or name="gclid"
+          const field = document.getElementById(`${key}_field`) || document.querySelector(`input[name="${key}"]`);
+          if (field) field.value = val;
+        });
+      };
+
+      // 3. Run safely on direct loads and Astro View Transitions
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', syncHiddenFields);
+      } else {
+        syncHiddenFields();
       }
-      for (
-        var i = document.querySelectorAll(
-            "input[type=hidden], input[type=text]",
-          ),
-          s = 0;
-        s < i.length;
-        s++
-      ) {
-        var a = sessionStorage.getItem(i[s].name);
-        a && (document.getElementsByName(i[s].name)[0].value = a);
-      }
-    };
-    setTimeout(function () {
-      queryForm();
-    }, 3e3);
-
-</script>
-<script>
-  function captureGCLID() {
-    var params = new URLSearchParams(window.location.search);
-    var gclid = params.get("gclid");
-    
-    if (!gclid) {
-      gclid = sessionStorage.getItem("gclid");
+      document.addEventListener('astro:page-load', syncHiddenFields);
+    } catch (e) {
+      console.warn("Attribution tracking error", e);
     }
-
-    if (gclid) {
-      sessionStorage.setItem("gclid", gclid);
-
-      var field = document.getElementById("gclid_field");
-
-      if (field) field.value = gclid;
-    }
-  }
-
-  window.addEventListener("load", captureGCLID);
+  })();
 </script>
 
 

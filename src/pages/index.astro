@@ -16,7 +16,7 @@ import FeaturesSection from "@/components/FeaturesSection.astro";
 
 import heroImg from "@/assets/images/hero-home.jpg";
 import AutoAddress from "@/components/AutoAddress.astro";
-
+import { Picture } from "astro:assets";
 ---
 
 <BaseLayout>
@@ -32,8 +32,8 @@ import AutoAddress from "@/components/AutoAddress.astro";
       </h1>
 
       <p class="mt-4 text-lg text-pretty">
-        Sell your property as-is, with no commissions.
-        Enter your address below to get your offer.
+        Sell your property as-is, with no commissions. Enter your address below
+        to get your offer.
       </p>
 
       <div class="mt-8">
@@ -126,14 +126,21 @@ import AutoAddress from "@/components/AutoAddress.astro";
       </div>
     </div>
     <div class="relative grid self-end">
+     
+
       <div
         class="hero-photo-shape h-[500px] sm:h-[590px] place-self-end relative"
       >
-        <Image
+        <Picture
           src={heroImg}
-          class="object-cover size-full mt-auto rounded-b-4xl"
-          height={600}
           alt="Two story house at sunset"
+          formats={["avif", "webp"]}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 640px) 400px, 800px"
+          loading="eager"
+          decoding="sync"
+          fetchpriority="high"
+          class="object-cover size-full mt-auto rounded-b-4xl"
         />
       </div>
       <div
@@ -244,9 +251,8 @@ import AutoAddress from "@/components/AutoAddress.astro";
       property and follows up with a written offer — no obligation to accept.
     </p>
     <div class="xl:mx-48 mt-8 feature">
-      
-        <AutoAddress />
-      
+      <AutoAddress />
+
       <small class="text-center block"
         >No obligation. Homes reviewed as-is.</small
       >
