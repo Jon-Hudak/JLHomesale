@@ -11,10 +11,25 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
     <div
       class="relative flex items-center bg-white p-1.5 pl-3 rounded-2xl shadow-lg shadow-slate-900/5 border-2 border-slate-300/80 transition-all duration-200 focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20"
     >
-      <div class="text-[#008751] flex items-center pointer-events-none mr-2 flex-shrink-0">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+      <div
+        class="text-[#008751] flex items-center pointer-events-none mr-2 flex-shrink-0"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+          ></path>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
       </div>
 
@@ -28,37 +43,61 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
           class="w-full py-2.5 pr-8 bg-slate-50/60 focus-within:bg-white text-slate-900 placeholder:text-slate-500 text-sm sm:text-base font-normal focus:outline-none transition-colors"
         />
 
-        <div data-address-spinner class="hidden absolute right-2 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-[#008751]">
+        <div
+          data-address-spinner
+          class="hidden absolute right-2 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-[#008751]"
+        >
           <svg class="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"></path>
           </svg>
         </div>
       </div>
 
       <div class="flex-shrink-0 ml-1">
-        <Button type="submit" variant="accent" hasArrow={true} class="!px-4 !py-2.5 !text-sm !font-semibold !rounded-xl !w-auto shadow-md">
+        <Button
+          type="submit"
+          variant="accent"
+          hasArrow={true}
+          class="!px-4 !py-2.5 !text-sm !font-semibold !rounded-xl !w-auto shadow-md"
+        >
           Get Offer
         </Button>
       </div>
     </div>
 
     <!-- The outer container toggles visibility, keeping the ul for options only -->
-    <div 
-      data-address-dropdown-container 
+    <div
+      data-address-dropdown-container
       class="hidden absolute left-0 right-0 top-full mt-2 bg-white border border-slate-200 rounded-xl shadow-xl z-50 overflow-hidden"
     >
-      <ul data-address-dropdown class="divide-y divide-slate-100 max-h-60 overflow-y-auto" role="listbox"></ul>
+      <ul
+        data-address-dropdown
+        class="divide-y divide-slate-100 max-h-60 overflow-y-auto"
+        role="listbox"
+      >
+      </ul>
 
-      <div class="flex items-center justify-end px-3.5 py-2 bg-slate-50 border-t border-slate-100 select-none">
-  <img 
-    src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png" 
-    alt="Powered by Google" 
-    class="h-3.5 w-auto object-contain opacity-60"
-    loading="lazy"
-    decoding="async"
-  />
-</div>
+      <div
+        class="flex items-center justify-end px-3.5 py-2 bg-slate-50 border-t border-slate-100 select-none"
+      >
+        <img
+          src="https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3_hdpi.png"
+          alt="Powered by Google"
+          class="h-3.5 w-auto object-contain opacity-60"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
     </div>
   </form>
 </div>
@@ -71,7 +110,6 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
     const apiKey = (widgets[0] as HTMLElement).dataset.apiKey;
     if (!apiKey) return;
 
-    // 1. Honest, Native Async/Defer Loader (No Timer Hacks)
     const loadGoogleMapsSdk = () => {
       if (window.googleMapsInitPromise) return window.googleMapsInitPromise;
 
@@ -94,20 +132,33 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
       return window.googleMapsInitPromise;
     };
 
-    // Kick off the script download immediately. 
-    // Thanks to async/defer, the browser will download it in the background while rendering the page.
-    loadGoogleMapsSdk();
+    // Wait for the browser to finish painting the LCP image before downloading Maps in the background
+    if (document.readyState === "complete") {
+      loadGoogleMapsSdk();
+    } else {
+      window.addEventListener("load", loadGoogleMapsSdk, { once: true });
+    }
 
     widgets.forEach((widget) => {
       if ((widget as HTMLElement).dataset.initialized === "true") return;
       (widget as HTMLElement).dataset.initialized = "true";
 
-      const form = widget.querySelector("[data-address-form]") as HTMLFormElement;
-      const input = widget.querySelector("[data-address-input]") as HTMLInputElement;
-      
-      const dropdownContainer = widget.querySelector("[data-address-dropdown-container]") as HTMLElement;
-      const dropdown = widget.querySelector("[data-address-dropdown]") as HTMLUListElement;
-      const spinner = widget.querySelector("[data-address-spinner]") as HTMLElement;
+      const form = widget.querySelector(
+        "[data-address-form]",
+      ) as HTMLFormElement;
+      const input = widget.querySelector(
+        "[data-address-input]",
+      ) as HTMLInputElement;
+
+      const dropdownContainer = widget.querySelector(
+        "[data-address-dropdown-container]",
+      ) as HTMLElement;
+      const dropdown = widget.querySelector(
+        "[data-address-dropdown]",
+      ) as HTMLUListElement;
+      const spinner = widget.querySelector(
+        "[data-address-spinner]",
+      ) as HTMLElement;
 
       if (!form || !input || !dropdown || !dropdownContainer) return;
 
@@ -140,7 +191,8 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
             await loadGoogleMapsSdk();
 
             if (!Places) Places = window.google.maps.places;
-            if (!sessionToken) sessionToken = new Places.AutocompleteSessionToken();
+            if (!sessionToken)
+              sessionToken = new Places.AutocompleteSessionToken();
 
             // Pure nationwide search (No geo bias, no region limitations)
             const request = {
@@ -149,7 +201,10 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
               sessionToken: sessionToken,
             };
 
-            const { suggestions } = await Places.AutocompleteSuggestion.fetchAutocompleteSuggestions(request);
+            const { suggestions } =
+              await Places.AutocompleteSuggestion.fetchAutocompleteSuggestions(
+                request,
+              );
 
             spinner?.classList.add("hidden");
             dropdown.innerHTML = "";
@@ -165,11 +220,14 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
               if (!prediction) return;
 
               const primaryText = prediction.mainText.text;
-              const secondaryText = prediction.secondaryText ? prediction.secondaryText.text : "";
+              const secondaryText = prediction.secondaryText
+                ? prediction.secondaryText.text
+                : "";
 
               const li = document.createElement("li");
               li.setAttribute("role", "option");
-              li.className = "flex items-start gap-2.5 px-4 py-3 cursor-pointer hover:bg-slate-50 transition-colors";
+              li.className =
+                "flex items-start gap-2.5 px-4 py-3 cursor-pointer hover:bg-slate-50 transition-colors";
               li.innerHTML = `
                 <div class="mt-0.5 text-[#008751] flex-shrink-0">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -181,27 +239,46 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
               `;
 
               li.addEventListener("click", async () => {
-                input.value = primaryText + (secondaryText ? ", " + secondaryText : "");
+                input.value =
+                  primaryText + (secondaryText ? ", " + secondaryText : "");
                 input.value = input.value.replace(/, USA$/, "");
                 closeDropdown();
                 spinner?.classList.remove("hidden");
 
                 try {
                   const place = prediction.toPlace();
-                  await place.fetchFields({ fields: ["addressComponents", "formattedAddress"] });
+                  await place.fetchFields({
+                    fields: ["addressComponents", "formattedAddress"],
+                  });
 
-                  let streetNumber = "", route = "", city = "", state = "", zip = "";
+                  let streetNumber = "",
+                    route = "",
+                    city = "",
+                    state = "",
+                    zip = "";
                   for (const component of place.addressComponents || []) {
                     const types = component.types;
-                    if (types.includes("street_number")) streetNumber = component.longText;
+                    if (types.includes("street_number"))
+                      streetNumber = component.longText;
                     if (types.includes("route")) route = component.longText;
-                    if (types.includes("locality") || types.includes("sublocality_level_1")) city = component.longText;
-                    if (types.includes("administrative_area_level_1")) state = component.shortText;
+                    if (
+                      types.includes("locality") ||
+                      types.includes("sublocality_level_1")
+                    )
+                      city = component.longText;
+                    if (types.includes("administrative_area_level_1"))
+                      state = component.shortText;
                     if (types.includes("postal_code")) zip = component.longText;
                   }
 
-                  sessionStorage.setItem("lead_property_address", place.formattedAddress?.replace(/, USA$/, "") || "");
-                  sessionStorage.setItem("lead_property_street", `${streetNumber} ${route}`.trim());
+                  sessionStorage.setItem(
+                    "lead_property_address",
+                    place.formattedAddress?.replace(/, USA$/, "") || "",
+                  );
+                  sessionStorage.setItem(
+                    "lead_property_street",
+                    `${streetNumber} ${route}`.trim(),
+                  );
                   sessionStorage.setItem("lead_property_city", city);
                   sessionStorage.setItem("lead_property_state", state);
                   sessionStorage.setItem("lead_property_zip", zip);
@@ -216,7 +293,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
               });
               dropdown.appendChild(li);
             });
-            
+
             dropdownContainer.classList.remove("hidden");
           } catch (error) {
             spinner?.classList.add("hidden");
@@ -227,8 +304,9 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
 
       input.addEventListener("keydown", (e) => {
         const items = dropdown.querySelectorAll("li");
-        if (!items.length || dropdownContainer.classList.contains("hidden")) return;
-        
+        if (!items.length || dropdownContainer.classList.contains("hidden"))
+          return;
+
         if (e.key === "ArrowDown") {
           e.preventDefault();
           activeIndex = (activeIndex + 1) % items.length;

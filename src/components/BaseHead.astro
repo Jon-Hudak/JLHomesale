@@ -39,7 +39,7 @@ import Favicons from "@/components/Favicons.astro";
   <Favicons />
   <Font cssVariable="--font-mont" preload />
   <!-- Consolidated Modern Attribution Tracker -->
-  <script is:inline type="text/partytown">
+  <script is:inline>
     (() => {
       try {
         // 1. Immediately grab query params and save to session
@@ -86,7 +86,7 @@ import Favicons from "@/components/Favicons.astro";
 
   <!-- Google tag (gtag.js)-->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11160695389"
-  ></script>
+  type="text/partytown"></script>
   <script is:inline type="text/partytown">
     //@ts-nocheck
     window.dataLayer = window.dataLayer || [];
@@ -97,35 +97,21 @@ import Favicons from "@/components/Favicons.astro";
     gtag("config", "AW-11160695389");
   </script>
 
-  <!-- Facebook Pixel Code -->
-  <script is:inline type="text/partytown">
-    //@ts-nocheck
-    !(function (f, b, e, v, n, t, s) {
-      if (f.fbq) return;
-      n = f.fbq = function () {
-        n.callMethod
-          ? n.callMethod.apply(n, arguments)
-          : n.queue.push(arguments);
-      };
-      if (!f._fbq) f._fbq = n;
-      n.push = n;
-      n.loaded = !0;
-      n.version = "2.0";
-      n.queue = [];
-      t = b.createElement(e);
-      t.async = !0;
-      t.src = v;
-      s = b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t, s);
-    })(
-      window,
-      document,
-      "script",
-      "https://connect.facebook.net/en_US/fbevents.js",
-    );
-    fbq("init", "419888609948087");
-    fbq("track", "PageView");
-  </script>
+<!-- Load Facebook Pixel natively, safely after LCP -->
+<script is:inline>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      
+      fbq('init', '419888609948087'); // Replace {code}
+      fbq('track', 'PageView');
+    }, 100);
+  }, { once: true });
+</script>
 
   <noscript data-astro-transition-persist="pixel">
     <img
