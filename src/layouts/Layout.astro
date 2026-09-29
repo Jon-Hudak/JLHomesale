@@ -110,12 +110,27 @@ const { title = "JL Home Sale", description = "" } = Astro.props;
         ><img src="https://monitor.clickcease.com" alt="ClickCease" /></a
       >
     </noscript>
+
+    <body>
+      <!-- Google Tag Manager (noscript) -->
+      <noscript
+        ><iframe
+          src="https://www.googletagmanager.com/ns.html?id=###"
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"></iframe></noscript
+      >
+      <!-- End Google Tag Manager (noscript) -->
+
+      <slot />
+    </body>
+
     <!--  ClickCease.com tracking-->
     <Header />
     <slot />
     <Footer />
     <!-- Start of LiveChat code -->
-    <script async="true" is:inline>
+    <!-- <script async="true" is:inline>
       // document.addEventListener("astro:page-load", () => {
       (function () {
         var lc = document.createElement("script");
@@ -127,7 +142,7 @@ const { title = "JL Home Sale", description = "" } = Astro.props;
         s.parentNode.insertBefore(lc, s);
       })();
       // });
-    </script>
+    </script> -->
     <!-- End of LiveChat code -->
   </body>
 
@@ -353,7 +368,7 @@ const { title = "JL Home Sale", description = "" } = Astro.props;
   function captureGCLID() {
     var params = new URLSearchParams(window.location.search);
     var gclid = params.get("gclid");
-    
+
     if (!gclid) {
       gclid = sessionStorage.getItem("gclid");
     }

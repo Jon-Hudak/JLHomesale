@@ -7,13 +7,20 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [partytown()],
+  integrations: [
+    partytown({
+      config: {
+        forward: ['dataLayer.push'],
+      }
+    })
+
+  ],
   fonts: [
-       {
+    {
       provider: fontProviders.fontsource(),
       name: "Montserrat",
       cssVariable: "--font-mont",
-      display:"swap"
+      display: "swap"
     },
   ],
   markdown: {

@@ -106,7 +106,7 @@ const preloadedHero = await getImage({
       }
     })();
   </script>
-
+  
   <!-- Google tag (gtag.js)-->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11160695389"
   type="text/partytown"></script>
@@ -119,10 +119,10 @@ const preloadedHero = await getImage({
     gtag("js", new Date());
     gtag("config", "AW-11160695389");
   </script>
-
-<!-- Facebook Pixel  -->
-
-<script is:inline>
+  
+  <!-- Facebook Pixel  -->
+  
+  <script is:inline>
   window.addEventListener("load", () => {
     // A tiny 50ms buffer ensures the browser completes the visual paint cycle
     setTimeout(() => {
@@ -143,14 +143,23 @@ const preloadedHero = await getImage({
   });
 </script>
 
-  <noscript data-astro-transition-persist="pixel">
-    <img
-      height="1"
-      width="1"
-      src="https://www.facebook.com/tr?id=419888609948087&ev=PageView
-		  &noscript=1"
-    />
-  </noscript>
+<!-- Google Tag Manager -->
+<script type="text/partytown">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T9LDTMDD');
+</script>
+<!-- End Google Tag Manager -->
 
-  <slot />
+<noscript data-astro-transition-persist="pixel">
+  <img
+  height="1"
+  width="1"
+  src="https://www.facebook.com/tr?id=419888609948087&ev=PageView
+  &noscript=1"
+  />
+</noscript>
+
+<slot />
 </head>
