@@ -121,26 +121,26 @@ const preloadedHero = await getImage({
   </script> -->
   
 
-<script>
+<!-- <script>
   // Astro View Transitions Support
   document.addEventListener("astro:page-load", () => {
     if (typeof fbq === "function") fbq("track", "PageView");
   });
-</script>
+</script> -->
 
-
-<!-- Google Tag Manager -->
+<!-- Google Tag Manager (Prioritized for Data & Bot Protection) -->
 <script is:inline>
-  // window.addEventListener("load", () => {
-  //   setTimeout(() => {
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-T9LDTMDD'); 
-    // }, 50);
-  // }, { once: true });
+  document.addEventListener("DOMContentLoaded", () => {
+    // Fires the millisecond the HTML is parsed, ignoring heavy images/CSS
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T9LDTMDD'); 
+  }, { once: true });
 </script>
+<!-- End Google Tag Manager -->
+
 <!-- End Google Tag Manager -->
 
 <slot />

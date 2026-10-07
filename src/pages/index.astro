@@ -126,18 +126,16 @@ import { Picture } from "astro:assets";
       </div>
     </div>
     <div class="relative grid self-end">
-     
-
       <div
         class="hero-photo-shape h-[500px] sm:h-[590px] place-self-end relative"
       >
         <Picture
           src={heroImg}
-          quality={72}
+          quality={40}
           alt="Two story house at sunset"
           formats={["avif", "webp"]}
-          widths={[400, 800, 1200]}
-          sizes="(max-width: 640px) 400px, 800px"
+          widths={[400, 600, 800, 1200]}
+          sizes="(max-width: 640px) 100vw, 800px"
           loading="eager"
           decoding="async"
           fetchpriority="high"
