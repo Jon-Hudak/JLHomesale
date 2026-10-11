@@ -234,6 +234,12 @@ import Button from "@/components/Button.astro";
         localStorage.setItem(param, urlVal);
       }
 
+      // Run on initial load
+      initStepTwoForm();
+
+      // Run on subsequent navigations if you are using Astro View Transitions
+      document.addEventListener("astro:page-load", initStepTwoForm);
+
       const storedVal = localStorage.getItem(param);
       if (storedVal) {
         const input = document.getElementById(
@@ -424,7 +430,7 @@ import Button from "@/components/Button.astro";
 
         if (!res.ok) throw new Error("Submission failed");
 
-       (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer = (window as any).dataLayer || [];
         (window as any).dataLayer.push({
           event: "lead_submitted",
         });
@@ -437,7 +443,6 @@ import Button from "@/components/Button.astro";
         sessionStorage.removeItem("lead_property_zip");
 
         window.location.href = "/thank-you";
-
       } catch (err) {
         console.error(err);
         submitBtn.disabled = false;
