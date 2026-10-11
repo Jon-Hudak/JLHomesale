@@ -349,15 +349,7 @@ const GOOGLE_API_KEY = import.meta.env.PUBLIC_GOOGLE_PLACES_KEY || "";
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const step1Forms = document.querySelectorAll(".step-one-form");
-
-    step1Forms.forEach((form) => {
-      form.addEventListener("submit", (e) => {
-        e.stopPropagation(); // Hides it from GA4
-      });
-    });
-  });
+  
 
   declare global {
     interface Window {

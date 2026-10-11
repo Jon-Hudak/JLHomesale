@@ -38,6 +38,8 @@ import Button from "@/components/Button.astro";
     <input type="hidden" name="utm_term" id="utm_term" />
     <input type="hidden" name="utm_content" id="utm_content" />
     <input type="hidden" name="gclid" id="gclid_field" />
+    <input type="hidden" name="gbraid" id="gbraid" />
+    <input type="hidden" name="wbraid" id="wbraid" />
 
     <!-- Step 1 Carryover: Property Address -->
     <div>
@@ -221,16 +223,18 @@ import Button from "@/components/Button.astro";
       "utm_term",
       "utm_content",
       "gclid",
+      "gbraid",
+      "wbraid",
     ];
     const urlParams = new URLSearchParams(window.location.search);
 
     trackParams.forEach((param) => {
       const urlVal = urlParams.get(param);
       if (urlVal) {
-        sessionStorage.setItem(param, urlVal);
+        localStorage.setItem(param, urlVal);
       }
 
-      const storedVal = sessionStorage.getItem(param);
+      const storedVal = localStorage.getItem(param);
       if (storedVal) {
         const input = document.getElementById(
           param === "gclid" ? "gclid_field" : param,
@@ -400,12 +404,14 @@ import Button from "@/components/Button.astro";
         formattedPhone: formatPhoneNumber(rawDigits),
         emailAddress: emailInput.value.trim(),
         consent: consentCheck.checked,
-        utm_source: sessionStorage.getItem("utm_source") || "",
-        utm_medium: sessionStorage.getItem("utm_medium") || "",
-        utm_campaign: sessionStorage.getItem("utm_campaign") || "",
-        utm_term: sessionStorage.getItem("utm_term") || "",
-        utm_content: sessionStorage.getItem("utm_content") || "",
-        gclid: sessionStorage.getItem("gclid") || "",
+        utm_source: localStorage.getItem("utm_source") || "",
+        utm_medium: localStorage.getItem("utm_medium") || "",
+        utm_campaign: localStorage.getItem("utm_campaign") || "",
+        utm_term: localStorage.getItem("utm_term") || "",
+        utm_content: localStorage.getItem("utm_content") || "",
+        gclid: localStorage.getItem("gclid") || "",
+        gbraid: localStorage.getItem("gbraid") || "",
+        wbraid: localStorage.getItem("wbraid") || "",
         submittedAt: new Date().toISOString(),
         sourceUrl: window.location.href,
       };
@@ -418,13 +424,10 @@ import Button from "@/components/Button.astro";
 
         if (!res.ok) throw new Error("Submission failed");
 
-   
-        if (typeof window.gtag === "function") {
-          window.gtag("event", "generate_lead", {
-            form_name: "cashOfferForm",
-            status: "success"
-          });
-        }
+       (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({
+          event: "lead_submitted",
+        });
 
         // Clean up Session Storage
         sessionStorage.removeItem("lead_property_address");
@@ -434,8 +437,8 @@ import Button from "@/components/Button.astro";
         sessionStorage.removeItem("lead_property_zip");
 
         window.location.href = "/thank-you";
-      } catch (err) {
 
+      } catch (err) {
         console.error(err);
         submitBtn.disabled = false;
         submitBtn.textContent = "Get My Cash Offer";
