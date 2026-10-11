@@ -418,6 +418,14 @@ import Button from "@/components/Button.astro";
 
         if (!res.ok) throw new Error("Submission failed");
 
+   
+        if (typeof window.gtag === "function") {
+          window.gtag("event", "generate_lead", {
+            form_name: "cashOfferForm",
+            status: "success"
+          });
+        }
+
         // Clean up Session Storage
         sessionStorage.removeItem("lead_property_address");
         sessionStorage.removeItem("lead_property_street");
@@ -427,6 +435,7 @@ import Button from "@/components/Button.astro";
 
         window.location.href = "/thank-you";
       } catch (err) {
+
         console.error(err);
         submitBtn.disabled = false;
         submitBtn.textContent = "Get My Cash Offer";
