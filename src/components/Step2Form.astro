@@ -234,11 +234,7 @@ import Button from "@/components/Button.astro";
         localStorage.setItem(param, urlVal);
       }
 
-      // Run on initial load
-      initStepTwoForm();
-
-      // Run on subsequent navigations if you are using Astro View Transitions
-      document.addEventListener("astro:page-load", initStepTwoForm);
+      
 
       const storedVal = localStorage.getItem(param);
       if (storedVal) {
