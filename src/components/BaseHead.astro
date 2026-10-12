@@ -74,17 +74,19 @@ const preloadedHero = await getImage({
           "utm_term",
           "utm_content",
           "gclid",
+          "gbraid",
+          "wbraid",
         ];
 
         keys.forEach((key) => {
           const val = params.get(key);
-          if (val) sessionStorage.setItem(key, val);
+          if (val) localStorage.setItem(key, val);
         });
 
     
         const syncHiddenFields = () => {
           keys.forEach((key) => {
-            const val = sessionStorage.getItem(key);
+            const val = localStorage.getItem(key);
             if (!val) return;
             // Matches either id="gclid_field" or name="gclid"
             const field =

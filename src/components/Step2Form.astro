@@ -215,36 +215,7 @@ import Button from "@/components/Button.astro";
 
     const pageLoadTime = Date.now();
 
-    // 1. Attribution Tracking (UTMs + GCLID)
-    const trackParams = [
-      "utm_source",
-      "utm_medium",
-      "utm_campaign",
-      "utm_term",
-      "utm_content",
-      "gclid",
-      "gbraid",
-      "wbraid",
-    ];
-    const urlParams = new URLSearchParams(window.location.search);
-
-    trackParams.forEach((param) => {
-      const urlVal = urlParams.get(param);
-      if (urlVal) {
-        localStorage.setItem(param, urlVal);
-      }
-
-      
-
-      const storedVal = localStorage.getItem(param);
-      if (storedVal) {
-        const input = document.getElementById(
-          param === "gclid" ? "gclid_field" : param,
-        ) as HTMLInputElement;
-        if (input) input.value = storedVal;
-      }
-    });
-
+ 
     // 2. Pull Step 1 Address
     const addressInput = document.getElementById(
       "propertyAddress",
