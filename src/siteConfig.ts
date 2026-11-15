@@ -5,7 +5,7 @@ import type {
 } from "@/types.ts";
 
 export const SITE: SiteConfiguration = {
-  title: "JL Homesale",
+  title: "JL Home Sale",
   description: "Sell your property as-is, with no agent commissions on our purchase.",
   href: "https://jlhomesale.com",
   author: "Jon Hudak",
