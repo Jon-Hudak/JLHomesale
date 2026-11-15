@@ -1,10 +1,14 @@
 ---
 import FAQ from "@/components/FAQ.astro";
+import SeoPage from "@/components/SeoPage.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 
 
 ---
 <BaseLayout>
+    <SeoPage
+    slot="head"
+  />
     <article class="mt-16 pb-24">
 <h1 class="h1 text-center">Frequently Asked Questions</h1>
         <FAQ hasHeader={false}/>

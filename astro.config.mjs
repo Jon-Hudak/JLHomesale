@@ -1,5 +1,6 @@
 import { defineConfig, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
+import sitemap from '@astrojs/sitemap';
 
 
 
@@ -26,6 +27,7 @@ export default defineConfig({
     },
   },
   site: "https://jlhomesale.com",
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },
